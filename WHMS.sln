@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34607.79
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WHMS", "WHMS\WHMS.csproj", "{5DFA573D-1177-408B-A984-1A8BF09065E4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBMS", "DBMS\DBMS.csproj", "{8622A19E-A2C9-4665-8993-DF3D37DBD694}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionClass", "FunctionClass\FunctionClass.csproj", "{34382E08-CA90-4549-A11B-0F08FC13AB0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DFA573D-1177-408B-A984-1A8BF09065E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DFA573D-1177-408B-A984-1A8BF09065E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DFA573D-1177-408B-A984-1A8BF09065E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DFA573D-1177-408B-A984-1A8BF09065E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8622A19E-A2C9-4665-8993-DF3D37DBD694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8622A19E-A2C9-4665-8993-DF3D37DBD694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8622A19E-A2C9-4665-8993-DF3D37DBD694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8622A19E-A2C9-4665-8993-DF3D37DBD694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34382E08-CA90-4549-A11B-0F08FC13AB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34382E08-CA90-4549-A11B-0F08FC13AB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34382E08-CA90-4549-A11B-0F08FC13AB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34382E08-CA90-4549-A11B-0F08FC13AB0A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8BA398E8-A133-497C-BACC-ADC0B8256BE7}
+	EndGlobalSection
+EndGlobal
