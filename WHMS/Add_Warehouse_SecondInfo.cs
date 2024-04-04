@@ -37,13 +37,18 @@ namespace WHMS
                 }
             }
         }
-        public void SetAArea2(int counter)
+        public void SetAArea2(string areaId, int counter)
         {
-            using ()
-            for (int i = 0; i <= counter; i++)
+            using (var context = new DatabaseContext())
             {
-
+                var selectedArea = context.WarehouseList_Areas.Find(areaId);
+                if (textBox_SelectedArea.Text != null)
+                for (int i = 0; i <= counter; i++)
+                {
+                    selectedArea.
+                }
             }
+
         }
         public void AreaSearcher(int maxcount)
         {

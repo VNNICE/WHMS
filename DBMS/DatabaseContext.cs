@@ -72,7 +72,7 @@ namespace DBMS
             modelBuilder.Entity<WarehouseList_Area_Area2>(i =>
             {
                 i.HasKey(j => j._Area2);
-
+                i.HasOne(j=>j.WarehouseList_Area)
             });
 
             modelBuilder.Entity<Functions_Stock>(i =>
