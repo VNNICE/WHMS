@@ -41,7 +41,6 @@ namespace WHMS
             button_Add_Warehouse = new Button();
             dataGridView_WarehouseLists = new DataGridView();
             comboBox_Area1 = new ComboBox();
-            textBox1 = new TextBox();
             button_Add_Images = new Button();
             pictureBox_Image = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView_WarehouseLists).BeginInit();
@@ -52,7 +51,7 @@ namespace WHMS
             // 
             comboBox_Name.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_Name.FormattingEnabled = true;
-            comboBox_Name.Location = new Point(61, 9);
+            comboBox_Name.Location = new Point(61, 38);
             comboBox_Name.Name = "comboBox_Name";
             comboBox_Name.Size = new Size(121, 23);
             comboBox_Name.TabIndex = 0;
@@ -61,7 +60,7 @@ namespace WHMS
             // 
             // button_Apply
             // 
-            button_Apply.Location = new Point(627, 8);
+            button_Apply.Location = new Point(597, 38);
             button_Apply.Name = "button_Apply";
             button_Apply.Size = new Size(75, 23);
             button_Apply.TabIndex = 2;
@@ -71,7 +70,7 @@ namespace WHMS
             // 
             // button_Cancel
             // 
-            button_Cancel.Location = new Point(93, 38);
+            button_Cancel.Location = new Point(93, 4);
             button_Cancel.Name = "button_Cancel";
             button_Cancel.Size = new Size(75, 23);
             button_Cancel.TabIndex = 3;
@@ -81,7 +80,7 @@ namespace WHMS
             // 
             // textBox_Area2
             // 
-            textBox_Area2.Location = new Point(473, 9);
+            textBox_Area2.Location = new Point(470, 38);
             textBox_Area2.Name = "textBox_Area2";
             textBox_Area2.Size = new Size(121, 23);
             textBox_Area2.TabIndex = 4;
@@ -89,7 +88,7 @@ namespace WHMS
             // label_Name
             // 
             label_Name.AutoSize = true;
-            label_Name.Location = new Point(12, 12);
+            label_Name.Location = new Point(12, 42);
             label_Name.Name = "label_Name";
             label_Name.Size = new Size(43, 15);
             label_Name.TabIndex = 5;
@@ -99,7 +98,7 @@ namespace WHMS
             // label_Area1
             // 
             label_Area1.AutoSize = true;
-            label_Area1.Location = new Point(188, 12);
+            label_Area1.Location = new Point(188, 42);
             label_Area1.Name = "label_Area1";
             label_Area1.Size = new Size(61, 15);
             label_Area1.TabIndex = 6;
@@ -108,7 +107,7 @@ namespace WHMS
             // label_Area2
             // 
             label_Area2.AutoSize = true;
-            label_Area2.Location = new Point(382, 12);
+            label_Area2.Location = new Point(379, 42);
             label_Area2.Name = "label_Area2";
             label_Area2.Size = new Size(85, 15);
             label_Area2.TabIndex = 7;
@@ -120,7 +119,7 @@ namespace WHMS
             label_Err2.BackColor = SystemColors.Menu;
             label_Err2.Enabled = false;
             label_Err2.ForeColor = Color.Red;
-            label_Err2.Location = new Point(473, 12);
+            label_Err2.Location = new Point(174, 4);
             label_Err2.Name = "label_Err2";
             label_Err2.Size = new Size(148, 15);
             label_Err2.TabIndex = 9;
@@ -128,7 +127,7 @@ namespace WHMS
             // 
             // button_Add_Warehouse
             // 
-            button_Add_Warehouse.Location = new Point(12, 38);
+            button_Add_Warehouse.Location = new Point(12, 4);
             button_Add_Warehouse.Name = "button_Add_Warehouse";
             button_Add_Warehouse.Size = new Size(75, 23);
             button_Add_Warehouse.TabIndex = 10;
@@ -151,22 +150,14 @@ namespace WHMS
             // 
             comboBox_Area1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_Area1.FormattingEnabled = true;
-            comboBox_Area1.Location = new Point(255, 9);
+            comboBox_Area1.Location = new Point(255, 38);
             comboBox_Area1.Name = "comboBox_Area1";
             comboBox_Area1.Size = new Size(121, 23);
             comboBox_Area1.TabIndex = 13;
             // 
-            // textBox1
-            // 
-            textBox1.Enabled = false;
-            textBox1.Location = new Point(473, 38);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(121, 23);
-            textBox1.TabIndex = 14;
-            // 
             // button_Add_Images
             // 
-            button_Add_Images.Location = new Point(370, 38);
+            button_Add_Images.Location = new Point(584, 9);
             button_Add_Images.Name = "button_Add_Images";
             button_Add_Images.Size = new Size(97, 23);
             button_Add_Images.TabIndex = 15;
@@ -189,7 +180,6 @@ namespace WHMS
             ClientSize = new Size(999, 290);
             Controls.Add(pictureBox_Image);
             Controls.Add(button_Add_Images);
-            Controls.Add(textBox1);
             Controls.Add(comboBox_Area1);
             Controls.Add(dataGridView_WarehouseLists);
             Controls.Add(button_Add_Warehouse);
@@ -222,7 +212,6 @@ namespace WHMS
         private Button button_Add_Warehouse;
         private DataGridView dataGridView_WarehouseLists;
         private ComboBox comboBox_Area1;
-        private TextBox textBox1;
         private Button button_Add_Images;
         private PictureBox pictureBox_Image;
     }

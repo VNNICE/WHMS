@@ -1,6 +1,6 @@
 ﻿namespace WHMS
 {
-    partial class Add_WarehouseList
+    partial class Add_WarehouseDefaultInfo
     {
         /// <summary>
         /// Required designer variable.

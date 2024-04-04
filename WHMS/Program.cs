@@ -14,7 +14,6 @@ namespace WHMS
         [STAThread]
         public static void Main(string[] args)
         {
-            MessageBox.Show(DataPath.dbPath);
             string msg = "";
             DBManager.MakeDefaultData(out msg);
             MessageBox.Show(msg);

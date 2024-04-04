@@ -14,12 +14,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WHMS
 {
-    public partial class Add_WarehouseList : Form
+    public partial class Add_WarehouseDefaultInfo : Form
     {
-        public Add_WarehouseList()
+        public Add_WarehouseDefaultInfo()
         {
             InitializeComponent();
             LoadComboBoxData();
+            comboBox_City.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void LoadComboBoxData()
@@ -46,7 +47,7 @@ namespace WHMS
 
         private void button_Apply_Click(object sender, EventArgs e)
         {
-            using (var context = new DBMS.DatabaseContext())
+            using (var context = new DatabaseContext())
             {
                 string city = comboBox_City.SelectedValue.ToString();
                 string name = textBox_Name.Text.ToString();
@@ -96,6 +97,7 @@ namespace WHMS
         {
 
         }
+        private static string MakeUrl = "";
         private void button_Add_Images_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -105,20 +107,18 @@ namespace WHMS
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string selectedFilePath = openFileDialog.FileName;
-                string imageFilePath = DataPath.imagePath;
-                if (!Directory.Exists(imageFilePath))
+                if (!Directory.Exists(DataPath.imagePath))
                 {
-                    Directory.CreateDirectory(imageFilePath);
+                    Directory.CreateDirectory(DataPath.imagePath);
                 }
 
-                string filename = Path.GetFileName(selectedFilePath);
-                string filePath = Path.Combine(imageFilePath, filename);
+                string fileExtension = Path.GetExtension(selectedFilePath);
+                string filePath = Path.Combine(DataPath.imagePath, "WarehouseImg_"+textBox_Name.ToString()+fileExtension);
                 File.Copy(selectedFilePath, filePath, true);
                 MakeUrl = filePath;
                 textBox_Show_ImagesPath.Text = MakeUrl;
             }
         }
-        private static string MakeUrl = "";
 
         private void Add_WarehouseList_Load(object sender, EventArgs e)
         {
@@ -133,7 +133,7 @@ namespace WHMS
             using (var context = new DBMS.DatabaseContext())
             {
                 var warehouseareas = new List<WarehouseList_Area>();
-                for (int i = 1; i <= count; i++)
+                for (int i = 0; i <= count; i++)
                 {
                     warehouseareas.Add(new WarehouseList_Area(id + "-"+ i.ToString("D2"), id, i, null, null));
                 }

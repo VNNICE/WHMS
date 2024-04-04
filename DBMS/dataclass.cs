@@ -72,10 +72,10 @@ namespace DBMS
 
     public class AdminList_Name
     {
-        public int AdminList_Id { get; set; }
-        public required AdminList AdminList { get; set; } = null!;
-        public required string _Name { get; set; }
-        public AdminList_Name(int AdminList_Id, string _Name) 
+        public string _Name { get; set; }
+        public AdminList AdminList { get; set; } = null!; public string AdminList_Id { get; set; }
+
+        public AdminList_Name(string AdminList_Id, string _Name) 
         {
             this.AdminList_Id = AdminList_Id;
             this._Name = _Name;
@@ -97,8 +97,7 @@ namespace DBMS
         }
         public string _Id { get; set; }
         public int _Count { get; set; }
-        public CityList CityList { get; set; } = null!;
-        public string CityList_Code { get; set; }
+        public CityList CityList { get; set; } = null!; public string CityList_Code { get; set; }
         public string _Name { get; set; }
         public string _ImagePath { get; set; }
         ///Ref
@@ -115,8 +114,7 @@ namespace DBMS
             this._NowImagePath = _NowImagePath;
         }
         public string _Id {  get; set; }
-        public WarehouseList WarehouseList { get; set; } = null!;
-        public string WarehouseList_Id { get; set; }
+        public WarehouseList WarehouseList { get; set; } = null!; public string WarehouseList_Id { get; set; }
         public int _Area { get; set; }
         public string? _DrawingImagePath { get; set; }
         public string? _NowImagePath { get; set; }

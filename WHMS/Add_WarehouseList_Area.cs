@@ -19,11 +19,22 @@ namespace WHMS
         public Add_WarehouseList_Area()
         {
             InitializeComponent();
-            LoadData();
+            LoadDefaultData();
             label_Err2.Visible = false;
         }
 
-        private void LoadData()
+        private void LoadGirdView()
+        {
+            using (var context = new DatabaseContext())
+            {
+                if (comboBox_Name.Text != null && comboBox_Area1 != null && context.WarehouseLists.Any())
+                {
+                    dataGridView_WarehouseLists.DataSource = context.WarehouseLists;
+                }
+            }
+        }
+
+        private void LoadDefaultData()
         {
             using (var context = new DatabaseContext())
             {
@@ -103,8 +114,8 @@ namespace WHMS
 
         private void OpenWL()
         {
-            Add_WarehouseList wl = new Add_WarehouseList();
-            wl.FormClosed += (sender, e) => { LoadData(); };
+            Add_WarehouseDefaultInfo wl = new Add_WarehouseDefaultInfo();
+            wl.FormClosed += (sender, e) => { LoadDefaultData(); };
             wl.ShowDialog();
         }
 
