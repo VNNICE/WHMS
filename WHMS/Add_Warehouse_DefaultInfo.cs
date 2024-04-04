@@ -14,9 +14,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WHMS
 {
-    public partial class Add_WarehouseDefaultInfo : Form
+    public partial class Add_Warehouse_DefaultInfo : Form
     {
-        public Add_WarehouseDefaultInfo()
+        public static string targetWarehouse { get; private set; } = "";
+
+        public Add_Warehouse_DefaultInfo()
         {
             InitializeComponent();
             LoadComboBoxData();
@@ -70,6 +72,9 @@ namespace WHMS
                     context.SaveChanges();
                     AreaMaker(id, areas);
                     MessageBox.Show("登録成功", "登録成功", MessageBoxButtons.OK);
+                    targetWarehouse = id;
+                    Add_Warehouse_SecondInfo form2 = new Add_Warehouse_SecondInfo();
+                    form2.ShowDialog();
                     this.Close();
                 }
                 catch (ArgumentException ae)

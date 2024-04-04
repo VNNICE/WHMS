@@ -69,6 +69,12 @@ namespace DBMS
                 i.HasOne(j=>j.WarehouseList).WithMany(j=>j.WarehouseList_Areas).HasForeignKey(j => j.WarehouseList_Id).IsRequired();
             });
 
+            modelBuilder.Entity<WarehouseList_Area_Area2>(i =>
+            {
+                i.HasKey(j => j._Area2);
+
+            });
+
             modelBuilder.Entity<Functions_Stock>(i =>
             {
                 i.HasKey(j => j._Id);

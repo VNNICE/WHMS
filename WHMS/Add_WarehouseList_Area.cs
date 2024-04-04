@@ -114,7 +114,7 @@ namespace WHMS
 
         private void OpenWL()
         {
-            Add_WarehouseDefaultInfo wl = new Add_WarehouseDefaultInfo();
+            Add_Warehouse_DefaultInfo wl = new Add_Warehouse_DefaultInfo();
             wl.FormClosed += (sender, e) => { LoadDefaultData(); };
             wl.ShowDialog();
         }

@@ -11,26 +11,18 @@ namespace DBMS
 {
     public class CityList
     {
-        public CityList(string _Code, string _City) 
+        public string _Code { get; set; }
+        public string _City { get; set; }
+        public ICollection<WarehouseList> WarehouseLists { get; } = new List<WarehouseList>();
+        public CityList(string _Code, string _City)
         {
             this._Code = _Code;
             this._City = _City;
         }
-        public string _Code { get; set; }
-        public string _City { get; set; }
-        public ICollection<WarehouseList> WarehouseLists { get; } = new List<WarehouseList>();
     }
 
     public class ItemList
     {
-        public ItemList(int _Id, string _Name, string _SerialNumber, int _Quantity, string? _Memo) 
-        {
-            this._Id = _Id;
-            this._Name = _Name;
-            this._SerialNumber = _SerialNumber;
-            this._Quantity = _Quantity;
-            this._Memo = _Memo;
-        }
         public required int _Id { get; set;  }
         public required string _Name { get; set; }
         public required string _AssetType { get; set; }
@@ -39,6 +31,14 @@ namespace DBMS
         public int? _Price { get; set; }
         public required int _Quantity { get; set; }
         public string? _Memo { get; set; }
+        public ItemList(int _Id, string _Name, string _SerialNumber, int _Quantity, string? _Memo)
+        {
+            this._Id = _Id;
+            this._Name = _Name;
+            this._SerialNumber = _SerialNumber;
+            this._Quantity = _Quantity;
+            this._Memo = _Memo;
+        }
     }
 
     public class ItemList_Spec
@@ -87,6 +87,13 @@ namespace DBMS
      */
     public class WarehouseList
     {
+        public string _Id { get; set; }
+        public int _Count { get; set; }
+        public string CityList_Code { get; set; } public CityList CityList { get; set; } = null!;
+        public string _Name { get; set; }
+        public string _ImagePath { get; set; }
+
+        public ICollection<WarehouseList_Area> WarehouseList_Areas { get; } = new List<WarehouseList_Area>();
         public WarehouseList(string _Id, int _Count, string CityList_Code, string _Name, string imagePath)
         {
             this._Id = _Id;
@@ -95,16 +102,17 @@ namespace DBMS
             this._Name = _Name;
             this._ImagePath = imagePath;
         }
-        public string _Id { get; set; }
-        public int _Count { get; set; }
-        public CityList CityList { get; set; } = null!; public string CityList_Code { get; set; }
-        public string _Name { get; set; }
-        public string _ImagePath { get; set; }
-        ///Ref
-        public ICollection<WarehouseList_Area> WarehouseList_Areas { get; } = new List<WarehouseList_Area>();
     }
     public class WarehouseList_Area
     {
+        public string _Id {  get; set; }
+        public string WarehouseList_Id { get; set; } public WarehouseList WarehouseList { get; set; } = null!;
+        public int _Area { get; set; }
+        public string? _DrawingImagePath { get; set; }
+        public string? _NowImagePath { get; set; }
+
+        public int _Conditions = 0;
+        public ICollection<WarehouseList_Area_Area2> WarehouseList_Area_Area2s { get; } = new List<WarehouseList_Area_Area2>();
         public WarehouseList_Area(string _Id, string WarehouseList_Id, int _Area, string? _DrawingImagePath, string? _NowImagePath)
         {
             this._Id = _Id;
@@ -113,27 +121,17 @@ namespace DBMS
             this._DrawingImagePath = _DrawingImagePath;
             this._NowImagePath = _NowImagePath;
         }
-        public string _Id {  get; set; }
-        public WarehouseList WarehouseList { get; set; } = null!; public string WarehouseList_Id { get; set; }
-        public int _Area { get; set; }
-        public string? _DrawingImagePath { get; set; }
-        public string? _NowImagePath { get; set; }
-
-        public int _Conditions = 0;
+    }
+    public class WarehouseList_Area_Area2
+    {
+        public int _Area2 { get; set; }
+        public int WarehouseList_Area_Id { get; set; } public WarehouseList_Area WarehouseList_Area { get; set; } = null!;
         public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
 
-        public void ChangeImages(string? newDrawing, string? newNow)
-        { 
-            this._DrawingImagePath = newDrawing;
-            this._NowImagePath = newNow;
-        }
-        public void Stocked()
+        public WarehouseList_Area_Area2(int _Area2, int WarehouseList_Area_Id) 
         {
-                this._Conditions = 1;
-        }
-        public void Outed()
-        {
-            this._Conditions = 0;
+            this._Area2 = _Area2;
+            this.WarehouseList_Area_Id = WarehouseList_Area_Id;
         }
     }
 
