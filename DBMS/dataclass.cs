@@ -112,9 +112,9 @@ namespace DBMS
         public string? _NowImagePath { get; set; }
 
         public int _Conditions = 0;
-        public ICollection<WarehouseList_Area_Area2> WarehouseList_Area_Area2s { get; } = new List<WarehouseList_Area_Area2>();
+        public ICollection<WarehouseList_Shelter> WarehouseList_Area_Area2s { get; } = new List<WarehouseList_Shelter>();
         public WarehouseList_Area(string _Id, string WarehouseList_Id, int _Area, string? _DrawingImagePath, string? _NowImagePath)
-        {
+        { 
             this._Id = _Id;
             this.WarehouseList_Id = WarehouseList_Id;
             this._Area = _Area;
@@ -122,16 +122,21 @@ namespace DBMS
             this._NowImagePath = _NowImagePath;
         }
     }
-    public class WarehouseList_Area_Area2
+    public class WarehouseList_Shelter
     {
-        public int _Area2 { get; set; }
-        public int WarehouseList_Area_Id { get; set; } public WarehouseList_Area WarehouseList_Area { get; set; } = null!;
-        public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
-
-        public WarehouseList_Area_Area2(int _Area2, int WarehouseList_Area_Id) 
+        public string _Id { get; set; }
+        public string WarehouseList_Area_Id { get; set; } public WarehouseList_Area WarehouseList_Area { get; set; } = null!;
+        public int _Length { get; set; }
+        public int _Width { get; set; }
+        public int _Height { get; set; }
+        //public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
+        public WarehouseList_Shelter(string _Id, string WarehouseList_Area_Id, int _Length, int _Width, int _Height) 
         {
-            this._Area2 = _Area2;
+            this._Id = _Id;
             this.WarehouseList_Area_Id = WarehouseList_Area_Id;
+            this._Length = _Length;
+            this._Width = _Width;
+            this._Height = _Height;
         }
     }
 

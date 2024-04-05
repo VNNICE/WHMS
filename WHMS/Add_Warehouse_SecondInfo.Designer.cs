@@ -38,20 +38,25 @@
             textBox_ImagePath = new TextBox();
             label3 = new Label();
             textBox1 = new TextBox();
+            label_LW = new Label();
+            textBox_Length = new TextBox();
+            textBox_Width = new TextBox();
+            label4 = new Label();
             SuspendLayout();
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(25, 9);
+            label1.BackColor = SystemColors.Menu;
+            label1.Location = new Point(3, 9);
             label1.Name = "label1";
-            label1.Size = new Size(43, 15);
+            label1.Size = new Size(85, 15);
             label1.TabIndex = 0;
             label1.Text = "倉庫名";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // butto_AddImage
             // 
-            butto_AddImage.Location = new Point(3, 93);
+            butto_AddImage.Location = new Point(3, 122);
             butto_AddImage.Name = "butto_AddImage";
             butto_AddImage.Size = new Size(203, 23);
             butto_AddImage.TabIndex = 3;
@@ -60,7 +65,7 @@
             // 
             // button_Decide
             // 
-            button_Decide.Location = new Point(3, 151);
+            button_Decide.Location = new Point(3, 180);
             button_Decide.Name = "button_Decide";
             button_Decide.Size = new Size(96, 23);
             button_Decide.TabIndex = 4;
@@ -69,7 +74,7 @@
             // 
             // button_Skip
             // 
-            button_Skip.Location = new Point(105, 151);
+            button_Skip.Location = new Point(105, 180);
             button_Skip.Name = "button_Skip";
             button_Skip.Size = new Size(101, 23);
             button_Skip.TabIndex = 5;
@@ -96,17 +101,18 @@
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(19, 38);
+            label2.BackColor = SystemColors.Menu;
+            label2.Location = new Point(3, 38);
             label2.Name = "label2";
-            label2.Size = new Size(55, 15);
+            label2.Size = new Size(85, 15);
             label2.TabIndex = 7;
             label2.Text = "対象置場";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBox_ImagePath
             // 
             textBox_ImagePath.Enabled = false;
-            textBox_ImagePath.Location = new Point(3, 122);
+            textBox_ImagePath.Location = new Point(3, 151);
             textBox_ImagePath.Name = "textBox_ImagePath";
             textBox_ImagePath.ReadOnly = true;
             textBox_ImagePath.Size = new Size(203, 23);
@@ -114,12 +120,13 @@
             // 
             // label3
             // 
-            label3.AutoSize = true;
+            label3.BackColor = SystemColors.Menu;
             label3.Location = new Point(3, 64);
             label3.Name = "label3";
             label3.Size = new Size(85, 15);
             label3.TabIndex = 10;
             label3.Text = "置場区分2生成";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBox1
             // 
@@ -128,11 +135,49 @@
             textBox1.Size = new Size(112, 23);
             textBox1.TabIndex = 2;
             // 
+            // label_LW
+            // 
+            label_LW.BackColor = SystemColors.Menu;
+            label_LW.Location = new Point(3, 93);
+            label_LW.Name = "label_LW";
+            label_LW.Size = new Size(85, 15);
+            label_LW.TabIndex = 12;
+            label_LW.Text = "縦幅 / 横幅";
+            label_LW.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // textBox_Length
+            // 
+            textBox_Length.Location = new Point(94, 93);
+            textBox_Length.Name = "textBox_Length";
+            textBox_Length.Size = new Size(40, 23);
+            textBox_Length.TabIndex = 13;
+            // 
+            // textBox_Width
+            // 
+            textBox_Width.Location = new Point(166, 94);
+            textBox_Width.Name = "textBox_Width";
+            textBox_Width.Size = new Size(40, 23);
+            textBox_Width.TabIndex = 14;
+            // 
+            // label4
+            // 
+            label4.BackColor = SystemColors.Menu;
+            label4.Location = new Point(134, 93);
+            label4.Name = "label4";
+            label4.Size = new Size(32, 23);
+            label4.TabIndex = 15;
+            label4.Text = "/ ";
+            label4.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // Add_Warehouse_SecondInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(218, 183);
+            ClientSize = new Size(218, 216);
+            Controls.Add(label4);
+            Controls.Add(textBox_Width);
+            Controls.Add(textBox_Length);
+            Controls.Add(label_LW);
             Controls.Add(label3);
             Controls.Add(textBox1);
             Controls.Add(textBox_ImagePath);
@@ -161,5 +206,9 @@
         private TextBox textBox_ImagePath;
         private Label label3;
         private TextBox textBox1;
+        private Label label_LW;
+        private TextBox textBox_Length;
+        private TextBox textBox_Width;
+        private Label label4;
     }
 }

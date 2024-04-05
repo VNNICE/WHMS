@@ -20,10 +20,10 @@ namespace DBMS
                 if (!Directory.Exists(DataPath.dbPath))
                 {
                     Directory.CreateDirectory(DataPath.dbPath);
-                    if (!Directory.Exists(DataPath.imagePath))
-                    {
-                        Directory.CreateDirectory(DataPath.imagePath);
-                    }
+                }
+                if (!Directory.Exists(DataPath.imagePath))
+                {
+                    Directory.CreateDirectory(DataPath.imagePath);
                 }
                 using (var context = new DatabaseContext())
                 {

@@ -46,7 +46,6 @@
             textBox_Name.Name = "textBox_Name";
             textBox_Name.Size = new Size(110, 23);
             textBox_Name.TabIndex = 1;
-            textBox_Name.TextChanged += textBox_Name_TextChanged;
             // 
             // label_City
             // 
@@ -73,8 +72,6 @@
             comboBox_City.Name = "comboBox_City";
             comboBox_City.Size = new Size(110, 23);
             comboBox_City.TabIndex = 0;
-            comboBox_City.SelectedIndexChanged += comboBox_City_SelectedIndexChanged;
-            comboBox_City.TextUpdate += comboBox_City_TextUpdate;
             // 
             // button_Apply
             // 
