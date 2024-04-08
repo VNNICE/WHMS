@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace WHMS
 {
     public partial class Add_Warehouse_SecondInfo : Form
-    {
+    { 
         private readonly DatabaseContext _context = new DatabaseContext();
         private static int searcher = 0;
         private string targetWarehouseId = Add_Warehouse_DefaultInfo.targetWarehouse;
@@ -21,11 +21,12 @@ namespace WHMS
         {
             InitializeComponent();
             _context = new DatabaseContext();
+
             LoadWarehouseInfo();
         }
 
 
-        public void LoadWarehouseInfo()
+        private void LoadWarehouseInfo()
         {
             MessageBox.Show(targetWarehouseId);
             var targetWarehouse = _context.WarehouseLists.Include(x => x.WarehouseList_Areas).FirstOrDefault(x => x._Id == targetWarehouseId);
@@ -37,11 +38,12 @@ namespace WHMS
                 textBox_SelectedArea.Text = nowCount.ToString();
             }
         }
-        public void SetAArea2(string areaId, int counter, out string msg)
+        private void SetAArea2(string areaId, int counter, out string msg)
         {
-            var selectedArea = _context.WarehouseList_Areas.Find(areaId);
+            var selectedArea = _context.WarehouseLists.Find(areaId);
             if (textBox_SelectedArea.Text != null && selectedArea != null)
             {
+                int maxCounts = selectedArea.WarehouseList_Areas.Count();
                 for (int i = 0; i <= counter; i++)
                 {
                     //selectedArea.WarehouseList_Area_Area2s.Add(new WarehouseList_Area_Area2(i, selectedArea._Id));
@@ -53,13 +55,47 @@ namespace WHMS
                 msg = "入力値エラー";
             }
         }
-        public void AreaSearcher(int maxcount)
+
+        private void MakeShelf(string shelfId, int width, int length, int height)
+        {
+            int imageWidth = 400;
+            int imageHeight = 400;
+            Bitmap bitmap = new Bitmap(imageWidth, imageHeight);
+            Graphics graphics = Graphics.FromImage(bitmap);
+
+            Pen pen = new Pen(Color.Black);
+            Brush brush = new SolidBrush(Color.Blue);
+            int startX = 50;
+            int startY = 50;
+            int rectangleWidth = (int)(width * 10);
+            int rectangleLength = (int)(length * 10); 
+            int rectangleHeight = (int)(height * 10); 
+            graphics.DrawRectangle(pen, startX, startY, rectangleWidth, rectangleLength);
+            graphics.DrawLine(pen, startX, startY, startX, startY - rectangleHeight);
+            graphics.DrawLine(pen, startX + rectangleWidth, startY, startX + rectangleWidth, startY - rectangleHeight);
+            graphics.DrawLine(pen, startX, startY - rectangleHeight, startX + rectangleWidth, startY - rectangleHeight);
+            string widthLabel = width.ToString();
+            string lengthLabel = length.ToString();
+            string heightLabel = height.ToString();
+            Font font = new Font("Arial", 10);
+            Brush labelBrush = new SolidBrush(Color.Black);
+            graphics.DrawString(widthLabel, font, labelBrush, startX + rectangleWidth / 2 - 10, startY + 5);
+            graphics.DrawString(lengthLabel, font, labelBrush, startX - 20, startY - rectangleHeight / 2 - 10);
+            graphics.DrawString(heightLabel, font, labelBrush, startX + rectangleWidth + 5, startY - rectangleHeight / 2 - 10);
+            string fileName = Path.Combine(DataPath.imagePath +shelfId +".png");
+            bitmap.Save(fileName);
+            MessageBox.Show("棚画像生成完了");
+            graphics.Dispose();
+            bitmap.Dispose();
+        }
+
+        private void AreaSearcher(int maxcount)
         {
             searcher++;
-            if (searcher == maxcount + 1)
+            if (searcher == maxcount - 1)
             {
                 MessageBox.Show("全置場設定完了");
-                this.Close();
+                this.Dispose();
             }
         }
     }

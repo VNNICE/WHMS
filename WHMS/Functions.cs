@@ -50,6 +50,8 @@ namespace WHMS
                             graphics.FillRectangle(Brushes.White, 0, 0, width, height);
                             graphics.DrawString("No Image", font, brush, new PointF(50, 40));
                             bitmap.Save(path);
+                            graphics.Dispose();
+                            bitmap.Dispose();
                         }
                     }
                 }

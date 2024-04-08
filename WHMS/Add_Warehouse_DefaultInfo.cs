@@ -47,8 +47,8 @@ namespace WHMS
             {
                 Add_Database();
                 Add_Warehouse_SecondInfo form2 = new Add_Warehouse_SecondInfo();
-                form2.ShowDialog();
-                this.Close();
+                this.Dispose();
+                form2.ShowDialog();                
             }
             catch (ArgumentException ae)
             {
@@ -117,7 +117,7 @@ namespace WHMS
         /*
          Functions
          */
-        public void AreaMaker(string id, int count)
+        private void AreaMaker(string id, int count)
         {
             var warehouseareas = new List<WarehouseList_Area>();
             for (int i = 0; i <= count; i++)
@@ -127,7 +127,7 @@ namespace WHMS
             _context.WarehouseList_Areas.AddRange(warehouseareas);
             _context.SaveChanges();
         }
-        public int Counter(string city)
+        private int Counter(string city)
         {
             if (_context.WarehouseLists.Any(x => x.CityList_Code == city))
             {
