@@ -21,7 +21,6 @@ namespace WHMS
         {
             InitializeComponent();
             _context = new DatabaseContext();
-
             LoadWarehouseInfo();
         }
 
@@ -38,17 +37,20 @@ namespace WHMS
                 textBox_SelectedArea.Text = nowCount.ToString();
             }
         }
-        private void SetAArea2(string areaId, int counter, out string msg)
+        private void SetAArea2(string areaId, out string msg)
         {
             var selectedArea = _context.WarehouseLists.Find(areaId);
+            int cnt = 1;
             if (textBox_SelectedArea.Text != null && selectedArea != null)
             {
-                int maxCounts = selectedArea.WarehouseList_Areas.Count();
-                for (int i = 0; i <= counter; i++)
+                if (selectedArea.WarehouseList_Areas.Any() == false)
                 {
-                    //selectedArea.WarehouseList_Area_Area2s.Add(new WarehouseList_Area_Area2(i, selectedArea._Id));
-                }
-                msg = $"置場区分2{counter}まで生成完了";
+                    textBox_Area2.Text = cnt.ToString();
+
+
+                } 
+                
+                textBox_Width.Text
             }
             else
             {

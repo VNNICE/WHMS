@@ -129,7 +129,7 @@ namespace DBMS
         public int _Length { get; set; }
         public int _Width { get; set; }
         public int _Height { get; set; }
-        //public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
+        public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
         public WarehouseList_Shelter(string _Id, string WarehouseList_Area_Id, int _Length, int _Width, int _Height) 
         {
             this._Id = _Id;

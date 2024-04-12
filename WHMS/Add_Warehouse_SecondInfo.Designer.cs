@@ -35,7 +35,7 @@
             textBox_SelectedArea = new TextBox();
             label2 = new Label();
             label3 = new Label();
-            textBox1 = new TextBox();
+            textBox_Area2 = new TextBox();
             label_LWH = new Label();
             textBox_Height = new TextBox();
             textBox_Length = new TextBox();
@@ -110,12 +110,12 @@
             label3.Text = "置場区分2生成";
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // textBox_Area2
             // 
-            textBox1.Location = new Point(94, 64);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(120, 23);
-            textBox1.TabIndex = 2;
+            textBox_Area2.Location = new Point(94, 64);
+            textBox_Area2.Name = "textBox_Area2";
+            textBox_Area2.Size = new Size(120, 23);
+            textBox_Area2.TabIndex = 2;
             // 
             // label_LWH
             // 
@@ -180,7 +180,7 @@
             Controls.Add(textBox_Height);
             Controls.Add(label_LWH);
             Controls.Add(label3);
-            Controls.Add(textBox1);
+            Controls.Add(textBox_Area2);
             Controls.Add(label2);
             Controls.Add(textBox_SelectedArea);
             Controls.Add(textBox_Name);
@@ -202,7 +202,7 @@
         private TextBox textBox_SelectedArea;
         private Label label2;
         private Label label3;
-        private TextBox textBox1;
+        private TextBox textBox_Area2;
         private Label label_LWH;
         private TextBox textBox_Height;
         private TextBox textBox_Length;
