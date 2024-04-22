@@ -16,7 +16,7 @@ namespace DBMS
         public DbSet<AdminList_Name> AdminList_Names { get; set; }
         public DbSet<WarehouseList> WarehouseLists { get; set; }
         public DbSet<WarehouseList_Area> WarehouseList_Areas { get; set; }
-        public DbSet<WarehouseList_Shelter> WarehouseList_Shelters { get; set; }
+        public DbSet<WarehouseList_Shelf> WarehouseList_Shelf { get; set; }
         public DbSet<Functions_Stock> Functions_Stocks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -66,12 +66,13 @@ namespace DBMS
                 i.HasKey(j => j._Id);
                 i.Property(j => j._Id).IsRequired();
 
-                i.HasMany(j => j.WarehouseList_Area_Area2s).WithOne(j => j.WarehouseList_Area).HasForeignKey(j => j.WarehouseList_Area_Id).OnDelete(DeleteBehavior.Cascade);
+                i.HasMany(j => j.WarehouseList_Shelves).WithOne(j => j.WarehouseList_Area).HasForeignKey(j => j.WarehouseList_Area_Id).OnDelete(DeleteBehavior.Cascade);
             });
 
-            modelBuilder.Entity<WarehouseList_Shelter>(i =>
+            modelBuilder.Entity<WarehouseList_Shelf>(i =>
             {
                 i.HasKey(j => j._Id);
+                i.Property(j=>j._Id).ValueGeneratedNever();
             });
             
             modelBuilder.Entity<Functions_Stock>(i =>
