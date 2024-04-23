@@ -63,6 +63,7 @@ namespace WHMS
                 length = Functions.Try_IntParse(label_L, textBox_Length);
                 height = Functions.Try_IntParse(label_H, textBox_Height);
                 Preview_Shelf();
+
             }
         }
         private void Preview_Shelf()
@@ -70,7 +71,7 @@ namespace WHMS
             int rectangleWidth = width * 10;
             int rectangleLength = length * 10;
             int rectangleHeight = height * 10;
-            graphics.DrawRectangle(pen, startX, startY, rectangleWidth, rectangleLength);
+            graphics.DrawRectangle(pen, 0, 0, rectangleWidth, rectangleHeight);
             graphics.DrawLine(pen, startX, startY, startX, startY - rectangleHeight);
             graphics.DrawLine(pen, startX + rectangleWidth, startY, startX + rectangleWidth, startY - rectangleHeight);
             graphics.DrawLine(pen, startX, startY - rectangleHeight, startX + rectangleWidth, startY - rectangleHeight);
