@@ -126,16 +126,17 @@ namespace DBMS
     {
         public string _Id { get; set; }
         public string WarehouseList_Area_Id { get; set; } public WarehouseList_Area WarehouseList_Area { get; set; } = null!;
-        public int _Length { get; set; }
         public int _Width { get; set; }
+        public int _Depth { get; set; }
+
         public int _Height { get; set; }
         public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
-        public WarehouseList_Shelf(string _Id, string WarehouseList_Area_Id, int _Length, int _Width, int _Height) 
+        public WarehouseList_Shelf(string _Id, string WarehouseList_Area_Id, int _Width, int _Depth, int _Height) 
         {
             this._Id = _Id;
             this.WarehouseList_Area_Id = WarehouseList_Area_Id;
-            this._Length = _Length;
             this._Width = _Width;
+            this._Depth = _Depth;
             this._Height = _Height;
         }
     }

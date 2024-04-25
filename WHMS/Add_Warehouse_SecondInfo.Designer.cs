@@ -37,13 +37,11 @@
             label3 = new Label();
             textBox_Shelf = new TextBox();
             label_W = new Label();
-            textBox_Height = new TextBox();
+            textBox_Depth = new TextBox();
             label_H = new Label();
             textBox_Width = new TextBox();
-            textBox_Length = new TextBox();
-            label_L = new Label();
-            pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            textBox_Height = new TextBox();
+            label_D = new Label();
             SuspendLayout();
             // 
             // label1
@@ -126,25 +124,25 @@
             // label_W
             // 
             label_W.BackColor = SystemColors.Menu;
-            label_W.Location = new Point(58, 94);
+            label_W.Location = new Point(-7, 94);
             label_W.Name = "label_W";
             label_W.Size = new Size(54, 23);
             label_W.TabIndex = 12;
-            label_W.Text = "横幅";
+            label_W.Text = "幅";
             label_W.TextAlign = ContentAlignment.MiddleCenter;
             label_W.Click += label_W_Click;
             // 
-            // textBox_Height
+            // textBox_Depth
             // 
-            textBox_Height.Location = new Point(152, 96);
-            textBox_Height.Name = "textBox_Height";
-            textBox_Height.Size = new Size(30, 23);
-            textBox_Height.TabIndex = 13;
+            textBox_Depth.Location = new Point(113, 94);
+            textBox_Depth.Name = "textBox_Depth";
+            textBox_Depth.Size = new Size(30, 23);
+            textBox_Depth.TabIndex = 13;
             // 
             // label_H
             // 
             label_H.BackColor = SystemColors.Menu;
-            label_H.Location = new Point(119, 95);
+            label_H.Location = new Point(135, 95);
             label_H.Name = "label_H";
             label_H.Size = new Size(40, 23);
             label_H.TabIndex = 16;
@@ -153,47 +151,38 @@
             // 
             // textBox_Width
             // 
-            textBox_Width.Location = new Point(94, 95);
+            textBox_Width.Location = new Point(38, 95);
             textBox_Width.Name = "textBox_Width";
             textBox_Width.Size = new Size(30, 23);
             textBox_Width.TabIndex = 17;
             textBox_Width.TextChanged += textBox_Width_TextChanged;
             // 
-            // textBox_Length
+            // textBox_Height
             // 
-            textBox_Length.Location = new Point(38, 94);
-            textBox_Length.Name = "textBox_Length";
-            textBox_Length.Size = new Size(33, 23);
-            textBox_Length.TabIndex = 14;
+            textBox_Height.Location = new Point(181, 95);
+            textBox_Height.Name = "textBox_Height";
+            textBox_Height.Size = new Size(33, 23);
+            textBox_Height.TabIndex = 14;
             // 
-            // label_L
+            // label_D
             // 
-            label_L.BackColor = SystemColors.Menu;
-            label_L.Location = new Point(3, 94);
-            label_L.Name = "label_L";
-            label_L.Size = new Size(40, 23);
-            label_L.TabIndex = 15;
-            label_L.Text = "縦幅 ";
-            label_L.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Location = new Point(220, 6);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(166, 141);
-            pictureBox1.TabIndex = 18;
-            pictureBox1.TabStop = false;
+            label_D.BackColor = SystemColors.Menu;
+            label_D.Location = new Point(75, 93);
+            label_D.Name = "label_D";
+            label_D.Size = new Size(40, 23);
+            label_D.TabIndex = 15;
+            label_D.Text = "奥行";
+            label_D.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // Add_Warehouse_SecondInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(395, 155);
-            Controls.Add(pictureBox1);
-            Controls.Add(textBox_Height);
+            ClientSize = new Size(221, 152);
+            Controls.Add(textBox_Depth);
             Controls.Add(textBox_Width);
-            Controls.Add(textBox_Length);
-            Controls.Add(label_L);
+            Controls.Add(textBox_Height);
+            Controls.Add(label_D);
             Controls.Add(label_W);
             Controls.Add(label3);
             Controls.Add(textBox_Shelf);
@@ -206,7 +195,6 @@
             Controls.Add(label_H);
             Name = "Add_Warehouse_SecondInfo";
             Text = "Add_WarehouseSecondInfo";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -222,11 +210,10 @@
         private Label label3;
         private TextBox textBox_Shelf;
         private Label label_W;
-        private TextBox textBox_Height;
+        private TextBox textBox_Depth;
         private Label label_H;
         private TextBox textBox_Width;
-        private TextBox textBox_Length;
-        private Label label_L;
-        private PictureBox pictureBox1;
+        private TextBox textBox_Height;
+        private Label label_D;
     }
 }

@@ -9,13 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace WHMS
 {
     public partial class Add_Warehouse_SecondInfo : Form
     {
         private string targetWarehouseId = Add_Warehouse_DefaultInfo.targetWarehouse;
-
+        PictureViewer pictureViewer = new PictureViewer();
         private readonly DatabaseContext _context = new DatabaseContext();
         private WarehouseList_Area? selectedArea = null;
         private WarehouseList? targetWarehouse = null;
@@ -26,18 +27,18 @@ namespace WHMS
         private static int searcher = 1;
         private static int shelfCnt = 1;
 
-        private static int length = 0;
         private static int width = 0;
+        private static int depth = 0;
         private static int height = 0;
         //DrawingSource
+        private static Size nowSize;
+        private static int bitmapWidth = 0;
+        private static int bitmapHeight = 0;
         private Bitmap? bitmap = null;
         private Graphics? graphics = null;
         private Pen pen = new Pen(Color.Black);
+        private Pen dotpen = new Pen(Color.Black) { DashStyle = DashStyle.Dot };
         private Brush brush = new SolidBrush(Color.Blue);
-        private int imageWidth = 400;
-        private int imageHeight = 400;
-        private int startX = 50;
-        private int startY = 50;
         ///
 
 
@@ -46,53 +47,69 @@ namespace WHMS
             InitializeComponent();
             textBox_Width.TextChanged += TextBox_Changed;
             textBox_Width.Leave += TextBox_Changed;
-            textBox_Length.TextChanged += TextBox_Changed;
-            textBox_Length.Leave += TextBox_Changed;
             textBox_Height.TextChanged += TextBox_Changed;
             textBox_Height.Leave += TextBox_Changed;
+            textBox_Depth.TextChanged += TextBox_Changed;
+            textBox_Depth.Leave += TextBox_Changed;
             LoadWarehouseInfo();
             maxAreas = selected_AreaLists.Select(x => x._Id).ToList().Count;
             MessageBox.Show(maxAreas - 1 + "まで登録可");
+        }//50, 150 150, 50
+        public void PictureViewerSetDefaultData()
+        {
+            if (!pictureViewer.Visible)
+            {
+                pictureViewer.Show();
+            }
+            pictureViewer.Left = this.Right;
+            pictureViewer.Top = this.Top;
+            this.FormClosing += (sender, e) => pictureViewer.Close();
         }
+
         private void TextBox_Changed(object sender, EventArgs e)
         {
-            if (textBox_Width.Text != "" && textBox_Length.Text != "" && textBox_Height.Text != "")
+            if (textBox_Width.Text != "" && textBox_Width.Text != "0" && textBox_Height.Text != "" && textBox_Height.Text != "0" && textBox_Depth.Text != "" && textBox_Depth.Text != "0")
             {
-                StartDraw();
                 width = Functions.Try_IntParse(label_W, textBox_Width);
-                length = Functions.Try_IntParse(label_L, textBox_Length);
                 height = Functions.Try_IntParse(label_H, textBox_Height);
+                depth = Functions.Try_IntParse(label_D, textBox_Depth);
+                StartDraw();
                 Preview_Shelf();
-
             }
         }
         private void Preview_Shelf()
         {
-            int rectangleWidth = width * 10;
-            int rectangleLength = length * 10;
-            int rectangleHeight = height * 10;
-            graphics.DrawRectangle(pen, 0, 0, rectangleWidth, rectangleHeight);
-            graphics.DrawLine(pen, startX, startY, startX, startY - rectangleHeight);
-            graphics.DrawLine(pen, startX + rectangleWidth, startY, startX + rectangleWidth, startY - rectangleHeight);
-            graphics.DrawLine(pen, startX, startY - rectangleHeight, startX + rectangleWidth, startY - rectangleHeight);
+            int[] vertexA = { (bitmapWidth - 1) / 8, (bitmapHeight - 1) / 3 };
+            int[] vertexB = { vertexA[0] , vertexA[1] + height };
+            int[] vertexC = { vertexA[0] + width, vertexA[1] + height };
+            int[] vertexD = { vertexA[0]+ width, vertexA[1] };
 
-            string widthLabel = width.ToString();
-            string lengthLabel = length.ToString();
-            string heightLabel = height.ToString();
+            graphics.DrawRectangle(pen, vertexA[0], vertexA[1], width, height);
+            graphics.DrawLine(pen, vertexA[0], vertexA[1], vertexA[0] + (depth / 2 ), vertexA[1] - (depth / 2));
+            graphics.DrawLine(pen, vertexC[0], vertexC[1], vertexC[0] + (depth / 2 ), vertexC[1] - (depth / 2));
+            graphics.DrawLine(pen, vertexD[0], vertexD[1], vertexD[0] + (depth / 2 ), vertexD[1] - (depth / 2 ));
 
-            Font font = new Font("Arial", 10);
-            Brush labelBrush = new SolidBrush(Color.Black);
+            graphics.DrawLine(pen, vertexA[0] + (depth / 2), vertexA[1] - (depth / 2), vertexD[0] + (depth / 2), vertexD[1] - (depth / 2));
+            graphics.DrawLine(pen, vertexD[0] + (depth / 2), vertexD[1] - (depth / 2), vertexC[0] + (depth / 2), vertexC[1] - (depth / 2));
 
-            graphics.DrawString(widthLabel, font, labelBrush, startX + rectangleWidth / 2 - 10, startY + 5);
-            graphics.DrawString(lengthLabel, font, labelBrush, startX - 20, startY - rectangleLength / 2 - 10);
-            graphics.DrawString(heightLabel, font, labelBrush, startX + rectangleWidth + 5, startY - rectangleLength / 2 - 10);
+            graphics.DrawLine(dotpen, vertexB[0], vertexB[1], vertexB[0] + (depth / 2 ), vertexB[1] - (depth / 2));
+            graphics.DrawLine(dotpen, vertexA[0] + (depth / 2), vertexA[1] - (depth / 2 ), vertexB[0] + (depth / 2), vertexB[1] - (depth / 2));
+            graphics.DrawLine(dotpen, vertexB[0] + (depth / 2), vertexB[1] - (depth / 2 ), vertexC[0] + (depth / 2), vertexC[1] - (depth / 2));
+            graphics.DrawString(width.ToString(), new Font("Arial", 10), Brushes.Black, new PointF(vertexB[0] + width / 2, vertexB[1] + 5));
+            graphics.DrawString(height.ToString(), new Font("Arial", 10), Brushes.Black, new PointF(vertexA[0] - 30, vertexA[1] + height/2 ));
+            graphics.DrawString(depth.ToString(), new Font("Arial", 10), Brushes.Black, new PointF(vertexC[0] + depth / 3, vertexC[1] - depth / 4));
 
-            pictureBox1.Image = bitmap;
+            pictureViewer.pictureBoxMain.Image = bitmap;
+            PictureViewerSetDefaultData();
         }
         
         private void StartDraw()
         {
-            bitmap = new Bitmap(imageWidth, imageHeight);
+            bitmapWidth = ((width + depth) * 2);
+            bitmapHeight = ((height + depth) * 2);
+            pictureViewer.Size =  new Size(bitmapWidth, bitmapHeight);
+            pictureViewer.pictureBoxMain.Size = new Size(bitmapWidth, bitmapHeight);
+            bitmap = new Bitmap(bitmapWidth, bitmapHeight);
             graphics = Graphics.FromImage(bitmap);
         }
 
@@ -123,7 +140,7 @@ namespace WHMS
                         var firstShelf = new WarehouseList_Shelf(selectedArea._Id + "S0", selectedArea._Id.ToString(), 0, 0, 0);
                         _context.Add(firstShelf);
                     }
-                    var newShelf = new WarehouseList_Shelf(shelfId, textBox_SelectedArea.Text.ToString(), length, width, height);
+                    var newShelf = new WarehouseList_Shelf(shelfId, textBox_SelectedArea.Text.ToString(), width, depth, height);
                     _context.Add(newShelf);
                     _context.SaveChanges();
                     shelfCnt++;
