@@ -22,7 +22,7 @@ namespace WHMS
         private WarehouseList targetWarehouse;
         private static List<WarehouseList_Area> selected_AreaLists = new List<WarehouseList_Area>();
         private string selectedAreaId;
-        private string shelfId = "";
+        private string shelfId;
         private static int maxAreas = 0;
         private static int searcher = 1;
         private static int shelfCnt = 1;
@@ -36,9 +36,6 @@ namespace WHMS
             InitializeComponent();
             targetWarehouse = _context.WarehouseLists.Include(x => x.WarehouseList_Areas).FirstOrDefault(x => x._Id == targetWarehouseId);
             selected_AreaLists.AddRange(targetWarehouse.WarehouseList_Areas);
-
-            selectedArea = _context.WarehouseList_Areas.Find(textBox_SelectedArea.Text.ToString());
-
             textBox_Width.TextChanged += TextBox_Changed;
             textBox_Width.Leave += TextBox_Changed;
             textBox_Height.TextChanged += TextBox_Changed;
@@ -80,9 +77,11 @@ namespace WHMS
         {
             if (targetWarehouse != null)
             {
+                selectedArea = _context.WarehouseList_Areas.Find(selectedAreaId);
                 textBox_Name.Text = targetWarehouse._Name.ToString();
                 var areaLists = selected_AreaLists[searcher];
-                textBox_SelectedArea.Text = areaLists._Id.ToString() + " / " + (maxAreas - 1).ToString();
+                selectedAreaId = areaLists._Id.ToString();
+                textBox_SelectedArea.Text = selectedAreaId + " / " + (maxAreas - 1).ToString();
                 textBox_Shelf.Text = shelfCnt.ToString();
             }
         }
@@ -92,14 +91,14 @@ namespace WHMS
             {
                 if (selectedArea.WarehouseList_Id.Any())
                 {
-                    selectedAreaId = selectedArea._Id.ToString();
+                    MessageBox.Show(selectedAreaId);
                     shelfId = selectedArea._Id + "S" + shelfCnt.ToString();
                     if (!selectedArea.WarehouseList_Shelves.Any())
                     { 
                         var firstShelf = new WarehouseList_Shelf(selectedArea._Id + "S0", selectedArea._Id.ToString(), 0, 0, 0);
                         _context.Add(firstShelf);
                     }
-                    var newShelf = new WarehouseList_Shelf(shelfId, textBox_SelectedArea.Text.ToString(), width, depth, height);
+                    var newShelf = new WarehouseList_Shelf(shelfId, selectedAreaId, width, depth, height);
                     _context.Add(newShelf);
                     _context.SaveChanges();
                     shelfCnt++;
@@ -142,7 +141,10 @@ namespace WHMS
         private void button_Skip_Click(object sender, EventArgs e)
         {
             AreaSearcher();
-            LoadWarehouseInfo();
+            if (searcher != maxAreas)
+            {
+                LoadWarehouseInfo();
+            }
         }
 
         private void textBox_Width_TextChanged(object sender, EventArgs e)

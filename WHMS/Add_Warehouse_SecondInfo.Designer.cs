@@ -59,7 +59,7 @@
             button_Decide.Location = new Point(3, 124);
             button_Decide.Name = "button_Decide";
             button_Decide.Size = new Size(96, 23);
-            button_Decide.TabIndex = 4;
+            button_Decide.TabIndex = 3;
             button_Decide.Text = "確定";
             button_Decide.UseVisualStyleBackColor = true;
             button_Decide.Click += button_Decide_Click;
@@ -69,7 +69,7 @@
             button_Skip.Location = new Point(113, 124);
             button_Skip.Name = "button_Skip";
             button_Skip.Size = new Size(101, 23);
-            button_Skip.TabIndex = 5;
+            button_Skip.TabIndex = 4;
             button_Skip.Text = "スキップ";
             button_Skip.UseVisualStyleBackColor = true;
             button_Skip.Click += button_Skip_Click;
@@ -124,7 +124,7 @@
             // label_W
             // 
             label_W.BackColor = SystemColors.Menu;
-            label_W.Location = new Point(-7, 94);
+            label_W.Location = new Point(-10, 94);
             label_W.Name = "label_W";
             label_W.Size = new Size(54, 23);
             label_W.TabIndex = 12;
@@ -134,43 +134,43 @@
             // 
             // textBox_Depth
             // 
-            textBox_Depth.Location = new Point(113, 94);
+            textBox_Depth.Location = new Point(121, 96);
             textBox_Depth.Name = "textBox_Depth";
             textBox_Depth.Size = new Size(30, 23);
-            textBox_Depth.TabIndex = 13;
+            textBox_Depth.TabIndex = 1;
             // 
             // label_H
             // 
             label_H.BackColor = SystemColors.Menu;
-            label_H.Location = new Point(135, 95);
+            label_H.Location = new Point(144, 96);
             label_H.Name = "label_H";
             label_H.Size = new Size(40, 23);
-            label_H.TabIndex = 16;
+            label_H.TabIndex = 1;
             label_H.Text = "高さ";
             label_H.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBox_Width
             // 
-            textBox_Width.Location = new Point(38, 95);
+            textBox_Width.Location = new Point(39, 95);
             textBox_Width.Name = "textBox_Width";
             textBox_Width.Size = new Size(30, 23);
-            textBox_Width.TabIndex = 17;
+            textBox_Width.TabIndex = 0;
             textBox_Width.TextChanged += textBox_Width_TextChanged;
             // 
             // textBox_Height
             // 
-            textBox_Height.Location = new Point(181, 95);
+            textBox_Height.Location = new Point(181, 97);
             textBox_Height.Name = "textBox_Height";
             textBox_Height.Size = new Size(33, 23);
-            textBox_Height.TabIndex = 14;
+            textBox_Height.TabIndex = 2;
             // 
             // label_D
             // 
             label_D.BackColor = SystemColors.Menu;
-            label_D.Location = new Point(75, 93);
+            label_D.Location = new Point(75, 95);
             label_D.Name = "label_D";
             label_D.Size = new Size(40, 23);
-            label_D.TabIndex = 15;
+            label_D.TabIndex = 4;
             label_D.Text = "奥行";
             label_D.TextAlign = ContentAlignment.MiddleCenter;
             // 

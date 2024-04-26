@@ -22,6 +22,13 @@ namespace WHMS
             column.HeaderText = view;
             gridview.Columns.Add(column);
         }
+        public void textBox_KeyPressOnlyNumber(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
         public static int Try_IntParse(Label label, TextBox text)
         {
             string s = text.Text.ToString();
