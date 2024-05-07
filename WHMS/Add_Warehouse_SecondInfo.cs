@@ -10,17 +10,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Configuration;
 
 namespace WHMS
 {
     public partial class Add_Warehouse_SecondInfo : Form
     {
+        private Functions fc = new Functions();
         private string targetWarehouseId = Add_Warehouse_DefaultInfo.targetWarehouse;
         PictureViewer pictureViewer = new PictureViewer();
         private readonly DatabaseContext _context = new DatabaseContext();
         private WarehouseList_Area selectedArea;
         private WarehouseList targetWarehouse;
         private static List<WarehouseList_Area> selected_AreaLists = new List<WarehouseList_Area>();
+
         private string selectedAreaId;
         private string shelfId;
         private static int maxAreas = 0;
@@ -42,6 +45,7 @@ namespace WHMS
             textBox_Height.Leave += TextBox_Changed;
             textBox_Depth.TextChanged += TextBox_Changed;
             textBox_Depth.Leave += TextBox_Changed;
+            textBox_Height.KeyPress += fc.textBox_KeyPressOnlyNumber;
             maxAreas = selected_AreaLists.Select(x => x._Id).ToList().Count;
             MessageBox.Show(maxAreas - 1 + "まで登録可");
             LoadWarehouseInfo();
@@ -59,9 +63,9 @@ namespace WHMS
             if (textBox_Width.Text != "" && textBox_Width.Text != "0" && textBox_Height.Text != "" && textBox_Height.Text != "0" && textBox_Depth.Text != "" && textBox_Depth.Text != "0")
             {
                 SetADefaultDataPictureBox();
-                width = Functions.Try_IntParse(label_W, textBox_Width);
-                height = Functions.Try_IntParse(label_H, textBox_Height);
-                depth = Functions.Try_IntParse(label_D, textBox_Depth);
+                width = fc.Try_IntParse(label_W, textBox_Width);
+                height = fc.Try_IntParse(label_H, textBox_Height);
+                depth = fc.Try_IntParse(label_D, textBox_Depth);
                 pictureViewer.SetAShelf(width, depth, height);
                 pictureViewer.StartDraw();
                 pictureViewer.Preview_Shelf();

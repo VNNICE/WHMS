@@ -13,9 +13,9 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace WHMS
 {
-    public class Functions
+    class Functions
     {
-        public static void SetDataGridViewColumns(DataGridView gridview, string data, string view)
+        public void SetDataGridViewColumns(DataGridView gridview, string data, string view)
         {
             DataGridViewColumn column = new DataGridViewTextBoxColumn();
             column.DataPropertyName = data;
@@ -29,7 +29,7 @@ namespace WHMS
                 e.Handled = true;
             }
         }
-        public static int Try_IntParse(Label label, TextBox text)
+        public int Try_IntParse(Label label, TextBox text)
         {
             string s = text.Text.ToString();
             try
@@ -42,7 +42,7 @@ namespace WHMS
                 throw new ArgumentException($"{label.Text}には整数を入力してください。");
             }
         }
-        public static void NoImageGenerator(string path)
+        public void NoImageGenerator(string path)
         {
             int width = 200;
             int height = 200;
