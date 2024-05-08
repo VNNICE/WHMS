@@ -13,6 +13,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace WHMS
 {
+
     public partial class View_WarehouseList_Area : Form
     {
         private readonly DatabaseContext context = new DatabaseContext();
@@ -21,9 +22,22 @@ namespace WHMS
         public View_WarehouseList_Area()
         {
             InitializeComponent();
-            SetJoinWarehouseLists();
             LoadDefaultData();
-
+            dataGridView_WarehouseLists.DataBindingComplete += dataGridView_format;
+            comboBox_Area.Format += (sender, e) =>
+            {
+                if (e.ListItem is WarehouseList_Area area && area._Area == -99)
+                {
+                    e.Value = "全体";
+                }
+            };
+            comboBox_Shelf.Format += (sender, e) =>
+            {
+                if (e.ListItem is WarehouseList_Shelf shelf && shelf._No == -99)
+                {
+                    e.Value = "全体";
+                }
+            };
             comboBox_City.SelectedIndexChanged += ComboBox_City_SelectedIndexChanged;
             comboBox_Name.SelectedIndexChanged += ComboBox_Name_SelectedIndexChanged;
             comboBox_Area.SelectedIndexChanged += ComboBox_Area_SelectedIndexChanged;
@@ -33,15 +47,18 @@ namespace WHMS
         private void ComboBox_City_SelectedIndexChanged(object? sender, EventArgs e)
         {
             ComboBox_NameData();
+            LoadGridViewCity();
         }
 
         private void ComboBox_Name_SelectedIndexChanged(object? sender, EventArgs e)
         {
             ComboBox_AreaData();
+            LoadGridViewWarehouse();
         }
         private void ComboBox_Area_SelectedIndexChanged(object? sender, EventArgs e)
         {
             ComboBox_ShelfData();
+            LoadGridViewArea();
         }
         private void ComboBox_Shelf_SelectedIndexChanged(object? sender, EventArgs e)
         {
@@ -64,29 +81,80 @@ namespace WHMS
                     wl.CityList._City,
                     wl._Id,
                     wl._Name,
+                    wa._Id,
                     wa._Area,
+                    ws._Id,
                     ws._No
                     )))).ToList();
                 }
             }
-        }
-
-        private void LoadGirdView()
-        {
-            if (comboBox_Name.Text != null && comboBox_Area != null && context.WarehouseLists.Any() && join_WarehouseLists != null)
-            {
-                dataGridView_WarehouseLists.DataSource = join_WarehouseLists;
-
-            }
             else
             {
-                MessageBox.Show("Null");
+                MessageBox.Show("登録された倉庫がありません、倉庫を登録してください。");
             }
         }
+
+        private void LoadGridView()
+        {
+                SetJoinWarehouseLists();
+                dataGridView_WarehouseLists.DataSource = join_WarehouseLists;
+        }
+
+        private void LoadGridViewCity()
+        {
+            if (join_WarehouseLists != null && comboBox_City.SelectedItem != null && comboBox_City.SelectedValue != null)
+            {
+                if (comboBox_City.SelectedValue.ToString() == "empty")
+                {
+                    dataGridView_WarehouseLists.DataSource = join_WarehouseLists.ToList();
+                }
+                else
+                {
+                    var code = comboBox_City.SelectedValue.ToString();
+                    var city = context.CityLists.Where(x=>x._Code == code).Select(x=>x._City).FirstOrDefault();
+                    dataGridView_WarehouseLists.DataSource = join_WarehouseLists.Where(x => x._City == city).ToList();
+                }
+            }
+        }
+
+        private void LoadGridViewWarehouse()
+        {
+            if (join_WarehouseLists != null && comboBox_Name.SelectedItem != null && comboBox_Name.SelectedValue != null)
+            {
+                if (comboBox_Name.SelectedValue.ToString() == "empty")
+                {
+                    LoadGridViewCity();
+                }
+                else
+                {
+                    dataGridView_WarehouseLists.DataSource = join_WarehouseLists.Where(x => x._Id == comboBox_Name.SelectedValue.ToString()).ToList();
+                }
+            }
+        }
+
+        private void LoadGridViewArea()
+        {
+            if (join_WarehouseLists != null && comboBox_Area.SelectedItem != null && comboBox_Area.SelectedValue != null)
+            {
+                if (comboBox_Area.SelectedValue.ToString() == "empty")
+                {
+                    LoadGridViewWarehouse();
+                }
+                else
+                {
+                    dataGridView_WarehouseLists.DataSource = join_WarehouseLists.Where(x => x._AreaId == comboBox_Area.SelectedValue.ToString()).ToList();
+                }
+            }
+        }
+        private void LoadGridViewShelf()
+        {
+
+        }
+
 
         private void LoadDefaultData()
         {
-            LoadGirdView();
+            LoadGridView();
             LoadImages();
             ComboBox_CityData();
         }
@@ -94,8 +162,10 @@ namespace WHMS
         {
             if (context.WarehouseLists.Any())
             {
+                var blank = new CityList("empty", "全体");
                 var codes = context.WarehouseLists.Select(x => x.CityList_Code).Distinct().ToList();
                 var cityElements = context.CityLists.Where(x=> codes.Contains(x._Code)).ToList();
+                cityElements.Insert(0, blank);
 
                 comboBox_City.DataSource = cityElements;
                 comboBox_City.DisplayMember = "_City";
@@ -107,18 +177,34 @@ namespace WHMS
         {
             if (comboBox_City.SelectedValue != null)
             {
-                var warehouseElements = context.WarehouseLists.Where(x=>x.CityList_Code == comboBox_City.SelectedValue.ToString()).Distinct().ToList();
+                List<WarehouseList> warehouseElements;
+                var blank = new WarehouseList("empty", 0, "", "全体", "");
+                if (comboBox_City.SelectedValue.ToString() == "empty")
+                {
+                    warehouseElements = context.WarehouseLists.ToList();
+                }
+                else
+                {
+                    
+                    warehouseElements = context.WarehouseLists.Where(x => x.CityList_Code == comboBox_City.SelectedValue.ToString()).Distinct().ToList();
+                }
+                warehouseElements.Insert(0, blank);
                 comboBox_Name.DataSource = warehouseElements;
                 comboBox_Name.DisplayMember = "_Name";
                 comboBox_Name.ValueMember = "_Id";
                 ComboBox_AreaData();
+
             }
+
         }
         private void ComboBox_AreaData()
         {
-            if (comboBox_Name.SelectedValue != null)
+            if (comboBox_City.SelectedValue != null && comboBox_Name.SelectedValue != null)
             {
-                var areaElements = context.WarehouseList_Areas.Where(x => x.WarehouseList_Id == comboBox_Name.ValueMember.ToString()).ToList();
+                var blank = new WarehouseList_Area("empty", "", -99, "", "");
+                var areaElements = context.WarehouseList_Areas.Where(x => x.WarehouseList_Id == comboBox_Name.SelectedValue.ToString()).ToList();
+                areaElements.Insert(0, blank);
+
                 comboBox_Area.DataSource = areaElements;
                 comboBox_Area.DisplayMember = "_Area";
                 comboBox_Area.ValueMember = "_Id";
@@ -127,12 +213,16 @@ namespace WHMS
         }
         private void ComboBox_ShelfData()
         {
-            if (comboBox_Area.SelectedValue != null)
+            if (comboBox_City.SelectedValue != null && comboBox_Name.SelectedValue != null && comboBox_Area.SelectedValue != null)
             {
-                var shelves = context.WarehouseList_Shelf.Where(x => x.WarehouseList_Area_Id == comboBox_Area.ValueMember.ToString()).Distinct().ToList();
-                comboBox_Shelf.DataSource = shelves;
-                comboBox_Area.DisplayMember = "_No";
-                comboBox_Area.ValueMember = "_Id";
+                var blank = new WarehouseList_Shelf("empty", -99, "", 0, 0, 0);
+                var shelfElements = context.WarehouseList_Shelf.Where(x => x.WarehouseList_Area_Id == comboBox_Area.SelectedValue.ToString()).ToList();
+                shelfElements.Insert(0, blank);
+
+
+                comboBox_Shelf.DataSource = shelfElements;
+                comboBox_Shelf.DisplayMember = "_No";
+                comboBox_Shelf.ValueMember = "_Id";
             }
         }
 
@@ -206,6 +296,16 @@ namespace WHMS
         private void pictureBox_Image_Click(object sender, EventArgs e)
         {
 
+        }
+        private void dataGridView_format(object? sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dataGridView_WarehouseLists.Columns["_City"].HeaderText = "地域";
+            dataGridView_WarehouseLists.Columns["_Id"].HeaderText = "ID";
+            dataGridView_WarehouseLists.Columns["_Name"].HeaderText = "倉庫名";
+            dataGridView_WarehouseLists.Columns["_AreaId"].Visible = false;
+            dataGridView_WarehouseLists.Columns["_Area"].HeaderText = "置場区分";
+            dataGridView_WarehouseLists.Columns["_ShelfId"].Visible = false;
+            dataGridView_WarehouseLists.Columns["_ShelfNo"].HeaderText = "棚";
         }
     }
 }

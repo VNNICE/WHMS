@@ -189,16 +189,13 @@ namespace WHMS
         #endregion
 
         private ComboBox comboBox_Name;
-        private Button button_Apply;
         private Button button_Cancel;
-        private TextBox textBox_Area2;
         private Label label_Name;
         private Label label_Area1;
         private Label label_Shelf;
         private Button button_Add_Warehouse;
         private DataGridView dataGridView_WarehouseLists;
         private ComboBox comboBox_Area;
-        private Button button_Add_Images;
         private PictureBox pictureBox_Image;
         private ComboBox comboBox_Shelf;
         private Label label_City;

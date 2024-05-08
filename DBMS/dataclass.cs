@@ -151,14 +151,18 @@ namespace DBMS
         public string _City { get; set; }
         public string _Id { get; set; }
         public string _Name { get; set; }
+        public string _AreaId { get; set; }
         public int _Area { get; set; }
+        public string _ShelfId { get; set; }
         public int _ShelfNo { get; set; }
-        public Join_Warehouse(string _City, string _Id, string _Name, int _Area, int _ShelfNo)
+        public Join_Warehouse(string _City, string _Id, string _Name, string _AreaId, int _Area, string _ShelfId, int _ShelfNo)
         {
             this._City = _City;
             this._Id = _Id;
             this._Name = _Name;
+            this._AreaId = _AreaId;
             this._Area = _Area;
+            this._ShelfId = _ShelfId;
             this._ShelfNo = _ShelfNo;
         }
     }

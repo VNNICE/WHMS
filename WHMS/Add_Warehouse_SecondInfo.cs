@@ -67,7 +67,7 @@ namespace WHMS
             this.FormClosing += (sender, e) => pictureViewer.Close();
             this.FormClosing += (sender, e) => ResetStaticData();
         }//50, 150 150, 50
-        private void KeyPressSettings(object sender, KeyPressEventArgs e)
+        private void KeyPressSettings(object? sender, KeyPressEventArgs e)
         {
             TextBox tb = sender as TextBox;
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -92,7 +92,7 @@ namespace WHMS
             height = 0;
         }
 
-        private void MovePictureBox(object sender, EventArgs e)
+        private void MovePictureBox(object? sender, EventArgs e)
         {
             pictureViewer.Left = this.Right;
             pictureViewer.Top = this.Top;
@@ -104,7 +104,7 @@ namespace WHMS
             pictureViewer.Top = this.Top;
             pictureViewer.TopMost = true;
         }
-        private void TextBox_Changed(object sender, EventArgs e)
+        private void TextBox_Changed(object? sender, EventArgs e)
         {
             if (textBox_Width.Text != "" && textBox_Width.Text != "0" && textBox_Height.Text != "" && textBox_Height.Text != "0" && textBox_Depth.Text != "" && textBox_Depth.Text != "0")
             {
@@ -177,18 +177,18 @@ namespace WHMS
 
         }
 
-        private void label_W_Click(object sender, EventArgs e)
+        private void label_W_Click(object? sender, EventArgs e)
         {
 
         }
 
-        private void button_Decide_Click(object sender, EventArgs e)
+        private void button_Decide_Click(object? sender, EventArgs e)
         {
             Add_Shelf();
             LoadWarehouseInfo();
         }
 
-        private void button_Skip_Click(object sender, EventArgs e)
+        private void button_Skip_Click(object? sender, EventArgs e)
         {
             if (shelfCnt == 1)
             {
@@ -204,7 +204,7 @@ namespace WHMS
             }
         }
 
-        private void textBox_Width_TextChanged(object sender, EventArgs e)
+        private void textBox_Width_TextChanged(object? sender, EventArgs e)
         {
 
         }
