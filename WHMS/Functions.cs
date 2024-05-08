@@ -19,6 +19,7 @@ namespace WHMS
     ///
         private void KeyPressSettings(object sender, KeyPressEventArgs e)
         {
+            TextBox tb = sender as TextBox;
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;

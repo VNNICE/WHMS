@@ -38,7 +38,7 @@ namespace WHMS
 
         private void button_Add_WarehouseList_Click(object sender, EventArgs e)
         {
-            Add_WarehouseList_Area wla = new Add_WarehouseList_Area();
+            View_WarehouseList_Area wla = new View_WarehouseList_Area();
             wla.ShowDialog();
         }
     }

@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using DBMS;
 using Microsoft.EntityFrameworkCore;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace WHMS
 {
@@ -27,6 +26,19 @@ namespace WHMS
             _context = new DatabaseContext();
             LoadComboBoxData();
             comboBox_City.DropDownStyle = ComboBoxStyle.DropDownList;
+            textBox_Add_Areas.KeyPress += KeyPressSettings;
+        }
+        private void KeyPressSettings(object sender, KeyPressEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (tb.Text.Length >= 4 && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
         }
 
         private void LoadComboBoxData()

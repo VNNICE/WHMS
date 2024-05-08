@@ -13,14 +13,13 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace WHMS
 {
-    public partial class Add_WarehouseList_Area : Form
+    public partial class View_WarehouseList_Area : Form
     {
 
-        public Add_WarehouseList_Area()
+        public View_WarehouseList_Area()
         {
             InitializeComponent();
             LoadDefaultData();
-            label_Err2.Visible = false;
         }
 
         private void LoadGirdView()

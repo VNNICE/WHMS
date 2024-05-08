@@ -2,7 +2,7 @@
 
 namespace WHMS
 {
-    partial class Add_WarehouseList_Area
+    partial class View_WarehouseList_Area
     {
         /// <summary>
         /// Required designer variable.
@@ -31,18 +31,15 @@ namespace WHMS
         private void InitializeComponent()
         {
             comboBox_Name = new ComboBox();
-            button_Apply = new Button();
             button_Cancel = new Button();
-            textBox_Area2 = new TextBox();
             label_Name = new Label();
             label_Area1 = new Label();
-            label_Area2 = new Label();
-            label_Err2 = new Label();
+            label_Shelf = new Label();
             button_Add_Warehouse = new Button();
             dataGridView_WarehouseLists = new DataGridView();
             comboBox_Area1 = new ComboBox();
-            button_Add_Images = new Button();
             pictureBox_Image = new PictureBox();
+            comboBox_Shelf = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView_WarehouseLists).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox_Image).BeginInit();
             SuspendLayout();
@@ -58,16 +55,6 @@ namespace WHMS
             comboBox_Name.SelectedIndexChanged += comboBox_Name_SelectedIndexChanged;
             comboBox_Name.SelectionChangeCommitted += comboBox_Name_SelectionChangeCommitted;
             // 
-            // button_Apply
-            // 
-            button_Apply.Location = new Point(597, 38);
-            button_Apply.Name = "button_Apply";
-            button_Apply.Size = new Size(75, 23);
-            button_Apply.TabIndex = 2;
-            button_Apply.Text = "追加";
-            button_Apply.UseVisualStyleBackColor = true;
-            button_Apply.Click += button_Apply_Click;
-            // 
             // button_Cancel
             // 
             button_Cancel.Location = new Point(93, 4);
@@ -77,13 +64,6 @@ namespace WHMS
             button_Cancel.Text = "戻る";
             button_Cancel.UseVisualStyleBackColor = true;
             button_Cancel.Click += button_Cancel_Click;
-            // 
-            // textBox_Area2
-            // 
-            textBox_Area2.Location = new Point(470, 38);
-            textBox_Area2.Name = "textBox_Area2";
-            textBox_Area2.Size = new Size(121, 23);
-            textBox_Area2.TabIndex = 4;
             // 
             // label_Name
             // 
@@ -104,26 +84,14 @@ namespace WHMS
             label_Area1.TabIndex = 6;
             label_Area1.Text = "置場区分1";
             // 
-            // label_Area2
+            // label_Shelf
             // 
-            label_Area2.AutoSize = true;
-            label_Area2.Location = new Point(379, 42);
-            label_Area2.Name = "label_Area2";
-            label_Area2.Size = new Size(85, 15);
-            label_Area2.TabIndex = 7;
-            label_Area2.Text = "置場区分2登録";
-            // 
-            // label_Err2
-            // 
-            label_Err2.AutoSize = true;
-            label_Err2.BackColor = SystemColors.Menu;
-            label_Err2.Enabled = false;
-            label_Err2.ForeColor = Color.Red;
-            label_Err2.Location = new Point(174, 4);
-            label_Err2.Name = "label_Err2";
-            label_Err2.Size = new Size(148, 15);
-            label_Err2.TabIndex = 9;
-            label_Err2.Text = "半角数字で入力してください。";
+            label_Shelf.AutoSize = true;
+            label_Shelf.Location = new Point(382, 42);
+            label_Shelf.Name = "label_Shelf";
+            label_Shelf.Size = new Size(61, 15);
+            label_Shelf.TabIndex = 7;
+            label_Shelf.Text = "置場区分2";
             // 
             // button_Add_Warehouse
             // 
@@ -155,15 +123,6 @@ namespace WHMS
             comboBox_Area1.Size = new Size(121, 23);
             comboBox_Area1.TabIndex = 13;
             // 
-            // button_Add_Images
-            // 
-            button_Add_Images.Location = new Point(584, 9);
-            button_Add_Images.Name = "button_Add_Images";
-            button_Add_Images.Size = new Size(97, 23);
-            button_Add_Images.TabIndex = 15;
-            button_Add_Images.Text = "置場画像追加";
-            button_Add_Images.UseVisualStyleBackColor = true;
-            // 
             // pictureBox_Image
             // 
             pictureBox_Image.Location = new Point(727, 8);
@@ -173,23 +132,29 @@ namespace WHMS
             pictureBox_Image.TabStop = false;
             pictureBox_Image.Click += pictureBox_Image_Click;
             // 
+            // comboBox_Shelf
+            // 
+            comboBox_Shelf.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox_Shelf.FormattingEnabled = true;
+            comboBox_Shelf.Location = new Point(449, 38);
+            comboBox_Shelf.Name = "comboBox_Shelf";
+            comboBox_Shelf.Size = new Size(121, 23);
+            comboBox_Shelf.TabIndex = 17;
+            // 
             // Add_WarehouseList_Area
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(999, 290);
+            Controls.Add(comboBox_Shelf);
             Controls.Add(pictureBox_Image);
-            Controls.Add(button_Add_Images);
             Controls.Add(comboBox_Area1);
             Controls.Add(dataGridView_WarehouseLists);
             Controls.Add(button_Add_Warehouse);
-            Controls.Add(label_Err2);
-            Controls.Add(label_Area2);
+            Controls.Add(label_Shelf);
             Controls.Add(label_Area1);
             Controls.Add(label_Name);
-            Controls.Add(textBox_Area2);
             Controls.Add(button_Cancel);
-            Controls.Add(button_Apply);
             Controls.Add(comboBox_Name);
             Name = "Add_WarehouseList_Area";
             Text = "Add_WarehouseList_Area";
@@ -207,12 +172,12 @@ namespace WHMS
         private TextBox textBox_Area2;
         private Label label_Name;
         private Label label_Area1;
-        private Label label_Area2;
-        private Label label_Err2;
+        private Label label_Shelf;
         private Button button_Add_Warehouse;
         private DataGridView dataGridView_WarehouseLists;
         private ComboBox comboBox_Area1;
         private Button button_Add_Images;
         private PictureBox pictureBox_Image;
+        private ComboBox comboBox_Shelf;
     }
 }

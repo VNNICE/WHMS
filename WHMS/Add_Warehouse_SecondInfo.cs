@@ -115,11 +115,7 @@ namespace WHMS
                 pictureViewer.SetAShelf(width, depth, height);
                 pictureViewer.StartDraw();
                 pictureViewer.Preview_Shelf();
-                if (!pictureViewer.Visible)
-                {
-                    pictureViewer.Show();
-                    SetADefaultDataPictureBox();
-                }
+                this.Focus();
             }
         }
 
@@ -143,9 +139,8 @@ namespace WHMS
             {
                 if (targetArea.WarehouseList_Id.Any())
                 {
-                    
                     if (!targetArea.WarehouseList_Shelves.Any())
-                    { 
+                    {
                         var firstShelf = new WarehouseList_Shelf(targetAreaId + "S0", targetArea._Id.ToString(), 0, 0, 0);
                         _context.Add(firstShelf);
                     }
@@ -195,10 +190,17 @@ namespace WHMS
 
         private void button_Skip_Click(object sender, EventArgs e)
         {
-            AreaSearcher();
-            if (searcher != maxAreas)
+            if (shelfCnt == 1)
             {
-                LoadWarehouseInfo();
+                MessageBox.Show("棚は最低1段以上作成してください。");
+            }
+            else
+            {
+                AreaSearcher();
+                if (searcher != maxAreas)
+                {
+                    LoadWarehouseInfo();
+                }
             }
         }
 
