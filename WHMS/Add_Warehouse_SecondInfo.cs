@@ -141,11 +141,11 @@ namespace WHMS
                 {
                     if (!targetArea.WarehouseList_Shelves.Any())
                     {
-                        var firstShelf = new WarehouseList_Shelf(targetAreaId + "S0", targetArea._Id.ToString(), 0, 0, 0);
+                        var firstShelf = new WarehouseList_Shelf(targetAreaId + "S0", 0, targetArea._Id.ToString(), 0, 0, 0);
                         _context.Add(firstShelf);
                     }
                     shelfId = targetAreaId + "S" + shelfCnt.ToString();
-                    var newShelf = new WarehouseList_Shelf(shelfId, targetAreaId, width, depth, height);
+                    var newShelf = new WarehouseList_Shelf(shelfId, shelfCnt, targetAreaId, width, depth, height);
                     MessageBox.Show(shelfId);
                     MessageBox.Show(newShelf._Id);
                     _context.Add(newShelf);

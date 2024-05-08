@@ -37,9 +37,11 @@ namespace WHMS
             label_Shelf = new Label();
             button_Add_Warehouse = new Button();
             dataGridView_WarehouseLists = new DataGridView();
-            comboBox_Area1 = new ComboBox();
+            comboBox_Area = new ComboBox();
             pictureBox_Image = new PictureBox();
             comboBox_Shelf = new ComboBox();
+            label_City = new Label();
+            comboBox_City = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView_WarehouseLists).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox_Image).BeginInit();
             SuspendLayout();
@@ -48,7 +50,7 @@ namespace WHMS
             // 
             comboBox_Name.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_Name.FormattingEnabled = true;
-            comboBox_Name.Location = new Point(61, 38);
+            comboBox_Name.Location = new Point(212, 36);
             comboBox_Name.Name = "comboBox_Name";
             comboBox_Name.Size = new Size(121, 23);
             comboBox_Name.TabIndex = 0;
@@ -68,7 +70,7 @@ namespace WHMS
             // label_Name
             // 
             label_Name.AutoSize = true;
-            label_Name.Location = new Point(12, 42);
+            label_Name.Location = new Point(163, 40);
             label_Name.Name = "label_Name";
             label_Name.Size = new Size(43, 15);
             label_Name.TabIndex = 5;
@@ -78,7 +80,7 @@ namespace WHMS
             // label_Area1
             // 
             label_Area1.AutoSize = true;
-            label_Area1.Location = new Point(188, 42);
+            label_Area1.Location = new Point(339, 40);
             label_Area1.Name = "label_Area1";
             label_Area1.Size = new Size(61, 15);
             label_Area1.TabIndex = 6;
@@ -87,7 +89,7 @@ namespace WHMS
             // label_Shelf
             // 
             label_Shelf.AutoSize = true;
-            label_Shelf.Location = new Point(382, 42);
+            label_Shelf.Location = new Point(533, 40);
             label_Shelf.Name = "label_Shelf";
             label_Shelf.Size = new Size(61, 15);
             label_Shelf.TabIndex = 7;
@@ -114,14 +116,14 @@ namespace WHMS
             dataGridView_WarehouseLists.Size = new Size(709, 211);
             dataGridView_WarehouseLists.TabIndex = 11;
             // 
-            // comboBox_Area1
+            // comboBox_Area
             // 
-            comboBox_Area1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox_Area1.FormattingEnabled = true;
-            comboBox_Area1.Location = new Point(255, 38);
-            comboBox_Area1.Name = "comboBox_Area1";
-            comboBox_Area1.Size = new Size(121, 23);
-            comboBox_Area1.TabIndex = 13;
+            comboBox_Area.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox_Area.FormattingEnabled = true;
+            comboBox_Area.Location = new Point(406, 36);
+            comboBox_Area.Name = "comboBox_Area";
+            comboBox_Area.Size = new Size(121, 23);
+            comboBox_Area.TabIndex = 13;
             // 
             // pictureBox_Image
             // 
@@ -136,19 +138,39 @@ namespace WHMS
             // 
             comboBox_Shelf.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox_Shelf.FormattingEnabled = true;
-            comboBox_Shelf.Location = new Point(449, 38);
+            comboBox_Shelf.Location = new Point(600, 36);
             comboBox_Shelf.Name = "comboBox_Shelf";
             comboBox_Shelf.Size = new Size(121, 23);
             comboBox_Shelf.TabIndex = 17;
             // 
-            // Add_WarehouseList_Area
+            // label_City
+            // 
+            label_City.AutoSize = true;
+            label_City.Location = new Point(12, 40);
+            label_City.Name = "label_City";
+            label_City.Size = new Size(31, 15);
+            label_City.TabIndex = 18;
+            label_City.Text = "地域";
+            // 
+            // comboBox_City
+            // 
+            comboBox_City.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox_City.FormattingEnabled = true;
+            comboBox_City.Location = new Point(56, 36);
+            comboBox_City.Name = "comboBox_City";
+            comboBox_City.Size = new Size(101, 23);
+            comboBox_City.TabIndex = 19;
+            // 
+            // View_WarehouseList_Area
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(999, 290);
+            Controls.Add(comboBox_City);
+            Controls.Add(label_City);
             Controls.Add(comboBox_Shelf);
             Controls.Add(pictureBox_Image);
-            Controls.Add(comboBox_Area1);
+            Controls.Add(comboBox_Area);
             Controls.Add(dataGridView_WarehouseLists);
             Controls.Add(button_Add_Warehouse);
             Controls.Add(label_Shelf);
@@ -156,7 +178,7 @@ namespace WHMS
             Controls.Add(label_Name);
             Controls.Add(button_Cancel);
             Controls.Add(comboBox_Name);
-            Name = "Add_WarehouseList_Area";
+            Name = "View_WarehouseList_Area";
             Text = "Add_WarehouseList_Area";
             ((System.ComponentModel.ISupportInitialize)dataGridView_WarehouseLists).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox_Image).EndInit();
@@ -175,9 +197,11 @@ namespace WHMS
         private Label label_Shelf;
         private Button button_Add_Warehouse;
         private DataGridView dataGridView_WarehouseLists;
-        private ComboBox comboBox_Area1;
+        private ComboBox comboBox_Area;
         private Button button_Add_Images;
         private PictureBox pictureBox_Image;
         private ComboBox comboBox_Shelf;
+        private Label label_City;
+        private ComboBox comboBox_City;
     }
 }

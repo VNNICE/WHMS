@@ -125,19 +125,41 @@ namespace DBMS
     public class WarehouseList_Shelf
     {
         public string _Id { get; set; }
+        public int _No { get; set; }
         public string WarehouseList_Area_Id { get; set; } public WarehouseList_Area WarehouseList_Area { get; set; } = null!;
         public int _Width { get; set; }
         public int _Depth { get; set; }
 
         public int _Height { get; set; }
         public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
-        public WarehouseList_Shelf(string _Id, string WarehouseList_Area_Id, int _Width, int _Depth, int _Height) 
+        public WarehouseList_Shelf(string _Id, int _No, string WarehouseList_Area_Id, int _Width, int _Depth, int _Height) 
         {
             this._Id = _Id;
+            this._No = _No;
             this.WarehouseList_Area_Id = WarehouseList_Area_Id;
             this._Width = _Width;
             this._Depth = _Depth;
             this._Height = _Height;
+        }
+    }
+
+    /*
+     JoinTables
+     */
+    public class Join_Warehouse
+    {
+        public string _City { get; set; }
+        public string _Id { get; set; }
+        public string _Name { get; set; }
+        public int _Area { get; set; }
+        public int _ShelfNo { get; set; }
+        public Join_Warehouse(string _City, string _Id, string _Name, int _Area, int _ShelfNo)
+        {
+            this._City = _City;
+            this._Id = _Id;
+            this._Name = _Name;
+            this._Area = _Area;
+            this._ShelfNo = _ShelfNo;
         }
     }
 
