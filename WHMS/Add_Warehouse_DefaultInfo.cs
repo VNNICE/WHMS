@@ -19,6 +19,7 @@ namespace WHMS
         private string MakeUrl = "";
         public static string targetWarehouse { get; private set; } = "";
         private readonly DatabaseContext _context;
+        private Functions fc = new Functions();
 
         public Add_Warehouse_DefaultInfo()
         {
@@ -71,11 +72,11 @@ namespace WHMS
             }
             int count = Counter(city);
             string id = city + (count).ToString("D2");
-            int areas = Functions.Try_IntParse(label_Add_Areas, textBox_Add_Areas);
+            int areas = fc.Try_IntParse(label_Add_Areas, textBox_Add_Areas);
             if (string.IsNullOrWhiteSpace(textBox_Show_ImagesPath.Text) && string.IsNullOrEmpty(textBox_Show_ImagesPath.Text))
             {
                 MakeUrl = Path.Combine(DataPath.imagePath, "Blank_WarehouseImg_" + textBox_Name.Text.ToString() + ".bmp");
-                Functions.NoImageGenerator(MakeUrl);
+                fc.NoImageGenerator(MakeUrl);
             }
 
             var warehouseList = new WarehouseList(id, count, city, name, MakeUrl);
