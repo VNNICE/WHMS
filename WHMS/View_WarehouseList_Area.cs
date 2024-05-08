@@ -31,17 +31,9 @@ namespace WHMS
                     e.Value = "全体";
                 }
             };
-            comboBox_Shelf.Format += (sender, e) =>
-            {
-                if (e.ListItem is WarehouseList_Shelf shelf && shelf._No == -99)
-                {
-                    e.Value = "全体";
-                }
-            };
             comboBox_City.SelectedIndexChanged += ComboBox_City_SelectedIndexChanged;
             comboBox_Name.SelectedIndexChanged += ComboBox_Name_SelectedIndexChanged;
             comboBox_Area.SelectedIndexChanged += ComboBox_Area_SelectedIndexChanged;
-            comboBox_Shelf.SelectedIndexChanged += ComboBox_Shelf_SelectedIndexChanged;
         }
 
         private void ComboBox_City_SelectedIndexChanged(object? sender, EventArgs e)
@@ -57,12 +49,7 @@ namespace WHMS
         }
         private void ComboBox_Area_SelectedIndexChanged(object? sender, EventArgs e)
         {
-            ComboBox_ShelfData();
             LoadGridViewArea();
-        }
-        private void ComboBox_Shelf_SelectedIndexChanged(object? sender, EventArgs e)
-        {
-            
         }
 
         private void SetJoinWarehouseLists()
@@ -208,21 +195,6 @@ namespace WHMS
                 comboBox_Area.DataSource = areaElements;
                 comboBox_Area.DisplayMember = "_Area";
                 comboBox_Area.ValueMember = "_Id";
-                ComboBox_ShelfData();
-            }
-        }
-        private void ComboBox_ShelfData()
-        {
-            if (comboBox_City.SelectedValue != null && comboBox_Name.SelectedValue != null && comboBox_Area.SelectedValue != null)
-            {
-                var blank = new WarehouseList_Shelf("empty", -99, "", 0, 0, 0);
-                var shelfElements = context.WarehouseList_Shelf.Where(x => x.WarehouseList_Area_Id == comboBox_Area.SelectedValue.ToString()).ToList();
-                shelfElements.Insert(0, blank);
-
-
-                comboBox_Shelf.DataSource = shelfElements;
-                comboBox_Shelf.DisplayMember = "_No";
-                comboBox_Shelf.ValueMember = "_Id";
             }
         }
 

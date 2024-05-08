@@ -34,12 +34,10 @@ namespace WHMS
             button_Cancel = new Button();
             label_Name = new Label();
             label_Area1 = new Label();
-            label_Shelf = new Label();
             button_Add_Warehouse = new Button();
             dataGridView_WarehouseLists = new DataGridView();
             comboBox_Area = new ComboBox();
             pictureBox_Image = new PictureBox();
-            comboBox_Shelf = new ComboBox();
             label_City = new Label();
             comboBox_City = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView_WarehouseLists).BeginInit();
@@ -86,15 +84,6 @@ namespace WHMS
             label_Area1.TabIndex = 6;
             label_Area1.Text = "置場区分1";
             // 
-            // label_Shelf
-            // 
-            label_Shelf.AutoSize = true;
-            label_Shelf.Location = new Point(533, 40);
-            label_Shelf.Name = "label_Shelf";
-            label_Shelf.Size = new Size(61, 15);
-            label_Shelf.TabIndex = 7;
-            label_Shelf.Text = "置場区分2";
-            // 
             // button_Add_Warehouse
             // 
             button_Add_Warehouse.Location = new Point(12, 4);
@@ -134,15 +123,6 @@ namespace WHMS
             pictureBox_Image.TabStop = false;
             pictureBox_Image.Click += pictureBox_Image_Click;
             // 
-            // comboBox_Shelf
-            // 
-            comboBox_Shelf.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox_Shelf.FormattingEnabled = true;
-            comboBox_Shelf.Location = new Point(600, 36);
-            comboBox_Shelf.Name = "comboBox_Shelf";
-            comboBox_Shelf.Size = new Size(121, 23);
-            comboBox_Shelf.TabIndex = 17;
-            // 
             // label_City
             // 
             label_City.AutoSize = true;
@@ -168,12 +148,10 @@ namespace WHMS
             ClientSize = new Size(999, 290);
             Controls.Add(comboBox_City);
             Controls.Add(label_City);
-            Controls.Add(comboBox_Shelf);
             Controls.Add(pictureBox_Image);
             Controls.Add(comboBox_Area);
             Controls.Add(dataGridView_WarehouseLists);
             Controls.Add(button_Add_Warehouse);
-            Controls.Add(label_Shelf);
             Controls.Add(label_Area1);
             Controls.Add(label_Name);
             Controls.Add(button_Cancel);
@@ -192,12 +170,10 @@ namespace WHMS
         private Button button_Cancel;
         private Label label_Name;
         private Label label_Area1;
-        private Label label_Shelf;
         private Button button_Add_Warehouse;
         private DataGridView dataGridView_WarehouseLists;
         private ComboBox comboBox_Area;
         private PictureBox pictureBox_Image;
-        private ComboBox comboBox_Shelf;
         private Label label_City;
         private ComboBox comboBox_City;
     }
