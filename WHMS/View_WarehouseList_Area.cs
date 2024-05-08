@@ -24,6 +24,7 @@ namespace WHMS
             InitializeComponent();
             LoadDefaultData();
             dataGridView_WarehouseLists.DataBindingComplete += dataGridView_format;
+            dataGridView_WarehouseLists.CellFormatting += dataGridView_CellFormatting;
             comboBox_Area.Format += (sender, e) =>
             {
                 if (e.ListItem is WarehouseList_Area area && area._Area == -99)
@@ -71,7 +72,8 @@ namespace WHMS
                     wa._Id,
                     wa._Area,
                     ws._Id,
-                    ws._No
+                    ws._No,
+                    ws._Stock
                     )))).ToList();
                 }
             }
@@ -278,6 +280,39 @@ namespace WHMS
             dataGridView_WarehouseLists.Columns["_Area"].HeaderText = "置場区分";
             dataGridView_WarehouseLists.Columns["_ShelfId"].Visible = false;
             dataGridView_WarehouseLists.Columns["_ShelfNo"].HeaderText = "棚";
+
+            dataGridView_WarehouseLists.Columns["_Stock"].HeaderText = "使用状態";
+        }
+        private void dataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView_WarehouseLists.Columns[e.ColumnIndex].Name == "_Stock")
+            {
+                if (e.Value != null && e.CellStyle != null)
+                {
+                    int stockStatus = (int)e.Value;
+                    if (stockStatus == 0)
+                    {
+                        e.CellStyle.BackColor = Color.Blue;
+                        e.CellStyle.ForeColor = Color.Blue;
+                    }
+                    else if (stockStatus == 1)
+                    {
+                        e.CellStyle.BackColor = Color.Red;
+                        e.CellStyle.ForeColor = Color.Red;
+                    }
+                }
+            }
+        }
+        private void dataGridView_WarehouseLists_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (dataGridView_WarehouseLists.Columns[e.ColumnIndex].Name == "_Name")
+                {
+                    string clickedCellValue = dataGridView_WarehouseLists.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    MessageBox.Show(clickedCellValue);
+                }
+            }
         }
     }
 }

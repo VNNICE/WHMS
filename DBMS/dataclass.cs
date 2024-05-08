@@ -111,7 +111,6 @@ namespace DBMS
         public string? _DrawingImagePath { get; set; }
         public string? _NowImagePath { get; set; }
 
-        public int _Conditions = 0;
         public ICollection<WarehouseList_Shelf> WarehouseList_Shelves { get; } = new List<WarehouseList_Shelf>();
         public WarehouseList_Area(string _Id, string WarehouseList_Id, int _Area, string? _DrawingImagePath, string? _NowImagePath)
         { 
@@ -131,8 +130,9 @@ namespace DBMS
         public int _Depth { get; set; }
 
         public int _Height { get; set; }
+        public int _Stock { get; set; }
         public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
-        public WarehouseList_Shelf(string _Id, int _No, string WarehouseList_Area_Id, int _Width, int _Depth, int _Height) 
+        public WarehouseList_Shelf(string _Id, int _No, string WarehouseList_Area_Id, int _Width, int _Depth, int _Height, int _Stock) 
         {
             this._Id = _Id;
             this._No = _No;
@@ -140,6 +140,7 @@ namespace DBMS
             this._Width = _Width;
             this._Depth = _Depth;
             this._Height = _Height;
+            this._Stock = _Stock;
         }
     }
 
@@ -155,7 +156,8 @@ namespace DBMS
         public int _Area { get; set; }
         public string _ShelfId { get; set; }
         public int _ShelfNo { get; set; }
-        public Join_Warehouse(string _City, string _Id, string _Name, string _AreaId, int _Area, string _ShelfId, int _ShelfNo)
+        public int _Stock { get; set; }
+        public Join_Warehouse(string _City, string _Id, string _Name, string _AreaId, int _Area, string _ShelfId, int _ShelfNo, int _Stock)
         {
             this._City = _City;
             this._Id = _Id;
@@ -164,6 +166,7 @@ namespace DBMS
             this._Area = _Area;
             this._ShelfId = _ShelfId;
             this._ShelfNo = _ShelfNo;
+            this._Stock = _Stock;
         }
     }
 
