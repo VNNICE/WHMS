@@ -19,6 +19,7 @@ namespace WHMS
         public static string targetWarehouse { get; private set; } = "";
         private readonly DatabaseContext _context;
         private Functions fc = new Functions();
+        PictureViewer pictureViewer = new PictureViewer();
 
         public Add_Warehouse_DefaultInfo()
         {
@@ -27,15 +28,16 @@ namespace WHMS
             LoadComboBoxData();
             comboBox_City.DropDownStyle = ComboBoxStyle.DropDownList;
             textBox_Add_Areas.KeyPress += KeyPressSettings;
+            pictureViewer.SetADefaultDataPictureBox(this);
         }
-        private void KeyPressSettings(object sender, KeyPressEventArgs e)
+        private void KeyPressSettings(object? sender, KeyPressEventArgs e)
         {
-            TextBox tb = sender as TextBox;
+            TextBox? tb = sender as TextBox;
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
-            if (tb.Text.Length >= 4 && e.KeyChar != '\b')
+            if (tb != null && tb.Text.Length >= 4 && e.KeyChar != '\b')
             {
                 e.Handled = true;
             }
@@ -71,7 +73,6 @@ namespace WHMS
 
         private void Add_Database()
         {
-            string msg = "";
             string city = comboBox_City.SelectedValue.ToString();
             string name = textBox_Name.Text.ToString();
             if (string.IsNullOrWhiteSpace(name))
@@ -132,12 +133,12 @@ namespace WHMS
          */
         private void AreaMaker(string id, int count)
         {
-            var warehouseareas = new List<WarehouseList_Area>();
+            var warehouseAreas = new List<WarehouseList_Area>();
             for (int i = 0; i <= count; i++)
             {
-                warehouseareas.Add(new WarehouseList_Area(id + "-" + i.ToString("D2"), id, i, null, null));
+                warehouseAreas.Add(new WarehouseList_Area(id + "-" + i.ToString("D2"), id, i, null, null));
             }
-            _context.WarehouseList_Areas.AddRange(warehouseareas);
+            _context.WarehouseList_Areas.AddRange(warehouseAreas);
             _context.SaveChanges();
         }
         private int Counter(string city)

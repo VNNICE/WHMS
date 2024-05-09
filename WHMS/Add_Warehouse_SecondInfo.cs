@@ -60,16 +60,13 @@ namespace WHMS
             maxAreas = targetAreaLists.Select(x => x._Id).ToList().Count;
             MessageBox.Show(maxAreas - 1 + "まで登録可");
             LoadWarehouseInfo();
-            SetADefaultDataPictureBox();
-
+            pictureViewer.SetADefaultDataPictureBox(this);
             pictureViewer.Show();
-            this.LocationChanged += MovePictureBox;
-            this.FormClosing += (sender, e) => pictureViewer.Close();
             this.FormClosing += (sender, e) => ResetStaticData();
         }//50, 150 150, 50
         private void KeyPressSettings(object? sender, KeyPressEventArgs e)
         {
-            TextBox tb = sender as TextBox;
+            TextBox? tb = sender as TextBox;
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
@@ -79,8 +76,6 @@ namespace WHMS
                 e.Handled = true;
             }
         }
-
-
 
         private void ResetStaticData()
         { 
@@ -92,28 +87,16 @@ namespace WHMS
             height = 0;
         }
 
-        private void MovePictureBox(object? sender, EventArgs e)
-        {
-            pictureViewer.Left = this.Right;
-            pictureViewer.Top = this.Top;
-        }
-
-        private void SetADefaultDataPictureBox()
-        {
-            pictureViewer.Left = this.Right;
-            pictureViewer.Top = this.Top;
-            pictureViewer.TopMost = true;
-        }
         private void TextBox_Changed(object? sender, EventArgs e)
         {
             if (textBox_Width.Text != "" && textBox_Width.Text != "0" && textBox_Height.Text != "" && textBox_Height.Text != "0" && textBox_Depth.Text != "" && textBox_Depth.Text != "0")
             {
-                SetADefaultDataPictureBox();
+                pictureViewer.SetADefaultDataPictureBox(this);
                 width = fc.Try_IntParse(label_W, textBox_Width);
                 height = fc.Try_IntParse(label_H, textBox_Height);
                 depth = fc.Try_IntParse(label_D, textBox_Depth);
                 pictureViewer.SetAShelf(width, depth, height);
-                pictureViewer.StartDraw();
+                pictureViewer.StartDrawShelf();
                 pictureViewer.Preview_Shelf();
                 this.Focus();
             }

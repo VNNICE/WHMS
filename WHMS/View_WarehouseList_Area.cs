@@ -18,13 +18,18 @@ namespace WHMS
     {
         private readonly DatabaseContext context = new DatabaseContext();
         private List<Join_Warehouse>? join_WarehouseLists;
+        PictureViewer pictureViewer = new PictureViewer(); 
 
         public View_WarehouseList_Area()
         {
             InitializeComponent();
             LoadDefaultData();
+
             dataGridView_WarehouseLists.DataBindingComplete += dataGridView_format;
             dataGridView_WarehouseLists.CellFormatting += dataGridView_CellFormatting;
+            dataGridView_WarehouseLists.CellMouseMove += new DataGridViewCellMouseEventHandler(dataGridView_WarehouseLists_CellMouseMove);
+            pictureViewer.Show();
+            pictureViewer.SetADefaultDataPictureBox(this);
             comboBox_Area.Format += (sender, e) =>
             {
                 if (e.ListItem is WarehouseList_Area area && area._Area == -99)
@@ -35,6 +40,7 @@ namespace WHMS
             comboBox_City.SelectedIndexChanged += ComboBox_City_SelectedIndexChanged;
             comboBox_Name.SelectedIndexChanged += ComboBox_Name_SelectedIndexChanged;
             comboBox_Area.SelectedIndexChanged += ComboBox_Area_SelectedIndexChanged;
+
         }
 
         private void ComboBox_City_SelectedIndexChanged(object? sender, EventArgs e)
@@ -47,6 +53,7 @@ namespace WHMS
         {
             ComboBox_AreaData();
             LoadGridViewWarehouse();
+            LoadImages();
         }
         private void ComboBox_Area_SelectedIndexChanged(object? sender, EventArgs e)
         {
@@ -212,48 +219,16 @@ namespace WHMS
                 var selectedWarehouse = context.WarehouseLists.Find(selectedWarehouseId);
                 if (selectedWarehouse != null && selectedWarehouse._ImagePath != null)
                 {
-                    try 
-                    {
-                        pictureBox_Image.Image = Image.FromFile(selectedWarehouse._ImagePath);
-                        pictureBox_Image.SizeMode = PictureBoxSizeMode.Zoom;
-                    }
-                    catch
-                    { 
-                        pictureBox_Image.Image = null;
-                    }
+                    pictureViewer.Mode_LoadPicture(selectedWarehouse._ImagePath);
                 }
             }
         }
-
-        private void comboBox_Name_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadImages();
-        }
-        private void comboBox_Name_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button_Apply_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label_Name_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void button_Cancel_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void label_Err1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button_Add_Warehouse_Click(object sender, EventArgs e)
         {
@@ -271,6 +246,8 @@ namespace WHMS
         {
 
         }
+
+        //DataGridView Settings
         private void dataGridView_format(object? sender, DataGridViewBindingCompleteEventArgs e)
         {
             dataGridView_WarehouseLists.Columns["_City"].HeaderText = "地域";
@@ -280,7 +257,6 @@ namespace WHMS
             dataGridView_WarehouseLists.Columns["_Area"].HeaderText = "置場区分";
             dataGridView_WarehouseLists.Columns["_ShelfId"].Visible = false;
             dataGridView_WarehouseLists.Columns["_ShelfNo"].HeaderText = "棚";
-
             dataGridView_WarehouseLists.Columns["_Stock"].HeaderText = "使用状態";
         }
         private void dataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -303,6 +279,19 @@ namespace WHMS
                 }
             }
         }
+
+        private void dataGridView_WarehouseLists_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                dataGridView_WarehouseLists.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                dataGridView_WarehouseLists.Cursor = Cursors.Default;
+            }
+        }
+
         private void dataGridView_WarehouseLists_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)

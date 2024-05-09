@@ -40,6 +40,7 @@ namespace WHMS
             pictureBox_Image = new PictureBox();
             label_City = new Label();
             comboBox_City = new ComboBox();
+            button_AddShelf = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView_WarehouseLists).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox_Image).BeginInit();
             SuspendLayout();
@@ -52,8 +53,6 @@ namespace WHMS
             comboBox_Name.Name = "comboBox_Name";
             comboBox_Name.Size = new Size(121, 23);
             comboBox_Name.TabIndex = 0;
-            comboBox_Name.SelectedIndexChanged += comboBox_Name_SelectedIndexChanged;
-            comboBox_Name.SelectionChangeCommitted += comboBox_Name_SelectionChangeCommitted;
             // 
             // button_Cancel
             // 
@@ -73,7 +72,6 @@ namespace WHMS
             label_Name.Size = new Size(43, 15);
             label_Name.TabIndex = 5;
             label_Name.Text = "倉庫名";
-            label_Name.Click += label_Name_Click;
             // 
             // label_Area1
             // 
@@ -141,11 +139,21 @@ namespace WHMS
             comboBox_City.Size = new Size(101, 23);
             comboBox_City.TabIndex = 19;
             // 
+            // button_AddShelf
+            // 
+            button_AddShelf.Location = new Point(533, 35);
+            button_AddShelf.Name = "button_AddShelf";
+            button_AddShelf.Size = new Size(93, 23);
+            button_AddShelf.TabIndex = 20;
+            button_AddShelf.Text = "置場区分2追加";
+            button_AddShelf.UseVisualStyleBackColor = true;
+            // 
             // View_WarehouseList_Area
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(999, 290);
+            Controls.Add(button_AddShelf);
             Controls.Add(comboBox_City);
             Controls.Add(label_City);
             Controls.Add(pictureBox_Image);
@@ -176,5 +184,6 @@ namespace WHMS
         private PictureBox pictureBox_Image;
         private Label label_City;
         private ComboBox comboBox_City;
+        private Button button_AddShelf;
     }
 }
