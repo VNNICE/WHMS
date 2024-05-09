@@ -56,29 +56,5 @@ namespace WHMS
                 throw new ArgumentException($"{label.Text}には整数を入力してください。");
             }
         }
-        public void NoImageGenerator(string path)
-        {
-            int width = 200;
-            int height = 200;
-            using (Bitmap bitmap = new Bitmap(width, height))
-            {
-                using (Graphics graphics = Graphics.FromImage(bitmap))
-                {
-                    using (Font font = new Font("Arial", 12))
-                    {
-                        using (SolidBrush brush = new SolidBrush(Color.Black))
-                        {
-                            graphics.FillRectangle(Brushes.White, 0, 0, width, height);
-                            graphics.DrawString("No Image", font, brush, new PointF(50, 40));
-                            bitmap.Save(path);
-                            graphics.Dispose();
-                            bitmap.Dispose();
-                        }
-                    }
-                }
-                
-            }
-            MessageBox.Show("画像なしで登録");
-        }   
     }
 }

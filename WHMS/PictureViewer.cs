@@ -26,12 +26,18 @@ namespace WHMS
         private Pen pen = new Pen(Color.Black);
         private Pen dotPen = new Pen(Color.Black) { DashStyle = DashStyle.Dot };
         private Brush brush = new SolidBrush(Color.Blue);
+        private string noImagesPath = Path.Combine(DataPath.imagePath, "NoImages");
         ///
         public PictureViewer()
         {
             InitializeComponent();
             this.Closed += (order, e) => ResetData();
+            if (!File.Exists(noImagesPath))
+            { 
+                NoImageGenerator();
+            }
         }
+
         private void ResetData()
         {
             width = 0;
@@ -41,30 +47,55 @@ namespace WHMS
             bitmapHeight = 0;
         }
 
-        public void Mode_LoadPicture(string path)
+        public void Mode_LoadPicture(string? path)
         {
             if (this.Visible == false)
             {
                 this.Show();
             }
-            try
+            if (path != "empty" && path != null)
             {
                 pictureBoxMain.Image = Image.FromFile(path);
                 pictureBoxMain.SizeMode = PictureBoxSizeMode.Zoom;
                 this.Size = pictureBoxMain.Size;
             }
-            catch 
+            else if (path == "empty")
             {
-                pictureBoxMain.Image = null;
+                pictureBoxMain.Image = Image.FromFile(noImagesPath);
+            }
+
+        }
+        public void NoImageGenerator()
+        {
+            int width = 200;
+            int height = 200;
+            using (Bitmap bitmap = new Bitmap(width, height))
+            {
+                using (Graphics graphics = Graphics.FromImage(bitmap))
+                {
+                    using (Font font = new Font("Arial", 12))
+                    {
+                        using (SolidBrush brush = new SolidBrush(Color.Black))
+                        {
+                            graphics.FillRectangle(Brushes.White, 0, 0, width, height);
+                            graphics.DrawString("No Image", font, brush, new PointF(50, 40));
+                            bitmap.Save(noImagesPath);
+                            graphics.Dispose();
+                            bitmap.Dispose();
+                        }
+                    }
+                }
+
             }
         }
 
         public void SetADefaultDataPictureBox(Form form)
         {
-            this.Left = form.Right;
+            this.Left = form.Right - 15;
             this.Top = form.Top;
             this.TopMost = true;
-            form.LocationChanged += (order, s) => { this.Left = form.Right; this.Top = form.Top; };
+
+            form.LocationChanged += (order, s) => { this.Left = form.Right - 15; this.Top = form.Top; };
             form.Closed += (order, e) => this.Close();
         }
 

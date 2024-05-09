@@ -37,12 +37,10 @@ namespace WHMS
             button_Add_Warehouse = new Button();
             dataGridView_WarehouseLists = new DataGridView();
             comboBox_Area = new ComboBox();
-            pictureBox_Image = new PictureBox();
             label_City = new Label();
             comboBox_City = new ComboBox();
             button_AddShelf = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView_WarehouseLists).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox_Image).BeginInit();
             SuspendLayout();
             // 
             // comboBox_Name
@@ -100,7 +98,7 @@ namespace WHMS
             dataGridView_WarehouseLists.Location = new Point(12, 67);
             dataGridView_WarehouseLists.Name = "dataGridView_WarehouseLists";
             dataGridView_WarehouseLists.ReadOnly = true;
-            dataGridView_WarehouseLists.Size = new Size(709, 211);
+            dataGridView_WarehouseLists.Size = new Size(975, 211);
             dataGridView_WarehouseLists.TabIndex = 11;
             // 
             // comboBox_Area
@@ -111,15 +109,6 @@ namespace WHMS
             comboBox_Area.Name = "comboBox_Area";
             comboBox_Area.Size = new Size(121, 23);
             comboBox_Area.TabIndex = 13;
-            // 
-            // pictureBox_Image
-            // 
-            pictureBox_Image.Location = new Point(727, 8);
-            pictureBox_Image.Name = "pictureBox_Image";
-            pictureBox_Image.Size = new Size(260, 270);
-            pictureBox_Image.TabIndex = 16;
-            pictureBox_Image.TabStop = false;
-            pictureBox_Image.Click += pictureBox_Image_Click;
             // 
             // label_City
             // 
@@ -156,7 +145,6 @@ namespace WHMS
             Controls.Add(button_AddShelf);
             Controls.Add(comboBox_City);
             Controls.Add(label_City);
-            Controls.Add(pictureBox_Image);
             Controls.Add(comboBox_Area);
             Controls.Add(dataGridView_WarehouseLists);
             Controls.Add(button_Add_Warehouse);
@@ -167,7 +155,6 @@ namespace WHMS
             Name = "View_WarehouseList_Area";
             Text = "Add_WarehouseList_Area";
             ((System.ComponentModel.ISupportInitialize)dataGridView_WarehouseLists).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox_Image).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -181,7 +168,6 @@ namespace WHMS
         private Button button_Add_Warehouse;
         private DataGridView dataGridView_WarehouseLists;
         private ComboBox comboBox_Area;
-        private PictureBox pictureBox_Image;
         private Label label_City;
         private ComboBox comboBox_City;
         private Button button_AddShelf;

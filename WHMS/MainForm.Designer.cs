@@ -28,96 +28,71 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
-            ID = new DataGridViewTextBoxColumn();
-            管理者 = new DataGridViewTextBoxColumn();
-            使用目的 = new DataGridViewTextBoxColumn();
-            種類 = new DataGridViewTextBoxColumn();
-            倉庫名 = new DataGridViewButtonColumn();
             button_Add_WarehouseList = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
             SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ID, 管理者, 使用目的, 種類, 倉庫名 });
-            dataGridView1.Location = new Point(59, 90);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(703, 373);
-            dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // ID
-            // 
-            ID.Frozen = true;
-            ID.HeaderText = "ID";
-            ID.Name = "ID";
-            ID.ReadOnly = true;
-            // 
-            // 管理者
-            // 
-            管理者.Frozen = true;
-            管理者.HeaderText = "管理者";
-            管理者.Name = "管理者";
-            管理者.ReadOnly = true;
-            // 
-            // 使用目的
-            // 
-            使用目的.Frozen = true;
-            使用目的.HeaderText = "使用目的";
-            使用目的.Name = "使用目的";
-            使用目的.ReadOnly = true;
-            // 
-            // 種類
-            // 
-            種類.Frozen = true;
-            種類.HeaderText = "種類";
-            種類.Name = "種類";
-            種類.ReadOnly = true;
-            // 
-            // 倉庫名
-            // 
-            倉庫名.FlatStyle = FlatStyle.Flat;
-            倉庫名.Frozen = true;
-            倉庫名.HeaderText = "倉庫名";
-            倉庫名.Name = "倉庫名";
-            倉庫名.ReadOnly = true;
-            倉庫名.Resizable = DataGridViewTriState.False;
-            倉庫名.SortMode = DataGridViewColumnSortMode.Automatic;
-            倉庫名.UseColumnTextForButtonValue = true;
             // 
             // button_Add_WarehouseList
             // 
-            button_Add_WarehouseList.Location = new Point(499, 52);
+            button_Add_WarehouseList.Font = new Font("Yu Gothic UI", 20F);
+            button_Add_WarehouseList.Location = new Point(12, 12);
             button_Add_WarehouseList.Name = "button_Add_WarehouseList";
-            button_Add_WarehouseList.Size = new Size(75, 23);
+            button_Add_WarehouseList.Size = new Size(172, 90);
             button_Add_WarehouseList.TabIndex = 1;
             button_Add_WarehouseList.Text = "倉庫管理";
             button_Add_WarehouseList.UseVisualStyleBackColor = true;
             button_Add_WarehouseList.Click += button_Add_WarehouseList_Click;
             // 
+            // button1
+            // 
+            button1.Font = new Font("Yu Gothic UI", 20F);
+            button1.Location = new Point(204, 12);
+            button1.Name = "button1";
+            button1.Size = new Size(172, 90);
+            button1.TabIndex = 2;
+            button1.Text = "入出庫管理";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Font = new Font("Yu Gothic UI", 20F);
+            button2.Location = new Point(12, 141);
+            button2.Name = "button2";
+            button2.Size = new Size(172, 90);
+            button2.TabIndex = 3;
+            button2.Text = "機能３";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Font = new Font("Yu Gothic UI", 20F);
+            button3.Location = new Point(204, 141);
+            button3.Name = "button3";
+            button3.Size = new Size(172, 90);
+            button3.TabIndex = 4;
+            button3.Text = "機能４";
+            button3.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(766, 458);
+            ClientSize = new Size(389, 250);
+            Controls.Add(button3);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(button_Add_WarehouseList);
-            Controls.Add(dataGridView1);
             Name = "MainForm";
             Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn ID;
-        private DataGridViewTextBoxColumn 管理者;
-        private DataGridViewTextBoxColumn 使用目的;
-        private DataGridViewTextBoxColumn 種類;
-        private DataGridViewButtonColumn 倉庫名;
         private Button button_Add_WarehouseList;
+        private Button button1;
+        private Button button2;
+        private Button button3;
     }
 }

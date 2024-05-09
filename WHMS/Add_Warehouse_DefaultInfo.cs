@@ -88,16 +88,15 @@ namespace WHMS
             int areas = fc.Try_IntParse(label_Add_Areas, textBox_Add_Areas);
             if (string.IsNullOrWhiteSpace(textBox_Show_ImagesPath.Text) && string.IsNullOrEmpty(textBox_Show_ImagesPath.Text))
             {
-                MakeUrl = Path.Combine(DataPath.imagePath, "Blank_WarehouseImg_" + textBox_Name.Text.ToString() + ".bmp");
-                fc.NoImageGenerator(MakeUrl);
+                MakeUrl = "empty";
+                MessageBox.Show("画像なしで登録します。");
             }
 
             var warehouseList = new WarehouseList(id, count, city, name, MakeUrl);
             _context.WarehouseLists.Add(warehouseList);
             _context.SaveChanges();
-            MessageBox.Show("倉庫登録成功");
             AreaMaker(id, areas);
-            MessageBox.Show("登録成功", "登録成功", MessageBoxButtons.OK);
+            MessageBox.Show("登録成功");
             targetWarehouse = id;
         }
 
@@ -126,6 +125,9 @@ namespace WHMS
                 File.Copy(selectedFilePath, filePath, true);
                 MakeUrl = filePath;
                 textBox_Show_ImagesPath.Text = MakeUrl;
+                pictureViewer.Show();
+                pictureViewer.SetADefaultDataPictureBox(this);
+                pictureViewer.Mode_LoadPicture(filePath);
             }
         }
         /*
