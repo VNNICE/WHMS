@@ -16,25 +16,26 @@ namespace WHMS
 {
     public partial class Add_Warehouse_SecondInfo : Form
     {
+
+
         private Functions fc = new Functions();
         PictureViewer pictureViewer = new PictureViewer();
         private readonly DatabaseContext _context = new DatabaseContext();
 
         private WarehouseList targetWarehouse;
-        private string targetWarehouseId = Add_Warehouse_DefaultInfo.targetWarehouse;
+        private string? targetWarehouseId = Add_Warehouse_DefaultInfo.targetWarehouse;
 
         private List<WarehouseList_Area> targetAreaLists = new List<WarehouseList_Area>();
-        private string targetAreaId;
-        WarehouseList_Area targetArea;
-        private string shelfId;
+        private string? targetAreaId;
+        WarehouseList_Area? targetArea;
+        private string? shelfId;
 
-        private static int maxAreas = 0;
-        private static int searcher = 1;
-        private static int shelfCnt = 1;
-        private static int width = 0;
-        private static int depth = 0;
-        private static int height = 0;
-
+        private int maxAreas = 0;
+        private int searcher = 1;
+        private int shelfCnt = 1;
+        private int width = 0;
+        private int depth = 0;
+        private int height = 0;
 
         public Add_Warehouse_SecondInfo()
         {
@@ -43,7 +44,7 @@ namespace WHMS
             targetAreaLists.AddRange(targetWarehouse.WarehouseList_Areas);
             string viewAreaLists = "";
             foreach (string s in targetAreaLists.Select(x => x._Id))
-            { 
+            {
                 viewAreaLists += s + "\n";
             }
             MessageBox.Show("TargetLists = " + viewAreaLists);
@@ -78,7 +79,7 @@ namespace WHMS
         }
 
         private void ResetStaticData()
-        { 
+        {
             maxAreas = 0;
             searcher = 1;
             shelfCnt = 1;
@@ -111,11 +112,24 @@ namespace WHMS
                 targetArea = _context.WarehouseList_Areas.Find(targetAreaId);
                 MessageBox.Show(targetArea._Id);
 
-                textBox_Name.Text = targetWarehouse._Name.ToString();               
+                textBox_Name.Text = targetWarehouse._Name.ToString();
                 textBox_SelectedArea.Text = targetArea._Id + " / " + (maxAreas - 1).ToString();
                 textBox_Shelf.Text = shelfCnt.ToString();
             }
         }
+        private void Test()
+        {
+            PictureViewer areaAdder = new PictureViewer();
+            {
+                int x = 0;
+                int y = 0;
+                int width = 0;
+                int height = 0;
+                areaAdder.Mode_CreateArea(this, _context.WarehouseLists.Find(targetWarehouseId)._ImagePath, ref x, ref y, ref width, ref height);
+                textBox1.Text = width.ToString();
+            }
+        }
+
         private void Add_Shelf()
         {
             if (textBox_SelectedArea.Text != null && targetArea != null)
@@ -144,7 +158,7 @@ namespace WHMS
         private void AreaSearcher()
         {
             if (targetWarehouse != null && targetWarehouse.WarehouseList_Areas != null)
-            { 
+            {
                 shelfCnt = 1;
                 searcher++;
                 if (searcher == maxAreas)
@@ -190,6 +204,11 @@ namespace WHMS
         private void textBox_Width_TextChanged(object? sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Test();
         }
     }
 }

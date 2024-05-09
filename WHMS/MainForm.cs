@@ -12,16 +12,21 @@ namespace WHMS
 {
     public partial class MainForm : Form
     {
+        
         public MainForm()
         {
             InitializeComponent();
+           
         }
 
 
         private void button_Add_WarehouseList_Click(object sender, EventArgs e)
         {
             View_WarehouseList_Area wla = new View_WarehouseList_Area();
-            wla.ShowDialog();
+            wla.Closed += (order, s) => this.Visible = true;
+            wla.Load += (order, s) => this.Visible = false;
+            
+            wla.Show();
         }
     }
 }

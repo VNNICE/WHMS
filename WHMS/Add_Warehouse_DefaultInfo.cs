@@ -15,7 +15,7 @@ namespace WHMS
 {
     public partial class Add_Warehouse_DefaultInfo : Form
     {
-        private string MakeUrl = "";
+        private string? MakeUrl;
         public static string targetWarehouse { get; private set; } = "";
         private readonly DatabaseContext _context;
         private Functions fc = new Functions();
@@ -61,9 +61,11 @@ namespace WHMS
             try
             {
                 Add_Database();
-                Add_Warehouse_SecondInfo form2 = new Add_Warehouse_SecondInfo();
-                this.Dispose();
-                form2.ShowDialog();                
+                Add_Warehouse_SecondInfo secondInfoForm = new Add_Warehouse_SecondInfo();
+                secondInfoForm.Owner = this.Owner;
+                secondInfoForm.Load += (order, s) => this.Visible = false;
+                secondInfoForm.Closed += (order, s) => { secondInfoForm.Owner.Enabled = true; this.Close(); };
+                secondInfoForm.Show();
             }
             catch (ArgumentException ae)
             {
@@ -88,7 +90,7 @@ namespace WHMS
             int areas = fc.Try_IntParse(label_Add_Areas, textBox_Add_Areas);
             if (string.IsNullOrWhiteSpace(textBox_Show_ImagesPath.Text) && string.IsNullOrEmpty(textBox_Show_ImagesPath.Text))
             {
-                MakeUrl = "empty";
+                MakeUrl = null;
                 MessageBox.Show("画像なしで登録します。");
             }
 
@@ -98,6 +100,11 @@ namespace WHMS
             AreaMaker(id, areas);
             MessageBox.Show("登録成功");
             targetWarehouse = id;
+        }
+        private void MapAreaSelection()
+        {
+            PictureViewer areaSelection = new PictureViewer();
+            
         }
 
         private void button_Cancel_Click(object sender, EventArgs e)

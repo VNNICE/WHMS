@@ -42,6 +42,8 @@
             textBox_Width = new TextBox();
             textBox_Height = new TextBox();
             label_D = new Label();
+            textBox1 = new TextBox();
+            button1 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -56,7 +58,7 @@
             // 
             // button_Decide
             // 
-            button_Decide.Location = new Point(3, 124);
+            button_Decide.Location = new Point(3, 156);
             button_Decide.Name = "button_Decide";
             button_Decide.Size = new Size(96, 23);
             button_Decide.TabIndex = 3;
@@ -66,7 +68,7 @@
             // 
             // button_Skip
             // 
-            button_Skip.Location = new Point(113, 124);
+            button_Skip.Location = new Point(108, 156);
             button_Skip.Name = "button_Skip";
             button_Skip.Size = new Size(101, 23);
             button_Skip.TabIndex = 4;
@@ -174,11 +176,30 @@
             label_D.Text = "奥行";
             label_D.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(3, 127);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 13;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(109, 125);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 14;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Add_Warehouse_SecondInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(221, 152);
+            ClientSize = new Size(221, 191);
+            Controls.Add(button1);
+            Controls.Add(textBox1);
             Controls.Add(textBox_Depth);
             Controls.Add(textBox_Width);
             Controls.Add(textBox_Height);
@@ -215,5 +236,7 @@
         private TextBox textBox_Width;
         private TextBox textBox_Height;
         private Label label_D;
+        private TextBox textBox1;
+        private Button button1;
     }
 }

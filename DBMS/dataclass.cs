@@ -91,7 +91,7 @@ namespace DBMS
         public int _Count { get; set; }
         public string CityList_Code { get; set; } public CityList CityList { get; set; } = null!;
         public string _Name { get; set; }
-        public string _ImagePath { get; set; }
+        public string? _ImagePath { get; set; }
 
         public ICollection<WarehouseList_Area> WarehouseList_Areas { get; } = new List<WarehouseList_Area>();
         public WarehouseList(string _Id, int _Count, string CityList_Code, string _Name, string imagePath)

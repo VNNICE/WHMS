@@ -56,7 +56,6 @@ namespace DBMS
                 i.HasOne(j=>j.CityList).WithMany(j=>j.WarehouseLists).HasForeignKey(j => j.CityList_Code).IsRequired();
 
                 i.HasIndex(j => j._Name).IsUnique();
-                i.HasIndex(j => j._ImagePath).IsUnique();
 
                 i.HasMany(j => j.WarehouseList_Areas).WithOne(j => j.WarehouseList).HasForeignKey(j => j.WarehouseList_Id).IsRequired().OnDelete(DeleteBehavior.Cascade); ;
             });

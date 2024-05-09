@@ -18,13 +18,12 @@ namespace WHMS
     {
         private readonly DatabaseContext context = new DatabaseContext();
         private List<Join_Warehouse>? join_WarehouseLists;
-        PictureViewer pictureViewer = new PictureViewer(); 
-
+        PictureViewer pictureViewer = new PictureViewer();
+        
         public View_WarehouseList_Area()
         {
             InitializeComponent();
             LoadDefaultData();
-
             dataGridView_WarehouseLists.DataBindingComplete += dataGridView_format;
             dataGridView_WarehouseLists.CellFormatting += dataGridView_CellFormatting;
             dataGridView_WarehouseLists.CellMouseMove += new DataGridViewCellMouseEventHandler(dataGridView_WarehouseLists_CellMouseMove);
@@ -40,7 +39,6 @@ namespace WHMS
             comboBox_City.SelectedIndexChanged += ComboBox_City_SelectedIndexChanged;
             comboBox_Name.SelectedIndexChanged += ComboBox_Name_SelectedIndexChanged;
             comboBox_Area.SelectedIndexChanged += ComboBox_Area_SelectedIndexChanged;
-
         }
 
         private void ComboBox_City_SelectedIndexChanged(object? sender, EventArgs e)
@@ -217,10 +215,15 @@ namespace WHMS
                 comboBox_Area.DisplayMember = "_Area";
                 comboBox_Area.ValueMember = "_Id";
                 var selectedWarehouse = context.WarehouseLists.Find(selectedWarehouseId);
-                if (selectedWarehouse != null && selectedWarehouse._ImagePath != null)
+                if (selectedWarehouse != null)
                 {
                     pictureViewer.Mode_LoadPicture(selectedWarehouse._ImagePath);
                 }
+                else
+                {
+                    pictureViewer.Mode_LoadPicture(null);
+                }
+
             }
         }
 
@@ -238,8 +241,10 @@ namespace WHMS
         private void OpenWL()
         {
             Add_Warehouse_DefaultInfo wl = new Add_Warehouse_DefaultInfo();
-            wl.FormClosed += (sender, e) => { LoadDefaultData(); };
-            wl.ShowDialog();
+            wl.Owner = this;
+            wl.Load += (order, s) => this.Enabled = false;
+            wl.FormClosed += (order, s) => this.Enabled = true;
+            wl.Show();
         }
 
         private void pictureBox_Image_Click(object sender, EventArgs e)

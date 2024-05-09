@@ -27,7 +27,8 @@ namespace WHMS
         private Pen dotPen = new Pen(Color.Black) { DashStyle = DashStyle.Dot };
         private Brush brush = new SolidBrush(Color.Blue);
         private string noImagesPath = Path.Combine(DataPath.imagePath, "NoImages");
-        ///
+        /////
+
         public PictureViewer()
         {
             InitializeComponent();
@@ -37,6 +38,76 @@ namespace WHMS
                 NoImageGenerator();
             }
         }
+        // Mode_CreateArea
+        private Point startPoint;
+        private Rectangle rect;
+        private bool isDragging;
+
+        public void Mode_CreateArea(Form form, string path, ref int x, ref int y, ref int width, ref int height)
+        {
+            
+
+            this.pictureBoxMain.Image = Image.FromFile(path);
+            this.pictureBoxMain.MouseDown += new MouseEventHandler(pictureBox_MouseDown);
+            this.pictureBoxMain.MouseMove += new MouseEventHandler(pictureBox_MouseMove);
+            this.pictureBoxMain.MouseUp += new MouseEventHandler(pictureBox_MouseUp);
+            this.pictureBoxMain.Paint += new PaintEventHandler(pictureBox_Paint);
+            this.Left = form.Right;
+            this.Top = form.Top;
+            x = rect.X;
+            y = rect.Y;
+            width = rect.Width;
+            height = rect.Height;
+            this.ShowDialog();
+        }
+
+        private void pictureBox_MouseDown(object? sender, MouseEventArgs e)
+        {
+            startPoint = e.Location;
+            isDragging = true;
+        }
+
+        private void pictureBox_MouseUp(object? sender, MouseEventArgs e)
+        {
+            isDragging = false;
+            int rectWidth = Math.Abs(e.X - startPoint.X);
+            int rectHeight = Math.Abs(e.Y - startPoint.Y); 
+
+            Point topLeft = new Point(
+                Math.Min(e.X, startPoint.X),
+                Math.Min(e.Y, startPoint.Y));
+            rect = new Rectangle(topLeft.X, topLeft.Y, rectWidth, rectHeight);
+        }
+
+        private void pictureBox_MouseMove(object? sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (isDragging)
+                {
+                    int width = Math.Abs(e.X - startPoint.X);
+                    int height = Math.Abs(e.Y - startPoint.Y);
+                    Point topLeft = new Point(
+                        Math.Min(e.X, startPoint.X),
+                        Math.Min(e.Y, startPoint.Y));
+
+                    rect = new Rectangle(topLeft.X, topLeft.Y, width, height);
+                    pictureBoxMain.Invalidate();
+                }
+            }
+        }
+        private void pictureBox_Paint(object? sender, PaintEventArgs e)
+        {
+            if (isDragging)
+            {
+                using (Brush brush = new SolidBrush(Color.FromArgb(128, 255, 0, 0)))
+                {
+                    e.Graphics.FillRectangle(brush, rect);
+                }
+            }
+        }
+        ////////////////////////////////////////
+
 
         private void ResetData()
         {
@@ -47,24 +118,25 @@ namespace WHMS
             bitmapHeight = 0;
         }
 
+
         public void Mode_LoadPicture(string? path)
         {
             if (this.Visible == false)
             {
                 this.Show();
             }
-            if (path != "empty" && path != null)
+            if (path != null)
             {
                 pictureBoxMain.Image = Image.FromFile(path);
                 pictureBoxMain.SizeMode = PictureBoxSizeMode.Zoom;
                 this.Size = pictureBoxMain.Size;
             }
-            else if (path == "empty")
+            else
             {
                 pictureBoxMain.Image = Image.FromFile(noImagesPath);
             }
-
         }
+
         public void NoImageGenerator()
         {
             int width = 200;
@@ -93,10 +165,12 @@ namespace WHMS
         {
             this.Left = form.Right - 15;
             this.Top = form.Top;
-            this.TopMost = true;
 
             form.LocationChanged += (order, s) => { this.Left = form.Right - 15; this.Top = form.Top; };
             form.Closed += (order, e) => this.Close();
+            form.MouseDown += (order, s) => this.TopMost = true;
+            form.MouseUp += (order, s) => this.TopMost = false;
+            form.Move += (order, s) => this.Activate();
         }
 
         public void SetAShelf(int w, int d, int h)
