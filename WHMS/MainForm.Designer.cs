@@ -30,7 +30,7 @@
         {
             button_Add_WarehouseList = new Button();
             button1 = new Button();
-            button2 = new Button();
+            button_ItemManager = new Button();
             button3 = new Button();
             SuspendLayout();
             // 
@@ -55,15 +55,15 @@
             button1.Text = "入出庫管理";
             button1.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // button_ItemManager
             // 
-            button2.Font = new Font("Yu Gothic UI", 20F);
-            button2.Location = new Point(12, 141);
-            button2.Name = "button2";
-            button2.Size = new Size(172, 90);
-            button2.TabIndex = 3;
-            button2.Text = "機能３";
-            button2.UseVisualStyleBackColor = true;
+            button_ItemManager.Font = new Font("Yu Gothic UI", 20F);
+            button_ItemManager.Location = new Point(12, 141);
+            button_ItemManager.Name = "button_ItemManager";
+            button_ItemManager.Size = new Size(172, 90);
+            button_ItemManager.TabIndex = 3;
+            button_ItemManager.Text = "ItemManager";
+            button_ItemManager.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
@@ -81,7 +81,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(389, 250);
             Controls.Add(button3);
-            Controls.Add(button2);
+            Controls.Add(button_ItemManager);
             Controls.Add(button1);
             Controls.Add(button_Add_WarehouseList);
             Name = "MainForm";
@@ -92,7 +92,7 @@
         #endregion
         private Button button_Add_WarehouseList;
         private Button button1;
-        private Button button2;
+        private Button button_ItemManager;
         private Button button3;
     }
 }

@@ -7,75 +7,59 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DBMS;
 using Microsoft.EntityFrameworkCore;
 
 namespace WHMS
 {
     public partial class Add_ItemList : Form
     {
+        private readonly DatabaseContext _context = new DatabaseContext();
+        private bool onClickMemo;
+        
+        private int id;
+        private string obj;
+        private string type;
+        private string assetType;
+        private string name;
+        private string manufacturer;
+        private string serialNumber;
+        private int price;
+        private int quantity;
+        private string? memo;
+
         public Add_ItemList()
         {
             InitializeComponent();
+            this.Size = new Size(204, 348);
+            button_DisplayMemo.Click += (sender, e) => DisplayMemo();
+        }
+        private void DisplayMemo() 
+        {
+            if (!onClickMemo)
+            {
+                onClickMemo = true;
+                this.Size = new Size(440, 348);
+                
+            }
+            else
+            {
+                onClickMemo = false;
+                this.Size = new Size(204, 348);
+            }
         }
 
-        private void text_Object_Click(object sender, EventArgs e)
+        private void SerializeText()
         {
-
-        }
-
-        private void text_Type_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void text_AssetType_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void text_Name_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void input_Object_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Add_ItemList_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void input_Type_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void input_AssetType_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void input_Manufacturer_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void input_SerialNumber_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void input_Quantity_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void input_Memo_TextChanged(object sender, EventArgs e)
-        {
-
+            obj = comboBox_Object.Text.ToString();
+            type = comboBox_Type.Text.ToString();
+            assetType = comboBox_AssetType.Text.ToString();
+            name = textBox_Name.Text.ToString();
+            manufacturer = comboBox_Manufacturer.Text.ToString();
+            serialNumber = textBox_SerialNumber.Text.ToString();
+            price = int.Parse(textBox_Price.Text);
+            quantity = int.Parse(textBox_Quantity.Text);
+            memo = text_Memo.Text.ToString();
         }
     }
 }

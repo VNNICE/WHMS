@@ -23,34 +23,29 @@ namespace DBMS
 
     public class ItemList
     {
-        public required int _Id { get; set;  }
-        public required string _Name { get; set; }
-        public required string _AssetType { get; set; }
-        public required string _Manufacturer { get; set; }
-        public required string _SerialNumber { get; set; }
-        public int? _Price { get; set; }
-        public required int _Quantity { get; set; }
+        public int _Id { get; set;  }
+        public string _Object { get; set; }
+        public string _Type { get; set; }
+        public string _AssetType { get; set; }
+        public string _Name { get; set; }
+        public string _Manufacturer { get; set; }
+        public string _SerialNumber { get; set; }
+        public int _Price { get; set; }
+        public int _Quantity { get; set; }
         public string? _Memo { get; set; }
-        public ItemList(int _Id, string _Name, string _SerialNumber, int _Quantity, string? _Memo)
+        public ItemList(int _Id, string _Object, string _Type, string _AssetType, string _Name, string _Manufacturer, string _SerialNumber, int _Price, int _Quantity, string? _Memo)
         {
             this._Id = _Id;
+            this._Object = _Object;
+            this._Type = _Type;
+            this._AssetType = _AssetType;
             this._Name = _Name;
+            this._Manufacturer = _Manufacturer;
             this._SerialNumber = _SerialNumber;
+            this._Price = _Price;
             this._Quantity = _Quantity;
             this._Memo = _Memo;
         }
-    }
-
-    public class ItemList_Spec
-    {
-        public ItemList_Spec(string _Object, string _Type, string _AssetType)
-        { 
-            this._Object = _Object;
-            this._Type = _Type;
-        }
-        public required int _Id { get; set; }
-        public required string _Object { get; set; }
-        public required string _Type { get; set; }
     }
 
     /*

@@ -16,11 +16,9 @@ namespace WHMS
 {
     public partial class Add_Warehouse_SecondInfo : Form
     {
-
-
+        private readonly DatabaseContext _context = new DatabaseContext();
         private Functions fc = new Functions();
         PictureViewer pictureViewer = new PictureViewer();
-        private readonly DatabaseContext _context = new DatabaseContext();
 
         private WarehouseList targetWarehouse;
         private string? targetWarehouseId = Add_Warehouse_DefaultInfo.targetWarehouse;
