@@ -15,8 +15,9 @@ namespace WHMS
     public partial class Add_ItemList : Form
     {
         private readonly DatabaseContext _context = new DatabaseContext();
-        private bool onClickMemo;
         
+        private bool onClickMemo = false;
+
         private int id;
         private string obj;
         private string type;
@@ -34,17 +35,21 @@ namespace WHMS
             this.Size = new Size(204, 348);
             button_DisplayMemo.Click += (sender, e) => DisplayMemo();
         }
+
         private void DisplayMemo() 
         {
+            
             if (!onClickMemo)
             {
                 onClickMemo = true;
+                button_DisplayMemo.Text = "＜＜備考登録";
                 this.Size = new Size(440, 348);
                 
             }
             else
             {
                 onClickMemo = false;
+                button_DisplayMemo.Text = "備考登録＞＞";
                 this.Size = new Size(204, 348);
             }
         }
