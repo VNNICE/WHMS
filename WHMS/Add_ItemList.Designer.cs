@@ -38,7 +38,7 @@
             label_Manufacturer = new Label();
             label_SerialNumber = new Label();
             label_Quantity = new Label();
-            text_Memo = new Label();
+            label_Memo = new Label();
             textBox_Name = new TextBox();
             textBox_SerialNumber = new TextBox();
             textBox_Quantity = new TextBox();
@@ -130,14 +130,14 @@
             label_Quantity.TabIndex = 11;
             label_Quantity.Text = "数量";
             // 
-            // text_Memo
+            // label_Memo
             // 
-            text_Memo.AutoSize = true;
-            text_Memo.Location = new Point(191, 68);
-            text_Memo.Name = "text_Memo";
-            text_Memo.Size = new Size(31, 15);
-            text_Memo.TabIndex = 12;
-            text_Memo.Text = "備考";
+            label_Memo.AutoSize = true;
+            label_Memo.Location = new Point(191, 68);
+            label_Memo.Name = "label_Memo";
+            label_Memo.Size = new Size(31, 15);
+            label_Memo.TabIndex = 12;
+            label_Memo.Text = "備考";
             // 
             // textBox_Name
             // 
@@ -254,7 +254,7 @@
             Controls.Add(textBox_Quantity);
             Controls.Add(textBox_SerialNumber);
             Controls.Add(textBox_Name);
-            Controls.Add(text_Memo);
+            Controls.Add(label_Memo);
             Controls.Add(label_Quantity);
             Controls.Add(label_SerialNumber);
             Controls.Add(label_Manufacturer);
@@ -281,7 +281,7 @@
         private Label label_Manufacturer;
         private Label label_SerialNumber;
         private Label label_Quantity;
-        private Label text_Memo;
+        private Label label_Memo;
         private TextBox textBox_Name;
         private TextBox input_Manufacturer;
         private TextBox textBox_SerialNumber;

@@ -62,6 +62,7 @@ namespace WHMS
             pictureViewer.SetADefaultDataPictureBox(this);
             pictureViewer.Show();
             this.FormClosing += (sender, e) => ResetStaticData();
+
         }//50, 150 150, 50
         private void KeyPressSettings(object? sender, KeyPressEventArgs e)
         {
@@ -113,18 +114,6 @@ namespace WHMS
                 textBox_Name.Text = targetWarehouse._Name.ToString();
                 textBox_SelectedArea.Text = targetArea._Id + " / " + (maxAreas - 1).ToString();
                 textBox_Shelf.Text = shelfCnt.ToString();
-            }
-        }
-        private void Test()
-        {
-            PictureViewer areaAdder = new PictureViewer();
-            {
-                int x = 0;
-                int y = 0;
-                int width = 0;
-                int height = 0;
-                areaAdder.Mode_CreateArea(this, _context.WarehouseLists.Find(targetWarehouseId)._ImagePath, ref x, ref y, ref width, ref height);
-                textBox1.Text = width.ToString();
             }
         }
 
@@ -202,11 +191,6 @@ namespace WHMS
         private void textBox_Width_TextChanged(object? sender, EventArgs e)
         {
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Test();
         }
     }
 }

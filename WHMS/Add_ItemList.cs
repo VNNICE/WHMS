@@ -34,13 +34,39 @@ namespace WHMS
         {
             InitializeComponent();
             this.Size = new Size(204, 348);
+            DataBinding();
             button_DisplayMemo.Click += (sender, e) => DisplayMemo();
             button_Decide.Click += (sender, e) => AddData();
+            
         }
         private void AddData()
         {
             SerializeText();
             AddItemData();
+            this.Close();
+        }
+        private void DataBinding()
+        {
+            try
+            {
+                if (_context.ItemLists != null && _context.ItemLists.Any())
+                {
+                    comboBox_Object.DataSource = _context.ItemLists.Select(x => x._Object).Distinct().ToList();
+                    comboBox_Type.DataSource = _context.ItemLists.Select(x => x._Type).Distinct().ToList();
+                    comboBox_AssetType.DataSource = _context.ItemLists.Select(x => x._AssetType).Distinct().ToList();
+                    comboBox_Manufacturer.DataSource = _context.ItemLists.Select(x => x._Manufacturer).Distinct().ToList();
+
+                    comboBox_Object.SelectedIndex = -1;
+                    comboBox_Type.SelectedIndex = -1; 
+                    comboBox_AssetType.SelectedIndex = -1;
+                    comboBox_Manufacturer.SelectedIndex = -1;
+                }
+            }
+            catch(ArgumentException ae) 
+            {
+                MessageBox.Show(ae.ToString());
+                return;
+            }
         }
 
         private void DisplayMemo() 
@@ -64,16 +90,16 @@ namespace WHMS
         private void AddItemData()
         {
             int idCnt;
-            if (_context.ItemLists.Any())
-            {
-                idCnt = _context.ItemLists.Select(x=>x._Id).LastOrDefault();
-            }
-            else
-            {
-                idCnt = 0;
-            }
             try
             {
+                if (_context.ItemLists.Any())
+                {
+                    idCnt = _context.ItemLists.Max(x => x._Id) + 1;
+                }
+                else
+                {
+                    idCnt = 0;
+                }
                 ItemList itemList = new ItemList(idCnt, obj, type, assetType, name, manufacturer, serialNumber, price, quantity, memo);
                 _context.ItemLists.Add(itemList);
                 _context.SaveChanges();
@@ -103,9 +129,9 @@ namespace WHMS
                 }
                 price = int.Parse(textBox_Price.Text);
                 quantity = int.Parse(textBox_Quantity.Text);
-                if (text_Memo.Text != null)
+                if (richTextBox_Memo.Text != null)
                 {
-                    memo = text_Memo.Text.ToString();
+                    memo = richTextBox_Memo.Text.ToString();
                 }
             }
             catch (InvalidValues)
