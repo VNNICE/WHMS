@@ -25,8 +25,8 @@ namespace WHMS
         private string name;
         private string manufacturer;
         private string serialNumber;
-        private int price;
-        private int quantity;
+        private int? price = null;
+        private int? quantity = null;
         private string? memo;
         private string errmsg;
 
@@ -64,6 +64,7 @@ namespace WHMS
 
         private void SerializeText()
         {
+            errmsg = "次の入力値が無効です：\n";
             try
             {
                 obj = comboBox_Object.Text.ToString();
@@ -72,12 +73,13 @@ namespace WHMS
                 name = textBox_Name.Text.ToString();
                 manufacturer = comboBox_Manufacturer.Text.ToString();
                 serialNumber = textBox_SerialNumber.Text.ToString();
-                price = int.Parse(textBox_Price.Text);
-                quantity = int.Parse(textBox_Quantity.Text);
-                if (obj == "" || type == "" || assetType == "" || name == "" || manufacturer == "" || price == 0 || quantity == 0)
+                if (obj == "" || type == "" || assetType == "" || name == "" || manufacturer == "" || serialNumber == "")
                 {
                     throw new InvalidValues();
                 }
+                price = int.Parse(textBox_Price.Text);
+                quantity = int.Parse(textBox_Quantity.Text);
+
                 if (text_Memo.Text != null)
                 {
                     memo = text_Memo.Text.ToString();
@@ -85,7 +87,7 @@ namespace WHMS
             }
             catch (InvalidValues)
             {
-                errmsg = "次の入力値が無効です：\n";
+                
                 if (obj == "")
                 {
                     errmsg += $"　{{{label_Object.Text}}}\n";
@@ -106,11 +108,16 @@ namespace WHMS
                 {
                     errmsg += $"　{{{label_SerialNumber.Text}}}\n";
                 }
-                if (price == 0)
+                MessageBox.Show(errmsg);
+                return;
+            }
+            catch (FormatException)
+            {
+                if (price == null)
                 {
                     errmsg += $"　{{{label_Price.Text}}}\n";
                 }
-                if (quantity == 0)
+                if (quantity == null)
                 {
                     errmsg += $"　{{{label_Quantity.Text}}}\n";
                 }
