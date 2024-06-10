@@ -29,6 +29,7 @@ namespace WHMS
             comboBox_City.DropDownStyle = ComboBoxStyle.DropDownList;
             textBox_Add_Areas.KeyPress += KeyPressSettings;
             pictureViewer.SetADefaultDataPictureBox(this);
+            
         }
         private void KeyPressSettings(object? sender, KeyPressEventArgs e)
         {

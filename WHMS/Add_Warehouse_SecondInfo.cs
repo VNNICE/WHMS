@@ -151,7 +151,7 @@ namespace WHMS
                 if (searcher == maxAreas)
                 {
                     MessageBox.Show("全置場設定完了");
-                    this.Dispose();
+                    this.Close();
                 }
             }
             else

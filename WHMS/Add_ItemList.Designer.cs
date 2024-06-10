@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            contextMenuStrip1 = new ContextMenuStrip(components);
             button_Decide = new Button();
             label_Object = new Label();
             label_Type = new Label();
@@ -52,11 +50,6 @@
             richTextBox_Memo = new RichTextBox();
             button_DisplayMemo = new Button();
             SuspendLayout();
-            // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
             // 
             // button_Decide
             // 
@@ -269,8 +262,6 @@
         }
 
         #endregion
-
-        private ContextMenuStrip contextMenuStrip1;
         private TextBox input_AssetType;
         private TextBox input;
         private Button button_Decide;

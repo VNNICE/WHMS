@@ -140,11 +140,6 @@ namespace WHMS
                 }
             }
         }
-        private void LoadGridViewShelf()
-        {
-
-        }
-
 
         private void LoadDefaultData()
         {
@@ -198,10 +193,10 @@ namespace WHMS
                 var blank = new WarehouseList_Area("empty", "", -99, "", "");
                 var areaElements = context.WarehouseList_Areas.Where(x => x.WarehouseList_Id == comboBox_Name.SelectedValue.ToString()).ToList();
                 areaElements.Insert(0, blank);
-
                 comboBox_Area.DataSource = areaElements;
                 comboBox_Area.DisplayMember = "_Area";
                 comboBox_Area.ValueMember = "_Id";
+                comboBox_Area.SelectedIndex = -1;
             }
         }
 
@@ -229,7 +224,7 @@ namespace WHMS
 
         private void button_Cancel_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
 
@@ -242,8 +237,10 @@ namespace WHMS
         {
             Add_Warehouse_DefaultInfo wl = new Add_Warehouse_DefaultInfo();
             wl.Owner = this;
+            /*
             wl.Load += (order, s) => this.Enabled = false;
             wl.FormClosed += (order, s) => this.Enabled = true;
+            */
             wl.Show();
         }
 
