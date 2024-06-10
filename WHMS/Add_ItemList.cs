@@ -25,8 +25,8 @@ namespace WHMS
         private string name;
         private string manufacturer;
         private string serialNumber;
-        private int? price = null;
-        private int? quantity = null;
+        private int price;
+        private int quantity;
         private string? memo;
         private string errmsg;
 
@@ -40,7 +40,7 @@ namespace WHMS
         private void AddData()
         {
             SerializeText();
-            //ItemList itemList = new ItemList();
+            AddItemData();
         }
 
         private void DisplayMemo() 
@@ -61,6 +61,30 @@ namespace WHMS
                 richTextBox_Memo.Enabled = false;
             }
         }
+        private void AddItemData()
+        {
+            int idCnt;
+            if (_context.ItemLists.Any())
+            {
+                idCnt = _context.ItemLists.Select(x=>x._Id).LastOrDefault();
+            }
+            else
+            {
+                idCnt = 0;
+            }
+            try
+            {
+                ItemList itemList = new ItemList(idCnt, obj, type, assetType, name, manufacturer, serialNumber, price, quantity, memo);
+                _context.ItemLists.Add(itemList);
+                _context.SaveChanges();
+                MessageBox.Show("保存完了!! ID: "+ idCnt);
+            }
+            catch (ArgumentException ae)
+            {
+                MessageBox.Show(ae.ToString());
+                return;
+            }
+        }
 
         private void SerializeText()
         {
@@ -79,7 +103,6 @@ namespace WHMS
                 }
                 price = int.Parse(textBox_Price.Text);
                 quantity = int.Parse(textBox_Quantity.Text);
-
                 if (text_Memo.Text != null)
                 {
                     memo = text_Memo.Text.ToString();
@@ -113,11 +136,11 @@ namespace WHMS
             }
             catch (FormatException)
             {
-                if (price == null)
+                if (!int.TryParse(textBox_Price.Text, out int i))
                 {
                     errmsg += $"　{{{label_Price.Text}}}\n";
                 }
-                if (quantity == null)
+                if (!int.TryParse(textBox_Quantity.Text, out int j))
                 {
                     errmsg += $"　{{{label_Quantity.Text}}}\n";
                 }
