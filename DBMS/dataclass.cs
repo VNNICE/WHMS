@@ -23,7 +23,8 @@ namespace DBMS
 
     public class ItemList
     {
-        public int _Id { get; set;  }
+        public string _Id { get; set;  }
+        public string _Admin { get; set; }
         public string _Object { get; set; }
         public string _Type { get; set; }
         public string _AssetType { get; set; }
@@ -33,9 +34,11 @@ namespace DBMS
         public int _Price { get; set; }
         public int _Quantity { get; set; }
         public string? _Memo { get; set; }
-        public ItemList(int _Id, string _Object, string _Type, string _AssetType, string _Name, string _Manufacturer, string _SerialNumber, int _Price, int _Quantity, string? _Memo)
+        public string? WarehouseShelf_Id { get; set; } public WarehouseList_Shelf? WarehouseList_Shelf { get; set; }
+        public ItemList(string _Id, string _Admin, string _Object, string _Type, string _AssetType, string _Name, string _Manufacturer, string _SerialNumber, int _Price, int _Quantity, string? _Memo)
         {
             this._Id = _Id;
+            this._Admin = _Admin;
             this._Object = _Object;
             this._Type = _Type;
             this._AssetType = _AssetType;
@@ -68,7 +71,7 @@ namespace DBMS
     public class AdminList_Name
     {
         public string _Name { get; set; }
-        public AdminList AdminList { get; set; } = null!; public string AdminList_Id { get; set; }
+        public string AdminList_Id { get; set; } public AdminList AdminList { get; set; } = null!;
 
         public AdminList_Name(string AdminList_Id, string _Name) 
         {

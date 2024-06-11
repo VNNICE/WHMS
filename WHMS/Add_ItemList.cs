@@ -18,7 +18,8 @@ namespace WHMS
         
         private bool onClickMemo = false;
 
-        private int id;
+        private string id;
+        private string admin;
         private string obj;
         private string type;
         private string assetType;
@@ -89,21 +90,12 @@ namespace WHMS
         }
         private void AddItemData()
         {
-            int idCnt;
             try
             {
-                if (_context.ItemLists.Any())
-                {
-                    idCnt = _context.ItemLists.Max(x => x._Id) + 1;
-                }
-                else
-                {
-                    idCnt = 0;
-                }
-                ItemList itemList = new ItemList(idCnt, obj, type, assetType, name, manufacturer, serialNumber, price, quantity, memo);
+                ItemList itemList = new ItemList(id, admin, obj, type, assetType, name, manufacturer, serialNumber, price, quantity, memo);
                 _context.ItemLists.Add(itemList);
                 _context.SaveChanges();
-                MessageBox.Show("保存完了!! ID: "+ idCnt);
+                MessageBox.Show("保存完了!! ID: "+ id);
             }
             catch (ArgumentException ae)
             {
@@ -117,6 +109,17 @@ namespace WHMS
             errmsg = "次の入力値が無効です：\n";
             try
             {
+                int idCnt;
+                if (_context.ItemLists.Any())
+                {
+                    idCnt = _context.ItemLists.Count();
+                }
+                else
+                {
+                    idCnt = 0;
+                }
+                id = + idCnt.ToString();
+                //admin = 
                 obj = comboBox_Object.Text.ToString();
                 type = comboBox_Type.Text.ToString();
                 assetType = comboBox_AssetType.Text.ToString();

@@ -29,7 +29,7 @@ namespace WHMS
         }
         private void GoToItemManager()
         {
-            Add_ItemList itemForm = new Add_ItemList();
+            View_ItemList itemForm = new View_ItemList();
             itemForm.Closed += (order, s) => this.Visible = true;
             itemForm.Load += (order, s) => this.Visible = false;
             itemForm.Show();
