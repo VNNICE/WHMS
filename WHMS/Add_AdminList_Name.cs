@@ -13,19 +13,87 @@ namespace WHMS
 {
     public partial class Add_AdminList_Name : Form
     {
+        private readonly DatabaseContext _context = new DatabaseContext();
+        private AdminList selectedGroup;
         public Add_AdminList_Name()
         {
             InitializeComponent();
+            LoadRegionData();
+            button_FindList.Click += (o, e) => GoToAddAdmin();
+            comboBox_Group.Enabled = false;
+            comboBox_Region.SelectedIndexChanged += (o, e) => LoadGroupData();
+            LoadGroupData();
+            button_Decide.Click += (o, e) => AddAdministrator();
+            button_Cancel.Click += (o, e) => this.Close();
         }
 
-        private void comboBox_Name_SelectedIndexChanged(object sender, EventArgs e)
+        private void AddAdministrator() 
         {
-
+            string name = textBox_Name.Text.ToString();
+            int cnt = _context.AdminList_Names.Count() + 1;
+            selectedGroup = _context.AdminLists.Find(comboBox_Group.SelectedValue.ToString());
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                MessageBox.Show("名前を確認してください。");
+                return;
+            }
+            else if (selectedGroup == null)
+            {
+                MessageBox.Show("正しいグループを選択してください。");
+                return;
+            }
+            else
+            {
+                string groupId = selectedGroup._Id;
+                string id = groupId + cnt.ToString("D3");
+                AdminList_Name data = new AdminList_Name(id, groupId, name);
+                _context.Add(data);
+                _context.SaveChanges();
+                this.Close();
+            }
         }
 
-        private void label_Name_Click(object sender, EventArgs e)
+        private void LoadRegionData() 
         {
-
+            comboBox_Region.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox_Group.DropDownStyle = ComboBoxStyle.DropDownList;
+            if (_context.AdminLists != null && _context.AdminLists.Any())
+            {
+                comboBox_Region.DataSource = _context.AdminLists.Select(x => x._Region).Distinct().ToList();
+            }
+            else 
+            {
+                comboBox_Region.Enabled = false;
+                comboBox_Region.Text = "データなし";
+            }
+        }
+        private void LoadGroupData()
+        {
+            var data = _context.AdminLists.Where(x => x._Region == comboBox_Region.Text).Distinct().ToList();
+            if (data != null)
+            {
+                comboBox_Group.Enabled = true;
+                comboBox_Group.DataSource = data;
+                comboBox_Group.DisplayMember = "_Group";
+                comboBox_Group.ValueMember = "_Id";
+            }
+            else
+            {
+                comboBox_Group.Enabled = false;
+            }
+        }
+        private void GoToAddAdmin()
+        {
+            Add_AdminList al = new Add_AdminList();
+            al.StartPosition = FormStartPosition.Manual;
+            al.Location = this.Location;
+            this.Enabled = false;
+            al.FormClosed += (o, e) =>
+            {
+                this.Refresh();
+                this.Enabled = true;
+            };
+            al.Show();
         }
     }
 }

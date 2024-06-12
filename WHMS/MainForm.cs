@@ -27,6 +27,8 @@ namespace WHMS
             View_WarehouseList_Area wla = new View_WarehouseList_Area();
             wla.Closed += (order, s) => this.Visible = true;
             wla.Load += (order, s) => this.Visible = false;
+            wla.StartPosition = FormStartPosition.Manual;
+            wla.Location = this.Location;
             wla.Show();
         }
         private void GoToItemManager()
@@ -34,6 +36,8 @@ namespace WHMS
             View_ItemList itemForm = new View_ItemList();
             itemForm.Closed += (order, s) => this.Visible = true;
             itemForm.Load += (order, s) => this.Visible = false;
+            itemForm.StartPosition = FormStartPosition.Manual;
+            itemForm.Location = this.Location;
             itemForm.Show();
         }
         private void GoToAdminManager()
@@ -41,6 +45,8 @@ namespace WHMS
             View_AdminList AdminForm = new View_AdminList();
             AdminForm.Closed += (order, s) => this.Visible = true;
             AdminForm.Load += (order, s) => this.Visible = false;
+            AdminForm.StartPosition = FormStartPosition.Manual;
+            AdminForm.Location = this.Location;
             AdminForm.Show();
         }
 

@@ -23,11 +23,9 @@ namespace DBMS
 
     public class ItemList
     {
-        public string _Id { get; set;  }
+        public string _Id { get; set; }
         public string _Admin { get; set; }
-        public string _Object { get; set; }
-        public string _Type { get; set; }
-        public string _AssetType { get; set; }
+        public string ItemTypeList_Id { get; set; } public ItemTypeList ItemTypeList {get; set;} = null!;
         public string _Name { get; set; }
         public string _Manufacturer { get; set; }
         public string _SerialNumber { get; set; }
@@ -35,19 +33,51 @@ namespace DBMS
         public int _Quantity { get; set; }
         public string? _Memo { get; set; }
         public string? WarehouseShelf_Id { get; set; } public WarehouseList_Shelf? WarehouseList_Shelf { get; set; }
-        public ItemList(string _Id, string _Admin, string _Object, string _Type, string _AssetType, string _Name, string _Manufacturer, string _SerialNumber, int _Price, int _Quantity, string? _Memo)
+        public ItemList(string _Id, string _Admin, string ItemTypeList_Id, string _Name, string _Manufacturer, string _SerialNumber, int _Price, int _Quantity, string? _Memo, string? WarehouseShelf_Id)
         {
             this._Id = _Id;
             this._Admin = _Admin;
-            this._Object = _Object;
-            this._Type = _Type;
-            this._AssetType = _AssetType;
+            this.ItemTypeList_Id = ItemTypeList_Id;
             this._Name = _Name;
             this._Manufacturer = _Manufacturer;
             this._SerialNumber = _SerialNumber;
             this._Price = _Price;
             this._Quantity = _Quantity;
             this._Memo = _Memo;
+            this.WarehouseShelf_Id = WarehouseShelf_Id;
+        }
+    }
+    public class ItemTypeList
+    {
+        public string _Id { get; set; }
+        public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
+        public string _Object { get; set; }
+        public string _ObjectInitial { get; set; }
+        public string _Type { get; set; }
+        public string _TypeInitial { get; set; }
+        public string _AssetType { get; set; } 
+        public string _AssetTypeInitial { get; set; }
+        public AssetManagementList? AssetManagementList { get; set; }
+
+        public ItemTypeList(string _Id, string _Object, string _ObjectInitial, string _Type, string _TypeInitial, string _AssetType, string _AssetTypeInitial)
+        {
+            this._Id = _Id;
+            this._Object = _Object;
+            this._ObjectInitial = _ObjectInitial;
+            this._Type = _Type;
+            this._TypeInitial = _TypeInitial;
+            this._AssetType = _AssetType;
+            this._AssetTypeInitial = _AssetTypeInitial;
+        }
+    }
+    public class AssetManagementList
+    {
+        public int _Id { get; set; }
+        public string ItemTypeList_Id { get; set; } public ItemTypeList ItemTypeList { get; set; } = null!;
+        public AssetManagementList(int _Id, string ItemTypeList_Id) 
+        {
+            this._Id = _Id;
+            this.ItemTypeList_Id = ItemTypeList_Id;
         }
     }
 
@@ -70,11 +100,12 @@ namespace DBMS
 
     public class AdminList_Name
     {
+        public string _Id { get; set; }
         public string _Name { get; set; }
         public string AdminList_Id { get; set; } public AdminList AdminList { get; set; } = null!;
-
-        public AdminList_Name(string AdminList_Id, string _Name) 
+        public AdminList_Name(string _Id, string AdminList_Id, string _Name) 
         {
+            this._Id = _Id;
             this.AdminList_Id = AdminList_Id;
             this._Name = _Name;
         }

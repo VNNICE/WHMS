@@ -52,9 +52,11 @@ namespace WHMS
             {
                 if (_context.ItemLists != null && _context.ItemLists.Any())
                 {
+                    /*
                     comboBox_Object.DataSource = _context.ItemLists.Select(x => x._Object).Distinct().ToList();
                     comboBox_Type.DataSource = _context.ItemLists.Select(x => x._Type).Distinct().ToList();
                     comboBox_AssetType.DataSource = _context.ItemLists.Select(x => x._AssetType).Distinct().ToList();
+                    */
                     comboBox_Manufacturer.DataSource = _context.ItemLists.Select(x => x._Manufacturer).Distinct().ToList();
 
                     comboBox_Object.SelectedIndex = -1;
@@ -92,8 +94,8 @@ namespace WHMS
         {
             try
             {
-                ItemList itemList = new ItemList(id, admin, obj, type, assetType, name, manufacturer, serialNumber, price, quantity, memo);
-                _context.ItemLists.Add(itemList);
+                //ItemList itemList = new ItemList(id, admin, obj, type, assetType, name, manufacturer, serialNumber, price, quantity, memo);
+                //_context.ItemLists.Add(itemList);
                 _context.SaveChanges();
                 MessageBox.Show("保存完了!! ID: "+ id);
             }

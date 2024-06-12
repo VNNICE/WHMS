@@ -26,10 +26,11 @@ namespace WHMS
             try
             {
                 LoadRegionData();
-                LoadGroupData();
                 ButtonsSettings();
+                LoadGridViewData();
+                comboBox_Region.SelectedIndexChanged += (o, s) => LoadGridViewData();
                 textBox_Initial.LostFocus += (o, s) => LoadInitial();
-                textBox_Initial.KeyPress += InitialRule;
+                textBox_Initial.KeyPress += InitialRule;                
             }
             catch
             {
@@ -40,10 +41,14 @@ namespace WHMS
         private void AddAdminList()
         {
             region = comboBox_Region.Text.ToString();
-            group = comboBox_Group.Text.ToString();
+            group = textBox_Group.Text.ToString();
             string initial = textBox_Initial.Text.ToString();
-            id = comboBox_Region.SelectedValue.ToString().ToUpper()[0].ToString() + initial;
             // Check the Group.
+            if (region == "全体") 
+            {
+                MessageBox.Show("正しい管轄を選んでください。");
+                return;
+            }
             if (string.IsNullOrWhiteSpace(group))
             {
                 MessageBox.Show("グループが空欄です。");
@@ -60,13 +65,14 @@ namespace WHMS
                 MessageBox.Show("略字が空欄です。");
                 return;
             }
-            else if (_context.AdminLists.Select(x => x._Id).Contains(id.Substring(0, 3 )))
-            {
-                MessageBox.Show("すでに登録されている略字です。");
-                return;
-            }
             else 
             {
+                id = comboBox_Region.SelectedValue.ToString().ToUpper().ToString() + initial;
+                if (_context.AdminLists.Select(x => x._Id).Contains(id.Substring(0, 4)))
+                {
+                    MessageBox.Show("すでに登録されている略字です。");
+                    return;
+                }
                 AdminList al = new AdminList(id, region, group);
                 _context.Add(al);
                 _context.SaveChanges();
@@ -75,21 +81,35 @@ namespace WHMS
             }
 
         }
-
-        private void LoadRegionData()
-        {
-            comboBox_Region.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox_Region.DataSource = _context.CityLists.ToList();
-            comboBox_Region.DisplayMember = "_City";
-            comboBox_Region.ValueMember = "_Code";
-            
-        }
-        private void LoadGroupData() 
+        private void LoadGridViewData() 
         {
             if (_context.AdminLists != null && _context.AdminLists.Any()) 
             {
-                comboBox_Group.DataSource = _context.AdminLists.Select(x => x._Group).ToList();
+                if (string.IsNullOrWhiteSpace(comboBox_Region.SelectedValue.ToString()))
+                {
+                    dataGridView.DataSource = _context.AdminLists.ToList();
+                }
+                else
+                {
+                    dataGridView.DataSource = _context.AdminLists.Where(x => x._Region == comboBox_Region.Text.ToString()).ToList();
+                }
+                dataGridView.Columns["_Id"].HeaderText = "ID";
+                dataGridView.Columns["_Region"].HeaderText = "地域";
+                dataGridView.Columns["_Group"].HeaderText = "グループ";
+                dataGridView.Columns["AdminList_Names"].Visible = false;
+
             }
+            
+        }
+        private void LoadRegionData()
+        {
+            comboBox_Region.DropDownStyle = ComboBoxStyle.DropDownList;
+            var data = _context.CityLists.ToList();
+            data.Insert(0, new CityList("", "全体"));
+            comboBox_Region.DataSource = data;
+            comboBox_Region.DisplayMember = "_City";
+            comboBox_Region.ValueMember = "_Code";
+            
         }
         private void LoadInitial() 
         {

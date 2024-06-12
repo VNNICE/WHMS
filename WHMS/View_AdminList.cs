@@ -20,8 +20,10 @@ namespace WHMS
 
         private void GoToAddAdmin() 
         {
-            Add_AdminList al = new Add_AdminList();
-            al.Show();
+            Add_AdminList_Name aln = new Add_AdminList_Name();
+            aln.StartPosition = FormStartPosition.Manual;
+            aln.Location = this.Location;
+            aln.Show();
         }
     }
 }

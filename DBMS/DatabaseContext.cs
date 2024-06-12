@@ -18,6 +18,8 @@ namespace DBMS
         public DbSet<WarehouseList_Area> WarehouseList_Areas { get; set; }
         public DbSet<WarehouseList_Shelf> WarehouseList_Shelf { get; set; }
         public DbSet<Functions_Stock> Functions_Stocks { get; set; }
+        public DbSet<ItemTypeList> ItemTypeLists { get; set; }
+        public DbSet<AssetManagementList> AssetManagementLists { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -33,6 +35,17 @@ namespace DBMS
             });
 
             modelBuilder.Entity<ItemList>(i =>
+            {
+                i.HasKey(j => j._Id);
+                i.HasOne(j => j.ItemTypeList).WithMany(j => j.ItemLists).HasForeignKey(j => j.ItemTypeList_Id).IsRequired();
+                i.HasOne(j => j.WarehouseList_Shelf).WithMany(j => j.ItemLists);
+            });
+            modelBuilder.Entity<ItemTypeList>(i =>
+            {
+                i.HasKey(j => j._Id);
+                i.HasMany(j => j.ItemLists).WithOne(j => j.ItemTypeList).HasForeignKey(j =>j.ItemTypeList_Id);
+            });
+            modelBuilder.Entity<AssetManagementList>(i =>
             {
                 i.HasKey(j => j._Id);
             });
