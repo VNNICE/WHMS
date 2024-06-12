@@ -118,7 +118,7 @@ namespace WHMS
                 {
                     idCnt = 0;
                 }
-                id = + idCnt.ToString();
+                //id = + idCnt.ToString();
                 //admin = 
                 obj = comboBox_Object.Text.ToString();
                 type = comboBox_Type.Text.ToString();

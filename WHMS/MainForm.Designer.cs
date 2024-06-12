@@ -28,22 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button_Add_WarehouseList = new Button();
+            button_WhManager = new Button();
             button1 = new Button();
             button_ItemManager = new Button();
-            button3 = new Button();
+            button_AdminManager = new Button();
             SuspendLayout();
             // 
-            // button_Add_WarehouseList
+            // button_WhManager
             // 
-            button_Add_WarehouseList.Font = new Font("Yu Gothic UI", 20F);
-            button_Add_WarehouseList.Location = new Point(12, 12);
-            button_Add_WarehouseList.Name = "button_Add_WarehouseList";
-            button_Add_WarehouseList.Size = new Size(172, 90);
-            button_Add_WarehouseList.TabIndex = 1;
-            button_Add_WarehouseList.Text = "倉庫管理";
-            button_Add_WarehouseList.UseVisualStyleBackColor = true;
-            button_Add_WarehouseList.Click += button_Add_WarehouseList_Click;
+            button_WhManager.Font = new Font("Yu Gothic UI", 20F);
+            button_WhManager.Location = new Point(12, 12);
+            button_WhManager.Name = "button_WhManager";
+            button_WhManager.Size = new Size(172, 90);
+            button_WhManager.TabIndex = 1;
+            button_WhManager.Text = "倉庫管理";
+            button_WhManager.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -65,34 +64,34 @@
             button_ItemManager.Text = "ItemManager";
             button_ItemManager.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // button_AdminManager
             // 
-            button3.Font = new Font("Yu Gothic UI", 20F);
-            button3.Location = new Point(204, 141);
-            button3.Name = "button3";
-            button3.Size = new Size(172, 90);
-            button3.TabIndex = 4;
-            button3.Text = "機能４";
-            button3.UseVisualStyleBackColor = true;
+            button_AdminManager.Font = new Font("Yu Gothic UI", 20F);
+            button_AdminManager.Location = new Point(204, 141);
+            button_AdminManager.Name = "button_AdminManager";
+            button_AdminManager.Size = new Size(172, 90);
+            button_AdminManager.TabIndex = 4;
+            button_AdminManager.Text = "管理者管理";
+            button_AdminManager.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(389, 250);
-            Controls.Add(button3);
+            Controls.Add(button_AdminManager);
             Controls.Add(button_ItemManager);
             Controls.Add(button1);
-            Controls.Add(button_Add_WarehouseList);
+            Controls.Add(button_WhManager);
             Name = "MainForm";
             Text = "Form1";
             ResumeLayout(false);
         }
 
         #endregion
-        private Button button_Add_WarehouseList;
+        private Button button_WhManager;
         private Button button1;
         private Button button_ItemManager;
-        private Button button3;
+        private Button button_AdminManager;
     }
 }

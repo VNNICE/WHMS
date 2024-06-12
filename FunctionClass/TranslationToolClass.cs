@@ -19,7 +19,7 @@ namespace TranslationToolClass
 
     public class Translation
     {
-        static string KtoH(string input)
+        public static string KtoH(string input)
         {
             const int S_OK = 0;
             IFELanguage ifelang = null;
@@ -49,6 +49,7 @@ namespace TranslationToolClass
         static Dictionary<string, string> JapaneseToRomaji = new Dictionary<string, string>()
         {
             {"あ", "a"}, {"い", "i"}, {"う", "u"}, {"え", "e"}, {"お", "o"},
+            {"ぁ", "a"}, {"ぃ", "i"}, {"ぅ", "u"}, {"ぇ", "e"}, {"ぉ", "o"},
             {"か", "ka"}, {"き", "ki"}, {"く", "ku"}, {"け", "ke"}, {"こ", "ko"},
             {"さ", "sa"}, {"し", "shi"}, {"す", "su"}, {"せ", "se"}, {"そ", "so"},
             {"た", "ta"}, {"ち", "chi"}, {"つ", "tsu"}, {"て", "te"}, {"と", "to"},
@@ -56,6 +57,7 @@ namespace TranslationToolClass
             {"は", "ha"}, {"ひ", "hi"}, {"ふ", "fu"}, {"へ", "he"}, {"ほ", "ho"},
             {"ま", "ma"}, {"み", "mi"}, {"む", "mu"}, {"め", "me"}, {"も", "mo"},
             {"や", "ya"}, {"ゆ", "yu"}, {"よ", "yo"},
+            {"ゃ", "ya"}, {"ゅ", "yu"}, {"ょ", "yo"},
             {"ら", "ra"}, {"り", "ri"}, {"る", "ru"}, {"れ", "re"}, {"ろ", "ro"},
             {"わ", "wa"}, {"を", "wo"}, {"ん", "n"},
 
@@ -66,6 +68,7 @@ namespace TranslationToolClass
             {"ぱ", "pa"}, {"ぴ", "pi"}, {"ぷ", "pu"}, {"ぺ", "pe"}, {"ぽ", "po"},
 
             {"ア", "a"}, {"イ", "i"}, {"ウ", "u"}, {"エ", "e"}, {"オ", "o"},
+            {"ァ", "a"}, {"ィ", "i"}, {"ゥ", "u"}, {"ェ", "e"}, {"ォ", "o"},
             {"カ", "ka"}, {"キ", "ki"}, {"ク", "ku"}, {"ケ", "ke"}, {"コ", "ko"},
             {"サ", "sa"}, {"シ", "shi"}, {"ス", "su"}, {"セ", "se"}, {"ソ", "so"},
             {"タ", "ta"}, {"チ", "chi"}, {"ツ", "tsu"}, {"テ", "te"}, {"ト", "to"},
@@ -73,6 +76,7 @@ namespace TranslationToolClass
             {"ハ", "ha"}, {"ヒ", "hi"}, {"フ", "fu"}, {"ヘ", "he"}, {"ホ", "ho"},
             {"マ", "ma"}, {"ミ", "mi"}, {"ム", "mu"}, {"メ", "me"}, {"モ", "mo"},
             {"ヤ", "ya"}, {"ユ", "yu"}, {"ヨ", "yo"},
+            {"ャ", "ya"}, {"ュ", "yu"}, {"ョ", "yo"},
             {"ラ", "ra"}, {"リ", "ri"}, {"ル", "ru"}, {"レ", "re"}, {"ロ", "ro"},
             {"ワ", "wa"}, {"ヲ", "wo"}, {"ン", "n"},
 
@@ -88,7 +92,7 @@ namespace TranslationToolClass
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             string? input = Strings.StrConv(s, VbStrConv.Wide);
             string result = "";
-            if (!String.IsNullOrEmpty(input))
+            if (!String.IsNullOrWhiteSpace(input))
             {
                 foreach (char c in input)
                 {
@@ -98,7 +102,7 @@ namespace TranslationToolClass
                     }
                     else
                     {
-                        result = "e";
+                        result = "";
                     }
 
                 }

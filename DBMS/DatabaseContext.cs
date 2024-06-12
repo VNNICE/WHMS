@@ -46,6 +46,7 @@ namespace DBMS
             modelBuilder.Entity<AdminList_Name>(i =>
             {
                 i.HasKey(j => j._Name);
+                i.HasOne(j => j.AdminList).WithMany(j => j.AdminList_Names).HasForeignKey(j => j.AdminList_Id).IsRequired();
             });
 
             modelBuilder.Entity<WarehouseList>(i =>

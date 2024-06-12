@@ -16,11 +16,13 @@ namespace WHMS
         public MainForm()
         {
             InitializeComponent();
-            button_ItemManager.Click += (sender, e) => GoToItemManager(); 
+            button_ItemManager.Click += (sender, e) => GoToItemManager();
+            button_WhManager.Click += (sender, e) => GoToWarehouseManager();
+            button_AdminManager.Click += (sender, e) => GoToAdminManager();
         }
 
 
-        private void button_Add_WarehouseList_Click(object sender, EventArgs e)
+        private void GoToWarehouseManager()
         {
             View_WarehouseList_Area wla = new View_WarehouseList_Area();
             wla.Closed += (order, s) => this.Visible = true;
@@ -33,6 +35,13 @@ namespace WHMS
             itemForm.Closed += (order, s) => this.Visible = true;
             itemForm.Load += (order, s) => this.Visible = false;
             itemForm.Show();
+        }
+        private void GoToAdminManager()
+        {
+            View_AdminList AdminForm = new View_AdminList();
+            AdminForm.Closed += (order, s) => this.Visible = true;
+            AdminForm.Load += (order, s) => this.Visible = false;
+            AdminForm.Show();
         }
 
     }
