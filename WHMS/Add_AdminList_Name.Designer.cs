@@ -37,6 +37,7 @@
             comboBox_Group = new ComboBox();
             button_Decide = new Button();
             button_Cancel = new Button();
+            button_Refresh = new Button();
             SuspendLayout();
             // 
             // label_Region
@@ -116,11 +117,21 @@
             button_Cancel.Text = "キャンセル";
             button_Cancel.UseVisualStyleBackColor = true;
             // 
+            // button_Refresh
+            // 
+            button_Refresh.Location = new Point(179, 44);
+            button_Refresh.Name = "button_Refresh";
+            button_Refresh.Size = new Size(75, 23);
+            button_Refresh.TabIndex = 13;
+            button_Refresh.Text = "リフレッシュ";
+            button_Refresh.UseVisualStyleBackColor = true;
+            // 
             // Add_AdminList_Name
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(266, 130);
+            Controls.Add(button_Refresh);
             Controls.Add(button_Cancel);
             Controls.Add(button_Decide);
             Controls.Add(label_Group);
@@ -147,5 +158,6 @@
         private ComboBox comboBox_Group;
         private Button button_Decide;
         private Button button_Cancel;
+        private Button button_Refresh;
     }
 }

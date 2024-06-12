@@ -88,7 +88,7 @@ namespace WHMS
             al.StartPosition = FormStartPosition.Manual;
             al.Location = this.Location;
             this.Enabled = false;
-            al.FormClosed += (o, e) =>
+            al.Closed += (o, e) =>
             {
                 this.Refresh();
                 this.Enabled = true;
