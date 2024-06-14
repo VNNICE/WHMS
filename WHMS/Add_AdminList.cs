@@ -18,7 +18,7 @@ namespace WHMS
         string id;
         string region;
         string group;
-        
+
 
         public Add_AdminList()
         {
@@ -30,7 +30,7 @@ namespace WHMS
                 LoadGridViewData();
                 comboBox_Region.SelectedIndexChanged += (o, s) => LoadGridViewData();
                 textBox_Initial.LostFocus += (o, s) => LoadInitial();
-                textBox_Initial.KeyPress += InitialRule;                
+                textBox_Initial.KeyPress += InitialRule;
             }
             catch
             {
@@ -44,7 +44,7 @@ namespace WHMS
             group = textBox_Group.Text.ToString();
             string initial = textBox_Initial.Text.ToString();
             // Check the Group.
-            if (region == "全体") 
+            if (region == "全体")
             {
                 MessageBox.Show("正しい管轄を選んでください。");
                 return;
@@ -54,7 +54,7 @@ namespace WHMS
                 MessageBox.Show("グループが空欄です。");
                 return;
             }
-            else if (_context.AdminLists.Where(x=>x._Region == region).Select(x=>x._Group).Contains(group))
+            else if (_context.AdminLists.Where(x => x._Region == region).Select(x => x._Group).Contains(group))
             {
                 MessageBox.Show("すでに登録されているグループです。");
                 return;
@@ -65,7 +65,7 @@ namespace WHMS
                 MessageBox.Show("略字が空欄です。");
                 return;
             }
-            else 
+            else
             {
                 id = comboBox_Region.SelectedValue.ToString().ToUpper().ToString() + initial;
                 if (_context.AdminLists.Select(x => x._Id).Contains(id.Substring(0, 4)))
@@ -81,9 +81,9 @@ namespace WHMS
             }
 
         }
-        private void LoadGridViewData() 
+        private void LoadGridViewData()
         {
-            if (_context.AdminLists != null && _context.AdminLists.Any()) 
+            if (_context.AdminLists != null && _context.AdminLists.Any())
             {
                 if (string.IsNullOrWhiteSpace(comboBox_Region.SelectedValue.ToString()))
                 {
@@ -99,7 +99,7 @@ namespace WHMS
                 dataGridView.Columns["AdminList_Names"].Visible = false;
 
             }
-            
+
         }
         private void LoadRegionData()
         {
@@ -109,20 +109,20 @@ namespace WHMS
             comboBox_Region.DataSource = data;
             comboBox_Region.DisplayMember = "_City";
             comboBox_Region.ValueMember = "_Code";
-            
+
         }
-        private void LoadInitial() 
+        private void LoadInitial()
         {
             if (!string.IsNullOrWhiteSpace(textBox_Initial.Text))
             {
                 textBox_Initial.Text = textBox_Initial.Text.ToUpper();
-                if (textBox_Initial.Text.Length == 3) 
+                if (textBox_Initial.Text.Length == 3)
                 {
                     textBox_Initial.Text = textBox_Initial.Text.Substring(0, 2);
                 }
             }
         }
-        private void InitialRule(object sender, KeyPressEventArgs e) 
+        private void InitialRule(object sender, KeyPressEventArgs e)
         {
             if (char.IsDigit(e.KeyChar))
             {
@@ -134,10 +134,10 @@ namespace WHMS
             }
         }
 
-        private void ButtonsSettings() 
+        private void ButtonsSettings()
         {
             button_Decide.Click += (o, s) => AddAdminList();
-            button_Cancle.Click += (o, s) => this.Close();
+            button_Cancel.Click += (o, s) => this.Close();
         }
     }
 }

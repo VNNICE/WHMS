@@ -34,7 +34,7 @@ namespace WHMS
         public Add_ItemList()
         {
             InitializeComponent();
-            this.Size = new Size(204, 348);
+            this.Size = new Size(283, 444);
             DataBinding();
             button_DisplayMemo.Click += (sender, e) => DisplayMemo();
             button_Decide.Click += (sender, e) => AddData();
@@ -60,8 +60,8 @@ namespace WHMS
                     comboBox_Manufacturer.DataSource = _context.ItemLists.Select(x => x._Manufacturer).Distinct().ToList();
 
                     comboBox_Object.SelectedIndex = -1;
-                    comboBox_Type.SelectedIndex = -1; 
-                    comboBox_AssetType.SelectedIndex = -1;
+                    //comboBox_Type.SelectedIndex = -1; 
+                    //comboBox_AssetType.SelectedIndex = -1;
                     comboBox_Manufacturer.SelectedIndex = -1;
                 }
             }
@@ -79,14 +79,14 @@ namespace WHMS
             {
                 onClickMemo = true;
                 button_DisplayMemo.Text = "＜＜備考登録";
-                this.Size = new Size(440, 348);
+                this.Size = new Size(524, 444);
                 richTextBox_Memo.Enabled = true;
             }
             else
             {
                 onClickMemo = false;
                 button_DisplayMemo.Text = "備考登録＞＞";
-                this.Size = new Size(204, 348);
+                this.Size = new Size(283, 444);
                 richTextBox_Memo.Enabled = false;
             }
         }

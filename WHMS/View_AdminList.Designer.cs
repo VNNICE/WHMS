@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
+            dataGridView = new DataGridView();
             button_GoToAddAdmin = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridView
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 99);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(434, 150);
-            dataGridView1.TabIndex = 0;
+            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Location = new Point(12, 99);
+            dataGridView.Name = "dataGridView";
+            dataGridView.Size = new Size(434, 150);
+            dataGridView.TabIndex = 0;
             // 
             // button_GoToAddAdmin
             // 
@@ -56,16 +56,16 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(458, 261);
             Controls.Add(button_GoToAddAdmin);
-            Controls.Add(dataGridView1);
+            Controls.Add(dataGridView);
             Name = "View_AdminList";
             Text = "View_AdminList";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView dataGridView1;
+        private DataGridView dataGridView;
         private Button button_GoToAddAdmin;
     }
 }

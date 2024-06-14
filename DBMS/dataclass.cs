@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.InteropServices;
 using System.Collections;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DBMS
 {
@@ -25,59 +26,81 @@ namespace DBMS
     {
         public string _Id { get; set; }
         public string _Admin { get; set; }
-        public string ItemTypeList_Id { get; set; } public ItemTypeList ItemTypeList {get; set;} = null!;
+        public string? Item_Object_Code { get; set; } public Item_Object? Item_Object { get; set; }
+
+        public string? Item_Type_Code { get; set; } public Item_Type? Item_Type { get; set; }
+        public string? Item_AssetType_Code { get; set; } public Item_AssetType? Item_AssetType { get; set; }
+        public int? AssetManagementList_Id { get; set; } public AssetManagementList? AssetManagementList { get; set; }
         public string _Name { get; set; }
         public string _Manufacturer { get; set; }
         public string _SerialNumber { get; set; }
+        public DateOnly? _PurchaseDate { get; set; }
         public int _Price { get; set; }
         public int _Quantity { get; set; }
+        
         public string? _Memo { get; set; }
         public string? WarehouseShelf_Id { get; set; } public WarehouseList_Shelf? WarehouseList_Shelf { get; set; }
-        public ItemList(string _Id, string _Admin, string ItemTypeList_Id, string _Name, string _Manufacturer, string _SerialNumber, int _Price, int _Quantity, string? _Memo, string? WarehouseShelf_Id)
+        public ItemList(string _Id, string _Admin, string Item_Object_Code, string Item_Type_Code, string Item_AssetType_Code, int? AssetManagementList_Id, string _Name, string _Manufacturer, string _SerialNumber, DateOnly? _PurchaseDate, int _Price, int _Quantity, string? _Memo, string? WarehouseShelf_Id)
         {
             this._Id = _Id;
             this._Admin = _Admin;
-            this.ItemTypeList_Id = ItemTypeList_Id;
+            this.Item_Object_Code = Item_Object_Code;
+            this.Item_Type_Code = Item_Type_Code;
+            this.Item_AssetType_Code = Item_AssetType_Code;
+            this.AssetManagementList_Id = AssetManagementList_Id;
             this._Name = _Name;
             this._Manufacturer = _Manufacturer;
             this._SerialNumber = _SerialNumber;
+            this._PurchaseDate = _PurchaseDate;
             this._Price = _Price;
             this._Quantity = _Quantity;
             this._Memo = _Memo;
             this.WarehouseShelf_Id = WarehouseShelf_Id;
         }
     }
-    public class ItemTypeList
+    public class Item_Object
     {
-        public string _Id { get; set; }
-        public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
         public string _Object { get; set; }
-        public string _ObjectInitial { get; set; }
-        public string _Type { get; set; }
-        public string _TypeInitial { get; set; }
-        public string _AssetType { get; set; } 
-        public string _AssetTypeInitial { get; set; }
-        public AssetManagementList? AssetManagementList { get; set; }
-
-        public ItemTypeList(string _Id, string _Object, string _ObjectInitial, string _Type, string _TypeInitial, string _AssetType, string _AssetTypeInitial)
+        public string _ObjectCode { get; set; }
+        public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
+        public Item_Object(string _Object, string _ObjectCode)
         {
-            this._Id = _Id;
             this._Object = _Object;
-            this._ObjectInitial = _ObjectInitial;
-            this._Type = _Type;
-            this._TypeInitial = _TypeInitial;
-            this._AssetType = _AssetType;
-            this._AssetTypeInitial = _AssetTypeInitial;
+            this._ObjectCode = _ObjectCode;
         }
     }
+    public class Item_Type
+    {
+        public string _Type { get; set; }
+        public string _TypeCode { get; set; }
+        public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
+        public Item_Type(string _Type, string _TypeCode)
+        {
+            this._Type = _Type;
+            this._TypeCode = _TypeCode;
+        }
+    }
+    public class Item_AssetType
+    {
+        public string _AssetType { get; set; }
+        public string _AssetTypeCode { get; set; }
+        public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
+        public Item_AssetType(string _AssetType, string _AssetTypeCode) 
+        {
+            this._AssetType = _AssetType;
+            this._AssetTypeCode = _AssetTypeCode;
+        }
+    }
+
+
     public class AssetManagementList
     {
         public int _Id { get; set; }
-        public string ItemTypeList_Id { get; set; } public ItemTypeList ItemTypeList { get; set; } = null!;
-        public AssetManagementList(int _Id, string ItemTypeList_Id) 
+        public string? ItemList_Id { get; set; } public ItemList? ItemList { get; set; }
+        public AssetManagementList(int _Id, string ItemList_Id) 
         {
             this._Id = _Id;
-            this.ItemTypeList_Id = ItemTypeList_Id;
+            this.ItemList_Id = ItemList_Id;
         }
     }
 
@@ -100,9 +123,10 @@ namespace DBMS
 
     public class AdminList_Name
     {
+        public string? AdminList_Id { get; set; } public AdminList? AdminList { get; set; } = null!;
         public string _Id { get; set; }
         public string _Name { get; set; }
-        public string AdminList_Id { get; set; } public AdminList AdminList { get; set; } = null!;
+        
         public AdminList_Name(string _Id, string AdminList_Id, string _Name) 
         {
             this._Id = _Id;
@@ -176,6 +200,22 @@ namespace DBMS
     /*
      JoinTables
      */
+    public class Join_AdminList 
+    {
+        public string _Id { get; set; }
+        public string _Region { get; set; }
+        public string _Group { get; set; }
+        public string _Name { get; set; }
+
+        public Join_AdminList(string _Id, string _Region, string _Group, string _Name)
+        {
+            this._Id = _Id;
+            this._Region = _Region;
+            this._Group = _Group;
+            this._Name = _Name;
+        }
+    }
+
     public class Join_Warehouse
     {
         public string _City { get; set; }

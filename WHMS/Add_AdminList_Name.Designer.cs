@@ -141,6 +141,7 @@
             Controls.Add(button_FindList);
             Controls.Add(label_Region);
             Controls.Add(comboBox_Region);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Add_AdminList_Name";
             Text = "Add_AdminList_Name";
             ResumeLayout(false);
