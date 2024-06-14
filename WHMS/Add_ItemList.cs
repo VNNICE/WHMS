@@ -38,7 +38,10 @@ namespace WHMS
             DataBinding();
             button_DisplayMemo.Click += (sender, e) => DisplayMemo();
             button_Decide.Click += (sender, e) => AddData();
-            
+            button_RefAdmin.Click += (sender, e) => Ref_Admin()
+            ;
+
+
         }
         private void AddData()
         {
@@ -180,9 +183,16 @@ namespace WHMS
             }
 
         }
+        private void Ref_Admin() 
+        {
+            View_AdminList va = new View_AdminList(true);
+            va.senderId += (o, s) => this.textBox_Admin.Text = s;
+            va.Show();
+        }
     }
     class InvalidValues() : Exception
     { 
     
     }
+
 }

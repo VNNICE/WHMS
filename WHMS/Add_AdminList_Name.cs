@@ -19,7 +19,7 @@ namespace WHMS
         {
             InitializeComponent();
             LoadRegionData();
-            button_FindList.Click += (o, e) => GoToAddAdmin();
+            button_AddAdmin.Click += (o, e) => GoToAddAdmin();
             comboBox_Group.Enabled = false;
             comboBox_Region.SelectedIndexChanged += (o, e) => LoadGroupData();
             LoadGroupData();
@@ -55,8 +55,6 @@ namespace WHMS
 
         private void LoadRegionData() 
         {
-            comboBox_Region.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox_Group.DropDownStyle = ComboBoxStyle.DropDownList;
             if (_context.AdminLists != null && _context.AdminLists.Any())
             {
                 comboBox_Region.DataSource = _context.AdminLists.Select(x => x._Region).Distinct().ToList();
@@ -69,17 +67,20 @@ namespace WHMS
         }
         private void LoadGroupData()
         {
-            var data = _context.AdminLists.Where(x => x._Region == comboBox_Region.Text).Distinct().ToList();
-            if (data != null)
+            if (_context.AdminLists != null && _context.AdminLists.Any())
             {
-                comboBox_Group.Enabled = true;
-                comboBox_Group.DataSource = data;
-                comboBox_Group.DisplayMember = "_Group";
-                comboBox_Group.ValueMember = "_Id";
-            }
-            else
-            {
-                comboBox_Group.Enabled = false;
+                var data = _context.AdminLists.Where(x => x._Region == comboBox_Region.Text).Distinct().ToList();
+                if (data != null)
+                {
+                    comboBox_Group.Enabled = true;
+                    comboBox_Group.DataSource = data;
+                    comboBox_Group.DisplayMember = "_Group";
+                    comboBox_Group.ValueMember = "_Id";
+                }
+                else
+                {
+                    comboBox_Group.Enabled = false;
+                }
             }
         }
         private void GoToAddAdmin()
@@ -90,7 +91,8 @@ namespace WHMS
             this.Enabled = false;
             al.Closed += (o, e) =>
             {
-                this.Refresh();
+                LoadRegionData();
+                LoadGroupData();
                 this.Enabled = true;
             };
             al.Show();

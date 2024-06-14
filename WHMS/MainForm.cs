@@ -42,7 +42,7 @@ namespace WHMS
         }
         private void GoToAdminManager()
         {
-            View_AdminList AdminForm = new View_AdminList();
+            View_AdminList AdminForm = new View_AdminList(false);
             AdminForm.Closed += (order, s) => this.Visible = true;
             AdminForm.Load += (order, s) => this.Visible = false;
             AdminForm.StartPosition = FormStartPosition.Manual;

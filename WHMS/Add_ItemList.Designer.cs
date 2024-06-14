@@ -46,10 +46,9 @@
             richTextBox_Memo = new RichTextBox();
             button_DisplayMemo = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
-            comboBox3 = new ComboBox();
             button4 = new Button();
             button3 = new Button();
-            button1 = new Button();
+            button_RefAdmin = new Button();
             button2 = new Button();
             comboBox_Type = new ComboBox();
             comboBox_AssetType = new ComboBox();
@@ -60,6 +59,7 @@
             textBox_Name = new TextBox();
             label_AssetNo = new Label();
             textBox_AssetNo = new TextBox();
+            textBox_Admin = new TextBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             panel1 = new Panel();
             tableLayoutPanel1.SuspendLayout();
@@ -245,14 +245,13 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 32F));
-            tableLayoutPanel1.Controls.Add(comboBox3, 1, 0);
             tableLayoutPanel1.Controls.Add(button4, 2, 3);
             tableLayoutPanel1.Controls.Add(button3, 2, 2);
             tableLayoutPanel1.Controls.Add(label_AssetType, 0, 3);
             tableLayoutPanel1.Controls.Add(label_Type, 0, 2);
             tableLayoutPanel1.Controls.Add(label_Object, 0, 1);
             tableLayoutPanel1.Controls.Add(comboBox_Object, 1, 1);
-            tableLayoutPanel1.Controls.Add(button1, 2, 0);
+            tableLayoutPanel1.Controls.Add(button_RefAdmin, 2, 0);
             tableLayoutPanel1.Controls.Add(button2, 2, 1);
             tableLayoutPanel1.Controls.Add(comboBox_Type, 1, 2);
             tableLayoutPanel1.Controls.Add(comboBox_AssetType, 1, 3);
@@ -271,6 +270,7 @@
             tableLayoutPanel1.Controls.Add(textBox_Name, 1, 5);
             tableLayoutPanel1.Controls.Add(label_AssetNo, 0, 4);
             tableLayoutPanel1.Controls.Add(textBox_AssetNo, 1, 4);
+            tableLayoutPanel1.Controls.Add(textBox_Admin, 1, 0);
             tableLayoutPanel1.Location = new Point(15, 12);
             tableLayoutPanel1.Margin = new Padding(3, 3, 3, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -288,18 +288,6 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 29F));
             tableLayoutPanel1.Size = new Size(237, 319);
             tableLayoutPanel1.TabIndex = 26;
-            // 
-            // comboBox3
-            // 
-            comboBox3.AutoCompleteMode = AutoCompleteMode.Suggest;
-            comboBox3.AutoCompleteSource = AutoCompleteSource.ListItems;
-            comboBox3.Dock = DockStyle.Fill;
-            comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(64, 3);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(137, 23);
-            comboBox3.TabIndex = 33;
             // 
             // button4
             // 
@@ -321,15 +309,15 @@
             button3.Text = "...";
             button3.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // button_RefAdmin
             // 
-            button1.Dock = DockStyle.Fill;
-            button1.Location = new Point(207, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(27, 23);
-            button1.TabIndex = 26;
-            button1.Text = "...";
-            button1.UseVisualStyleBackColor = true;
+            button_RefAdmin.Dock = DockStyle.Fill;
+            button_RefAdmin.Location = new Point(207, 3);
+            button_RefAdmin.Name = "button_RefAdmin";
+            button_RefAdmin.Size = new Size(27, 23);
+            button_RefAdmin.TabIndex = 26;
+            button_RefAdmin.Text = "...";
+            button_RefAdmin.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -427,6 +415,15 @@
             textBox_AssetNo.Size = new Size(137, 23);
             textBox_AssetNo.TabIndex = 38;
             // 
+            // textBox_Admin
+            // 
+            textBox_Admin.Dock = DockStyle.Fill;
+            textBox_Admin.Location = new Point(64, 3);
+            textBox_Admin.Name = "textBox_Admin";
+            textBox_Admin.ReadOnly = true;
+            textBox_Admin.Size = new Size(137, 23);
+            textBox_Admin.TabIndex = 39;
+            // 
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.ColumnCount = 2;
@@ -495,12 +492,11 @@
         private Button button_DisplayMemo;
         private TableLayoutPanel tableLayoutPanel1;
         private TextBox textBox_Name;
-        private Button button1;
+        private Button button_RefAdmin;
         private Button button2;
         private ComboBox comboBox_Type;
         private ComboBox comboBox_AssetType;
         private Label label1;
-        private ComboBox comboBox3;
         private Button button4;
         private Button button3;
         private TableLayoutPanel tableLayoutPanel2;
@@ -510,5 +506,6 @@
         private DateTimePicker dateTimePicker;
         private Label label_AssetNo;
         private TextBox textBox_AssetNo;
+        private TextBox textBox_Admin;
     }
 }
