@@ -35,12 +35,12 @@ namespace WHMS
         {
             InitializeComponent();
             this.Size = new Size(283, 444);
-            DataBinding();
+            
             button_DisplayMemo.Click += (sender, e) => DisplayMemo();
             button_Decide.Click += (sender, e) => AddData();
-            button_RefAdmin.Click += (sender, e) => Ref_Admin()
-            ;
-
+            button_RefAdmin.Click += (sender, e) => Ref_Admin();
+            button_Object.Click += (sender, e) => Ref_Obj();
+            DataBinding();
 
         }
         private void AddData()
@@ -55,18 +55,11 @@ namespace WHMS
             {
                 if (_context.ItemLists != null && _context.ItemLists.Any())
                 {
-                    /*
-                    comboBox_Object.DataSource = _context.ItemLists.Select(x => x._Object).Distinct().ToList();
-                    comboBox_Type.DataSource = _context.ItemLists.Select(x => x._Type).Distinct().ToList();
-                    comboBox_AssetType.DataSource = _context.ItemLists.Select(x => x._AssetType).Distinct().ToList();
-                    */
                     comboBox_Manufacturer.DataSource = _context.ItemLists.Select(x => x._Manufacturer).Distinct().ToList();
-
-                    comboBox_Object.SelectedIndex = -1;
-                    //comboBox_Type.SelectedIndex = -1; 
-                    //comboBox_AssetType.SelectedIndex = -1;
                     comboBox_Manufacturer.SelectedIndex = -1;
                 }
+                Refresh_ItemObject();
+
             }
             catch(ArgumentException ae) 
             {
@@ -74,6 +67,31 @@ namespace WHMS
                 return;
             }
         }
+        private void Refresh_ItemObject() 
+        {
+            if (_context.Item_Objects != null && _context.Item_Objects.Any())
+            {
+                comboBox_Object.DataSource = _context.Item_Objects.Select(x=>x._Object).Distinct().ToList();
+                comboBox_Object.SelectedIndex = -1;
+            }
+        }
+        private void Refresh_ItemType() 
+        {
+            if (_context.Item_Types.Any())
+            {
+                comboBox_Type.DataSource = _context.Item_Types.Distinct().ToList();
+                comboBox_Object.SelectedIndex = -1;
+            }
+        }
+        private void Refresh_ItemAssetTypes() 
+        {
+            if (_context.Item_AssetTypes.Any())
+            {
+                comboBox_AssetType.DataSource = _context.Item_AssetTypes.Distinct().ToList();
+                comboBox_Object.SelectedIndex = -1;
+            }
+        }
+
 
         private void DisplayMemo() 
         {
@@ -181,13 +199,42 @@ namespace WHMS
                 MessageBox.Show(errmsg);
                 return;
             }
-
         }
+
         private void Ref_Admin() 
         {
             View_AdminList va = new View_AdminList(true);
             va.senderId += (o, s) => this.textBox_Admin.Text = s;
             va.Show();
+        }
+        private void Ref_Obj() 
+        {
+            Add_ItemProperty aip = new Add_ItemProperty(1, true);
+            aip.FormClosing += (o, s) =>
+            {
+                DialogResult result = MessageBox.Show("入力値を入力しますか？", "確認", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    Refresh_ItemObject();
+                    aip.senderId += (o, s) => this.comboBox_Object.Text = s;
+                    comboBox_Object.Enabled = false;
+                }
+                else
+                {
+                    Refresh_ItemObject();
+                }
+            };
+            
+
+            aip.Show();
+        }
+        private void Ref_Type()
+        { 
+        
+        }
+        private void Ref_AssetType() 
+        {
+            
         }
     }
     class InvalidValues() : Exception

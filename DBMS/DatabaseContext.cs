@@ -13,8 +13,8 @@ namespace DBMS
         public DbSet<CityList> CityLists { get; set; }
         public DbSet<ItemList> ItemLists { get; set; }
         public DbSet<Item_Object> Item_Objects { get; set; }
-        public DbSet<Item_Type> item_Types { get; set; }
-        public DbSet<Item_AssetType> item_AssetTypes { get; set; }
+        public DbSet<Item_Type> Item_Types { get; set; }
+        public DbSet<Item_AssetType> Item_AssetTypes { get; set; }
         public DbSet<AssetManagementList> AssetManagementLists { get; set; }
         public DbSet<AdminList> AdminLists { get; set; }
         public DbSet<AdminList_Name> AdminList_Names { get; set; }

@@ -48,8 +48,9 @@
             tableLayoutPanel1 = new TableLayoutPanel();
             button4 = new Button();
             button3 = new Button();
+            checkBox1 = new CheckBox();
             button_RefAdmin = new Button();
-            button2 = new Button();
+            button_Object = new Button();
             comboBox_Type = new ComboBox();
             comboBox_AssetType = new ComboBox();
             label1 = new Label();
@@ -250,9 +251,10 @@
             tableLayoutPanel1.Controls.Add(label_AssetType, 0, 3);
             tableLayoutPanel1.Controls.Add(label_Type, 0, 2);
             tableLayoutPanel1.Controls.Add(label_Object, 0, 1);
+            tableLayoutPanel1.Controls.Add(checkBox1, 2, 7);
             tableLayoutPanel1.Controls.Add(comboBox_Object, 1, 1);
             tableLayoutPanel1.Controls.Add(button_RefAdmin, 2, 0);
-            tableLayoutPanel1.Controls.Add(button2, 2, 1);
+            tableLayoutPanel1.Controls.Add(button_Object, 2, 1);
             tableLayoutPanel1.Controls.Add(comboBox_Type, 1, 2);
             tableLayoutPanel1.Controls.Add(comboBox_AssetType, 1, 3);
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
@@ -309,6 +311,16 @@
             button3.Text = "...";
             button3.UseVisualStyleBackColor = true;
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Dock = DockStyle.Fill;
+            checkBox1.Location = new Point(207, 206);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(27, 23);
+            checkBox1.TabIndex = 40;
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
             // button_RefAdmin
             // 
             button_RefAdmin.Dock = DockStyle.Fill;
@@ -319,15 +331,15 @@
             button_RefAdmin.Text = "...";
             button_RefAdmin.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // button_Object
             // 
-            button2.Dock = DockStyle.Fill;
-            button2.Location = new Point(207, 32);
-            button2.Name = "button2";
-            button2.Size = new Size(27, 23);
-            button2.TabIndex = 27;
-            button2.Text = "...";
-            button2.UseVisualStyleBackColor = true;
+            button_Object.Dock = DockStyle.Fill;
+            button_Object.Location = new Point(207, 32);
+            button_Object.Name = "button_Object";
+            button_Object.Size = new Size(27, 23);
+            button_Object.TabIndex = 27;
+            button_Object.Text = "...";
+            button_Object.UseVisualStyleBackColor = true;
             // 
             // comboBox_Type
             // 
@@ -493,7 +505,7 @@
         private TableLayoutPanel tableLayoutPanel1;
         private TextBox textBox_Name;
         private Button button_RefAdmin;
-        private Button button2;
+        private Button button_Object;
         private ComboBox comboBox_Type;
         private ComboBox comboBox_AssetType;
         private Label label1;
@@ -507,5 +519,6 @@
         private Label label_AssetNo;
         private TextBox textBox_AssetNo;
         private TextBox textBox_Admin;
+        private CheckBox checkBox1;
     }
 }

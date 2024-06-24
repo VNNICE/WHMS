@@ -19,7 +19,7 @@ namespace WHMS
         private List<Join_AdminList> Join_AdminLists = new List<Join_AdminList>();
         private List<Join_AdminList> Region_SortedAdminLists = new List<Join_AdminList>();
         private List<Join_AdminList> Group_SortedAdminLists = new List<Join_AdminList>();
-        public event EventHandler<string?> senderId;
+        public event EventHandler<string?>? senderId;
         public View_AdminList(bool selectionMode)
         {
             InitializeComponent();
@@ -41,7 +41,7 @@ namespace WHMS
             var data = _context.AdminLists.Include(a => a.AdminList_Names).ToList();
             Join_AdminLists = data.SelectMany(al => al.AdminList_Names.Select(an => new Join_AdminList(an._Id, al._Region, al._Group, an._Name))).ToList();
             //GoToAdmin Button Settings
-            button_GoToAddAdmin.Click += (o, s) => 
+            button_GoToAddAdmin.Click += (o, s) =>
             {
                 Add_AdminList_Name aln = new Add_AdminList_Name();
                 aln.StartPosition = FormStartPosition.Manual;
@@ -58,20 +58,20 @@ namespace WHMS
             // Default Load 
             LoadComboBox_RegionData();
             LoadGridViewData();
-            
+
         }
-        
+
         //Load ComboBox Data
-        private void LoadComboBox_RegionData() 
+        private void LoadComboBox_RegionData()
         {
-            if (_context.AdminList_Names != null && _context.AdminList_Names.Any()) 
+            if (_context.AdminList_Names != null && _context.AdminList_Names.Any())
             {
                 var RegionLists = Join_AdminLists.Select(x => x._Region).Distinct().ToList();
                 RegionLists.Insert(0, "全体");
                 comboBox_RegionList.DataSource = RegionLists;
             }
         }
-        private void LoadComboBox_GroupData() 
+        private void LoadComboBox_GroupData()
         {
             if (comboBox_RegionList.Items != null)
             {
@@ -80,7 +80,7 @@ namespace WHMS
                     comboBox_SortGroup.Enabled = false;
                     comboBox_SortGroup.DataSource = null;
                 }
-                else 
+                else
                 {
                     comboBox_SortGroup.Enabled = true;
                     var GroupLists = Join_AdminLists.Where(x => x._Region == comboBox_RegionList.Text).Select(x => x._Group).Distinct().ToList();
@@ -90,9 +90,9 @@ namespace WHMS
             }
         }
         //DataGridView
-        private void LoadGridViewData() 
+        private void LoadGridViewData()
         {
-            if (_context.AdminList_Names.Any() && _context.AdminList_Names != null) 
+            if (_context.AdminList_Names.Any() && _context.AdminList_Names != null)
             {
                 GridViewData();
                 dataGridView.ReadOnly = true;
@@ -104,17 +104,17 @@ namespace WHMS
                 dataGridView.Columns["_Name"].HeaderText = "氏名";
             }
         }
-        private void GridViewData() 
+        private void GridViewData()
         {
             if (_context.AdminList_Names != null)
             {
                 List<AdminList> data = _context.AdminLists.Include(a => a.AdminList_Names).ToList();
-                var allTargetLists = data.SelectMany(al => al.AdminList_Names.Select(an => new Join_AdminList(an._Id, al._Region, al._Group, an._Name))).ToList();;
+                var allTargetLists = data.SelectMany(al => al.AdminList_Names.Select(an => new Join_AdminList(an._Id, al._Region, al._Group, an._Name))).ToList(); ;
                 if (comboBox_RegionList.Text == "全体" || string.IsNullOrWhiteSpace(comboBox_RegionList.Text))
                 {
                     Join_AdminLists = allTargetLists;
                 }
-                else 
+                else
                 {
                     if (string.IsNullOrWhiteSpace(comboBox_SortGroup.Text) || comboBox_SortGroup.Text == "全体")
                     {
@@ -129,12 +129,12 @@ namespace WHMS
             }
         }
 
-        private void SelectionMode() 
+        private void SelectionMode()
         {
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView.CellDoubleClick += (sender, e) =>
             {
-                if (e.ColumnIndex >= 0 && e.RowIndex >= 0) 
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
                 {
                     int clicked = e.RowIndex;
                     DialogResult result = MessageBox.Show($"ID: {Join_AdminLists[clicked]._Id.ToString()}, 氏名:{Join_AdminLists[clicked]._Name.ToString()}の情報をを入力しますか？", "データ入力確認", MessageBoxButtons.YesNoCancel);
@@ -153,6 +153,11 @@ namespace WHMS
                 }
 
             };
+        }
+
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

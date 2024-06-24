@@ -44,11 +44,11 @@
             // 
             dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Location = new Point(0, 70);
-            dataGridView.Margin = new Padding(3, 0, 3, 3);
+            dataGridView.Location = new Point(0, 73);
             dataGridView.Name = "dataGridView";
-            dataGridView.Size = new Size(276, 220);
+            dataGridView.Size = new Size(276, 217);
             dataGridView.TabIndex = 0;
+            dataGridView.CellContentClick += dataGridView_CellContentClick;
             // 
             // button_GoToAddAdmin
             // 

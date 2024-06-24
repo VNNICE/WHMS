@@ -15,6 +15,7 @@ namespace WHMS
     public partial class Add_AdminList : Form
     {
         private readonly DatabaseContext _context = new DatabaseContext();
+        private readonly InputRules inputRules = new InputRules();
         string id;
         string region;
         string group;
@@ -29,8 +30,7 @@ namespace WHMS
                 ButtonsSettings();
                 LoadGridViewData();
                 comboBox_Region.SelectedIndexChanged += (o, s) => LoadGridViewData();
-                textBox_Initial.LostFocus += (o, s) => LoadInitial();
-                textBox_Initial.KeyPress += InitialRule;
+                inputRules.Rule_Initial(textBox_Initial);
             }
             catch
             {
@@ -110,28 +110,6 @@ namespace WHMS
             comboBox_Region.DisplayMember = "_City";
             comboBox_Region.ValueMember = "_Code";
 
-        }
-        private void LoadInitial()
-        {
-            if (!string.IsNullOrWhiteSpace(textBox_Initial.Text))
-            {
-                textBox_Initial.Text = textBox_Initial.Text.ToUpper();
-                if (textBox_Initial.Text.Length == 3)
-                {
-                    textBox_Initial.Text = textBox_Initial.Text.Substring(0, 2);
-                }
-            }
-        }
-        private void InitialRule(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            else if (textBox_Initial.Text.Length > 2 && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
         }
 
         private void ButtonsSettings()

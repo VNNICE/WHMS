@@ -13,36 +13,8 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace WHMS
 {
-    /* 
-     SampleCodes
-    ///////////////////////////////////////////////////////////////////////
-    ///
-        private void KeyPressSettings(object sender, KeyPressEventArgs e)
-        {
-            TextBox tb = sender as TextBox;
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            if (textBox.Text.Length >= 4 && e.KeyChar != '\b')
-            {
-                e.Handled = true;
-            }
-        }
-
-
-    //
-    */
     class Functions
     {
-        public void SetDataGridViewColumns(DataGridView gridview, string data, string view)
-        {
-            DataGridViewColumn column = new DataGridViewTextBoxColumn();
-            column.DataPropertyName = data;
-            column.HeaderText = view;
-            gridview.Columns.Add(column);
-        }
-
         public int Try_IntParse(Label label, TextBox text)
         {
             string s = text.Text.ToString();
