@@ -67,7 +67,7 @@ namespace WHMS
                 return;
             }
         }
-        private void Refresh_ItemObject() 
+        public void Refresh_ItemObject() 
         {
             if (_context.Item_Objects != null && _context.Item_Objects.Any())
             {
@@ -224,8 +224,6 @@ namespace WHMS
                     Refresh_ItemObject();
                 }
             };
-            
-
             aip.Show();
         }
         private void Ref_Type()

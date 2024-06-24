@@ -156,9 +156,18 @@ namespace WHMS
                 }
                 _context.SaveChanges();
                 MessageBox.Show("登録完了");
-                if (inputMode) 
+                if (inputMode)
                 {
-                    senderId?.Invoke(this, textBox_Property.Text);
+                    DialogResult result = MessageBox.Show("", "", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        senderId?.Invoke(this, textBox_Property.Text);
+                        ParentForm =
+                    }
+                    else
+                    {
+
+                    }
                 }
                 this.Close();
             }
