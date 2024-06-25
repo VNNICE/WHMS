@@ -21,8 +21,8 @@ namespace DBMS
         public DbSet<WarehouseList> WarehouseLists { get; set; }
         public DbSet<WarehouseList_Area> WarehouseList_Areas { get; set; }
         public DbSet<WarehouseList_Shelf> WarehouseList_Shelf { get; set; }
-        public DbSet<Functions_Stock> Functions_Stocks { get; set; }
-        
+        public DbSet<StockItemList> StockItemLists { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -104,10 +104,11 @@ namespace DBMS
                 i.HasKey(j => j._Id);
                 i.Property(j=>j._Id).ValueGeneratedNever();
             });
-            ///
-            modelBuilder.Entity<Functions_Stock>(i =>
+
+            modelBuilder.Entity<StockItemList>(i =>
             {
                 i.HasKey(j => j._Id);
+                i.HasO
             });
         }
     }

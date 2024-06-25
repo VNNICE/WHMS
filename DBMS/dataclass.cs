@@ -123,8 +123,10 @@ namespace DBMS
 
     public class AdminList_Name
     {
-        public string AdminList_Id { get; set; } public AdminList AdminList { get; set; } = null!;
+       
         public string _Id { get; set; }
+        public string AdminList_Id { get; set; }
+        public AdminList AdminList { get; set; } = null!;
         public string _Name { get; set; }
         public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
 
@@ -197,10 +199,34 @@ namespace DBMS
             this._Stock = _Stock;
         }
     }
+    public class StockItemList
+    {
+        public string _Id { get; set; }
+        public string ItemList_Id { get; set; }  public ItemList ItemList { get; set; } = null!;
+        public string WarehouseList_Shelf_Id { get; set; } public WarehouseList_Shelf WarehouseList_Shelf { get; set; } = null!;
+        public DateOnly _ExpirationDate { get; set; }
+        public DateOnly _CarryingInDate { get; set; }
+        public DateOnly? _CarryingOutDate { get; set; }
+        public DateOnly? _TakeOutDate { get; set; }
+        public DateOnly? _TakeInDate { get; set; }
+        public StockItemList(string _Id, string ItemList_Id, string WarehouseList_Shelf_Id, DateOnly _ExpirationDate, DateOnly _CarryingInDate, DateOnly? _CarryingOutDate, DateOnly? _TakeOutDate, DateOnly? _TakeInDate)
+        {
+            this._Id = _Id;
+            this.ItemList_Id = ItemList_Id;
+            this.WarehouseList_Shelf_Id = WarehouseList_Shelf_Id;
+            this._ExpirationDate = _ExpirationDate;
+            this._CarryingInDate = _CarryingInDate;
+            this._CarryingOutDate = _CarryingOutDate;
+            this._TakeInDate = _TakeInDate;
+            this._TakeOutDate = _TakeOutDate;
+        }
+    }
 
     /*
      JoinTables
      */
+
+
 
     public class Join_AdminList 
     {

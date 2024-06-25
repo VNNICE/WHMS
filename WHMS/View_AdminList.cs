@@ -17,8 +17,6 @@ namespace WHMS
     {
         private readonly DatabaseContext _context = new DatabaseContext();
         private List<Join_AdminList> Join_AdminLists = new List<Join_AdminList>();
-        private List<Join_AdminList> Region_SortedAdminLists = new List<Join_AdminList>();
-        private List<Join_AdminList> Group_SortedAdminLists = new List<Join_AdminList>();
 
         public event EventHandler<string>? senderId;
         public event EventHandler<bool>? senderBool;
@@ -39,10 +37,6 @@ namespace WHMS
         }
         private void DefaultSettings()
         {
-            //Data Settings
-            var data = _context.AdminLists.Include(a => a.AdminList_Names).ToList();
-            Join_AdminLists = data.SelectMany(al => al.AdminList_Names.Select(an => new Join_AdminList(an._Id, al._Region, al._Group, an._Name))).ToList();
-            //GoToAdmin Button Settings
             button_GoToAddAdmin.Click += (o, s) =>
             {
                 Add_AdminList_Name aln = new Add_AdminList_Name();
@@ -68,7 +62,7 @@ namespace WHMS
         {
             if (_context.AdminList_Names != null && _context.AdminList_Names.Any())
             {
-                var RegionLists = Join_AdminLists.Select(x => x._Region).Distinct().ToList();
+                var RegionLists = _context.AdminLists.Select(x=>x._Region).Distinct().ToList();
                 RegionLists.Insert(0, "全体");
                 comboBox_RegionList.DataSource = RegionLists;
             }
@@ -85,7 +79,7 @@ namespace WHMS
                 else
                 {
                     comboBox_SortGroup.Enabled = true;
-                    var GroupLists = Join_AdminLists.Where(x => x._Region == comboBox_RegionList.Text).Select(x => x._Group).Distinct().ToList();
+                    var GroupLists = _context.AdminLists.Where(x => x._Region == comboBox_RegionList.Text).Select(x => x._Group).Distinct().ToList();//Join_AdminLists.Where(x => x._Region == comboBox_RegionList.Text).Select(x => x._Group).Distinct().ToList();
                     GroupLists.Insert(0, "全体");
                     comboBox_SortGroup.DataSource = GroupLists;
                 }
@@ -96,39 +90,40 @@ namespace WHMS
         {
             if (_context.AdminList_Names.Any() && _context.AdminList_Names != null)
             {
-                GridViewData();
+                var allTargetLists = _context.AdminList_Names.Include(x => x.AdminList).Select(x => new
+                {
+                    x._Id,
+                    x.AdminList._Region,
+                    x.AdminList._Group,
+                    x._Name
+                }).ToList();
+                if (comboBox_RegionList.Text == "全体" || string.IsNullOrWhiteSpace(comboBox_RegionList.Text))
+                {
+                    dataGridView.DataSource = allTargetLists;
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(comboBox_SortGroup.Text) || comboBox_SortGroup.Text == "全体")
+                    {
+                        dataGridView.DataSource = allTargetLists.Where(x => x._Region == comboBox_RegionList.Text).ToList();
+                    }
+                    else
+                    {
+                        dataGridView.DataSource = allTargetLists.Where(x => x._Region == comboBox_RegionList.Text && x._Group == comboBox_SortGroup.Text).ToList();
+                    }
+                }
                 dataGridView.ReadOnly = true;
                 dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                dataGridView.DataSource = Join_AdminLists;
                 dataGridView.Columns["_Id"].HeaderText = "ID";
                 dataGridView.Columns["_Region"].HeaderText = "管轄";
                 dataGridView.Columns["_Group"].HeaderText = "グループ";
                 dataGridView.Columns["_Name"].HeaderText = "氏名";
             }
         }
-        private void GridViewData()
+        private void GridViewDataBinding()
         {
-            if (_context.AdminList_Names != null)
-            {
-                List<AdminList> data = _context.AdminLists.Include(a => a.AdminList_Names).ToList();
-                var allTargetLists = data.SelectMany(al => al.AdminList_Names.Select(an => new Join_AdminList(an._Id, al._Region, al._Group, an._Name))).ToList(); ;
-                if (comboBox_RegionList.Text == "全体" || string.IsNullOrWhiteSpace(comboBox_RegionList.Text))
-                {
-                    Join_AdminLists = allTargetLists;
-                }
-                else
-                {
-                    if (string.IsNullOrWhiteSpace(comboBox_SortGroup.Text) || comboBox_SortGroup.Text == "全体")
-                    {
-                        Join_AdminLists = allTargetLists.Where(x => x._Region == comboBox_RegionList.Text).ToList();
-                    }
-                    else
-                    {
-                        Join_AdminLists = allTargetLists.Where(x => x._Region == comboBox_RegionList.Text && x._Group == comboBox_SortGroup.Text).ToList();
-                    }
-                }
 
-            }
+
         }
 
         private void SelectionMode()
@@ -139,10 +134,12 @@ namespace WHMS
                 if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
                 {
                     int clicked = e.RowIndex;
-                    DialogResult result = MessageBox.Show($"ID: {Join_AdminLists[clicked]._Id.ToString()}, 氏名:{Join_AdminLists[clicked]._Name.ToString()}の情報をを入力しますか？", "データ入力確認", MessageBoxButtons.YesNoCancel);
+                    string id = dataGridView.Rows[clicked].Cells["_Id"].Value.ToString();
+                    string name = dataGridView.Rows[clicked].Cells["_Id"].Value.ToString();
+                    DialogResult result = MessageBox.Show($"ID: {id}, 氏名:{name}の情報をを入力しますか？", "データ入力確認", MessageBoxButtons.YesNoCancel);
                     if (result == DialogResult.Yes)
                     {
-                        senderId?.Invoke(this, Join_AdminLists[clicked]._Id.ToString());
+                        senderId?.Invoke(this, id);
                         senderBool?.Invoke(this, true);
                         this.Close();
                     }
