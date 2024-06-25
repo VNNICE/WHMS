@@ -32,6 +32,7 @@
             button1 = new Button();
             button_ItemManager = new Button();
             button_AdminManager = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // button_WhManager
@@ -74,11 +75,21 @@
             button_AdminManager.Text = "管理者管理";
             button_AdminManager.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            button2.Location = new Point(157, 112);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 5;
+            button2.Text = "button2";
+            button2.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(389, 250);
+            Controls.Add(button2);
             Controls.Add(button_AdminManager);
             Controls.Add(button_ItemManager);
             Controls.Add(button1);
@@ -93,5 +104,6 @@
         private Button button1;
         private Button button_ItemManager;
         private Button button_AdminManager;
+        private Button button2;
     }
 }

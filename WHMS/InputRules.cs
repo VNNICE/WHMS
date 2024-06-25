@@ -34,5 +34,16 @@ namespace WHMS
                 }
             };
         }
+
+        public void Rule_OnlyInt(TextBox textBox) 
+        {
+            textBox.KeyPress += (o, e) =>
+            {
+                if (char.IsLetter(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            };
+        }
     }
 }

@@ -1,3 +1,5 @@
+using DBMS;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +14,7 @@ namespace WHMS
 {
     public partial class MainForm : Form
     {
-        
+        private readonly DatabaseContext _context = new DatabaseContext();
         public MainForm()
         {
             InitializeComponent();

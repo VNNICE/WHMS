@@ -25,11 +25,11 @@ namespace DBMS
     public class ItemList
     {
         public string _Id { get; set; }
-        public string _Admin { get; set; }
-        public string? Item_Object_Code { get; set; } public Item_Object? Item_Object { get; set; }
+        public string AdminList_Name_Id { get; set; } public AdminList_Name AdminList_Name { get; set; } = null!;
+        public string Item_Object_Code { get; set; } public Item_Object Item_Object { get; set; } = null!;
 
-        public string? Item_Type_Code { get; set; } public Item_Type? Item_Type { get; set; }
-        public string? Item_AssetType_Code { get; set; } public Item_AssetType? Item_AssetType { get; set; }
+        public string Item_Type_Code { get; set; } public Item_Type Item_Type { get; set; } = null!;
+        public string Item_AssetType_Code { get; set; } public Item_AssetType Item_AssetType { get; set; } = null!;
         public int? AssetManagementList_Id { get; set; } public AssetManagementList? AssetManagementList { get; set; }
         public string _Name { get; set; }
         public string _Manufacturer { get; set; }
@@ -40,10 +40,10 @@ namespace DBMS
         
         public string? _Memo { get; set; }
         public string? WarehouseShelf_Id { get; set; } public WarehouseList_Shelf? WarehouseList_Shelf { get; set; }
-        public ItemList(string _Id, string _Admin, string Item_Object_Code, string Item_Type_Code, string Item_AssetType_Code, int? AssetManagementList_Id, string _Name, string _Manufacturer, string _SerialNumber, DateOnly? _PurchaseDate, int _Price, int _Quantity, string? _Memo, string? WarehouseShelf_Id)
+        public ItemList(string _Id, string AdminList_Name_Id, string Item_Object_Code, string Item_Type_Code, string Item_AssetType_Code, int? AssetManagementList_Id, string _Name, string _Manufacturer, string _SerialNumber, DateOnly? _PurchaseDate, int _Price, int _Quantity, string? _Memo, string? WarehouseShelf_Id)
         {
             this._Id = _Id;
-            this._Admin = _Admin;
+            this.AdminList_Name_Id = AdminList_Name_Id;
             this.Item_Object_Code = Item_Object_Code;
             this.Item_Type_Code = Item_Type_Code;
             this.Item_AssetType_Code = Item_AssetType_Code;
@@ -123,10 +123,11 @@ namespace DBMS
 
     public class AdminList_Name
     {
-        public string? AdminList_Id { get; set; } public AdminList? AdminList { get; set; } = null!;
+        public string AdminList_Id { get; set; } public AdminList AdminList { get; set; } = null!;
         public string _Id { get; set; }
         public string _Name { get; set; }
-        
+        public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
+
         public AdminList_Name(string _Id, string AdminList_Id, string _Name) 
         {
             this._Id = _Id;
@@ -200,6 +201,7 @@ namespace DBMS
     /*
      JoinTables
      */
+
     public class Join_AdminList 
     {
         public string _Id { get; set; }

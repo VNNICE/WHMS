@@ -46,14 +46,14 @@
             richTextBox_Memo = new RichTextBox();
             button_DisplayMemo = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
-            button4 = new Button();
-            button3 = new Button();
+            button_RefAssetType = new Button();
+            button_RefType = new Button();
             checkBox1 = new CheckBox();
             button_RefAdmin = new Button();
-            button_Object = new Button();
+            button_RefObject = new Button();
             comboBox_Type = new ComboBox();
             comboBox_AssetType = new ComboBox();
-            label1 = new Label();
+            label_Admin = new Label();
             dateTimePicker = new DateTimePicker();
             label_PurchaseDate = new Label();
             comboBox_Manufacturer = new ComboBox();
@@ -63,6 +63,7 @@
             textBox_Admin = new TextBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             panel1 = new Panel();
+            button1 = new Button();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             panel1.SuspendLayout();
@@ -246,18 +247,18 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 32F));
-            tableLayoutPanel1.Controls.Add(button4, 2, 3);
-            tableLayoutPanel1.Controls.Add(button3, 2, 2);
+            tableLayoutPanel1.Controls.Add(button_RefAssetType, 2, 3);
+            tableLayoutPanel1.Controls.Add(button_RefType, 2, 2);
             tableLayoutPanel1.Controls.Add(label_AssetType, 0, 3);
             tableLayoutPanel1.Controls.Add(label_Type, 0, 2);
             tableLayoutPanel1.Controls.Add(label_Object, 0, 1);
             tableLayoutPanel1.Controls.Add(checkBox1, 2, 7);
             tableLayoutPanel1.Controls.Add(comboBox_Object, 1, 1);
             tableLayoutPanel1.Controls.Add(button_RefAdmin, 2, 0);
-            tableLayoutPanel1.Controls.Add(button_Object, 2, 1);
+            tableLayoutPanel1.Controls.Add(button_RefObject, 2, 1);
             tableLayoutPanel1.Controls.Add(comboBox_Type, 1, 2);
             tableLayoutPanel1.Controls.Add(comboBox_AssetType, 1, 3);
-            tableLayoutPanel1.Controls.Add(label1, 0, 0);
+            tableLayoutPanel1.Controls.Add(label_Admin, 0, 0);
             tableLayoutPanel1.Controls.Add(textBox_Quantity, 1, 10);
             tableLayoutPanel1.Controls.Add(label_Quantity, 0, 10);
             tableLayoutPanel1.Controls.Add(label_Price, 0, 9);
@@ -291,25 +292,25 @@
             tableLayoutPanel1.Size = new Size(237, 319);
             tableLayoutPanel1.TabIndex = 26;
             // 
-            // button4
+            // button_RefAssetType
             // 
-            button4.Dock = DockStyle.Fill;
-            button4.Location = new Point(207, 90);
-            button4.Name = "button4";
-            button4.Size = new Size(27, 23);
-            button4.TabIndex = 32;
-            button4.Text = "...";
-            button4.UseVisualStyleBackColor = true;
+            button_RefAssetType.Dock = DockStyle.Fill;
+            button_RefAssetType.Location = new Point(207, 90);
+            button_RefAssetType.Name = "button_RefAssetType";
+            button_RefAssetType.Size = new Size(27, 23);
+            button_RefAssetType.TabIndex = 32;
+            button_RefAssetType.Text = "...";
+            button_RefAssetType.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // button_RefType
             // 
-            button3.Dock = DockStyle.Fill;
-            button3.Location = new Point(207, 61);
-            button3.Name = "button3";
-            button3.Size = new Size(27, 23);
-            button3.TabIndex = 31;
-            button3.Text = "...";
-            button3.UseVisualStyleBackColor = true;
+            button_RefType.Dock = DockStyle.Fill;
+            button_RefType.Location = new Point(207, 61);
+            button_RefType.Name = "button_RefType";
+            button_RefType.Size = new Size(27, 23);
+            button_RefType.TabIndex = 31;
+            button_RefType.Text = "...";
+            button_RefType.UseVisualStyleBackColor = true;
             // 
             // checkBox1
             // 
@@ -331,15 +332,15 @@
             button_RefAdmin.Text = "...";
             button_RefAdmin.UseVisualStyleBackColor = true;
             // 
-            // button_Object
+            // button_RefObject
             // 
-            button_Object.Dock = DockStyle.Fill;
-            button_Object.Location = new Point(207, 32);
-            button_Object.Name = "button_Object";
-            button_Object.Size = new Size(27, 23);
-            button_Object.TabIndex = 27;
-            button_Object.Text = "...";
-            button_Object.UseVisualStyleBackColor = true;
+            button_RefObject.Dock = DockStyle.Fill;
+            button_RefObject.Location = new Point(207, 32);
+            button_RefObject.Name = "button_RefObject";
+            button_RefObject.Size = new Size(27, 23);
+            button_RefObject.TabIndex = 27;
+            button_RefObject.Text = "...";
+            button_RefObject.UseVisualStyleBackColor = true;
             // 
             // comboBox_Type
             // 
@@ -361,16 +362,16 @@
             comboBox_AssetType.Size = new Size(137, 23);
             comboBox_AssetType.TabIndex = 29;
             // 
-            // label1
+            // label_Admin
             // 
-            label1.AutoSize = true;
-            label1.Dock = DockStyle.Fill;
-            label1.Location = new Point(3, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(55, 29);
-            label1.TabIndex = 30;
-            label1.Text = "管理者";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
+            label_Admin.AutoSize = true;
+            label_Admin.Dock = DockStyle.Fill;
+            label_Admin.Location = new Point(3, 0);
+            label_Admin.Name = "label_Admin";
+            label_Admin.Size = new Size(55, 29);
+            label_Admin.TabIndex = 30;
+            label_Admin.Text = "管理者";
+            label_Admin.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // dateTimePicker
             // 
@@ -460,11 +461,21 @@
             panel1.Size = new Size(237, 33);
             panel1.TabIndex = 28;
             // 
+            // button1
+            // 
+            button1.Location = new Point(297, 55);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 29;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // Add_ItemList
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(508, 405);
+            Controls.Add(button1);
             Controls.Add(panel1);
             Controls.Add(tableLayoutPanel2);
             Controls.Add(tableLayoutPanel1);
@@ -505,20 +516,21 @@
         private TableLayoutPanel tableLayoutPanel1;
         private TextBox textBox_Name;
         private Button button_RefAdmin;
-        private Button button_Object;
+        private Button button_RefObject;
         private ComboBox comboBox_Type;
         private ComboBox comboBox_AssetType;
-        private Label label1;
-        private Button button4;
-        private Button button3;
+        private Label label_Admin;
+        private Button button_RefAssetType;
+        private Button button_RefType;
         private TableLayoutPanel tableLayoutPanel2;
         private Panel panel1;
         private ComboBox comboBox_Manufacturer;
         private Label label_PurchaseDate;
         private DateTimePicker dateTimePicker;
-        private Label label_AssetNo;
-        private TextBox textBox_AssetNo;
         private TextBox textBox_Admin;
         private CheckBox checkBox1;
+        private Label label_AssetNo;
+        private TextBox textBox_AssetNo;
+        private Button button1;
     }
 }

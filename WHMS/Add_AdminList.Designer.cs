@@ -206,7 +206,7 @@
             label_Initial.Name = "label_Initial";
             label_Initial.Size = new Size(90, 23);
             label_Initial.TabIndex = 6;
-            label_Initial.Text = "略字登録";
+            label_Initial.Text = "コード登録";
             label_Initial.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBox_Initial

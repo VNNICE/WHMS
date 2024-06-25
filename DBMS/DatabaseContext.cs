@@ -41,7 +41,7 @@ namespace DBMS
             modelBuilder.Entity<ItemList>(i =>
             {
                 i.HasKey(j => j._Id);
-                
+                i.HasOne(j => j.AdminList_Name).WithMany(j => j.ItemLists).HasForeignKey(j => j.AdminList_Name_Id);
                 i.HasOne(j => j.WarehouseList_Shelf).WithMany(j => j.ItemLists).HasForeignKey(j=>j.WarehouseShelf_Id);
                 i.HasOne(j => j.Item_Object).WithMany(j => j.ItemLists).HasForeignKey(j => j.Item_Object_Code);
                 i.HasOne(j => j.Item_Type).WithMany(j => j.ItemLists).HasForeignKey(j => j.Item_Type_Code);
@@ -79,7 +79,9 @@ namespace DBMS
             {
                 i.HasKey(j => j._Id);
                 i.HasIndex(j => j._Name).IsUnique();
+                
             });
+            //i.HasOne(j => j.AdminList).WithMany(j => j.AdminList_Names).HasForeignKey(j => j.AdminList_Id);
             ///
             //Related Entity for Warehouse
             modelBuilder.Entity<WarehouseList>(i =>

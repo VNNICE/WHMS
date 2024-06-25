@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DBMS;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace WHMS
@@ -21,29 +22,51 @@ namespace WHMS
             InitializeComponent();
             button_New.Click += (o, s) => OpenAddItem();
             button_Close.Click += (o, s) => this.Close();
-            GridViewData();
+            GridViewRefresh();
         }
         public void GridViewRefresh()
         {
             if (_context.ItemLists != null && _context.ItemLists.Any())
             {
                 dataGridView.ReadOnly = true;
-                dataGridView.DataSource = _context.ItemLists.ToList();
+                var itemLists = _context.ItemLists
+                    .Include(x => x.AdminList_Name)
+                    .Include(x => x.Item_Object)
+                    .Include(x => x.Item_Type)
+                    .Include(x => x.Item_AssetType)
+                    .Include(x => x.WarehouseList_Shelf)
+                    .Select(x => new
+                    {
+                        x._Id,
+                        AdminList_Name = x.AdminList_Name.AdminList._Group + x.AdminList_Name._Name,
+                        Item_Object = x.Item_Object._Object,
+                        Item_Type = x.Item_Type._Type,
+                        Item_AssetType = x.Item_AssetType._AssetType,
+                        x._Name,
+                        x._Manufacturer,
+                        x._SerialNumber,
+                        x._Price,
+                        x._Quantity,
+                        x._Memo,
+                        WarehouseList_Shelf = x.WarehouseList_Shelf._Id
+                    }).ToList();
+                var viewLists =
+
+                dataGridView.DataSource = itemLists;
                 dataGridView.Columns["_Id"].HeaderText = "ID";
-                dataGridView.Columns["_Object"].HeaderText = "使用目的";
-                dataGridView.Columns["_Type"].HeaderText = "種類";
-                dataGridView.Columns["_AssetType"].HeaderText = "資産管理";
+                dataGridView.Columns["AdminList_Name"].HeaderText = "使用目的";
+                dataGridView.Columns["Item_Type"].HeaderText = "種類";
+                dataGridView.Columns["Item_AssetType"].HeaderText = "資産管理";
                 dataGridView.Columns["_Name"].HeaderText = "品目";
                 dataGridView.Columns["_Manufacturer"].HeaderText = "メーカー";
                 dataGridView.Columns["_SerialNumber"].HeaderText = "型番";
                 dataGridView.Columns["_Price"].HeaderText = "価格";
                 dataGridView.Columns["_Quantity"].HeaderText = "数量";
                 dataGridView.Columns["_Memo"].HeaderText = "メモ";
-                dataGridView.Columns["WarehouseShelf_Id"].HeaderText = "保管先";
-                dataGridView.Columns["WarehouseList_Shelf"].Visible = false;
+                dataGridView.Columns["WarehouseList_Shelf"].HeaderText = "保管先";
             }
         }
-
+        
         public void GridViewData() 
         {
             GridViewRefresh();

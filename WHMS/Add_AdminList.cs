@@ -59,10 +59,10 @@ namespace WHMS
                 MessageBox.Show("すでに登録されているグループです。");
                 return;
             }
-            // Check the Initial.
+            // Check the Code.
             if (string.IsNullOrWhiteSpace(initial))
             {
-                MessageBox.Show("略字が空欄です。");
+                MessageBox.Show("コードが空欄です。");
                 return;
             }
             else
@@ -70,7 +70,7 @@ namespace WHMS
                 id = comboBox_Region.SelectedValue.ToString().ToUpper().ToString() + initial;
                 if (_context.AdminLists.Select(x => x._Id).Contains(id.Substring(0, 4)))
                 {
-                    MessageBox.Show("すでに登録されている略字です。");
+                    MessageBox.Show("すでに登録されているコードです。");
                     return;
                 }
                 AdminList al = new AdminList(id, region, group);

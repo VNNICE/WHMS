@@ -19,7 +19,9 @@ namespace WHMS
         private List<Join_AdminList> Join_AdminLists = new List<Join_AdminList>();
         private List<Join_AdminList> Region_SortedAdminLists = new List<Join_AdminList>();
         private List<Join_AdminList> Group_SortedAdminLists = new List<Join_AdminList>();
-        public event EventHandler<string?>? senderId;
+
+        public event EventHandler<string>? senderId;
+        public event EventHandler<bool>? senderBool;
         public View_AdminList(bool selectionMode)
         {
             InitializeComponent();
@@ -141,6 +143,7 @@ namespace WHMS
                     if (result == DialogResult.Yes)
                     {
                         senderId?.Invoke(this, Join_AdminLists[clicked]._Id.ToString());
+                        senderBool?.Invoke(this, true);
                         this.Close();
                     }
                     else if (result == DialogResult.No)

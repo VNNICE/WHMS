@@ -18,12 +18,14 @@ namespace WHMS
         InputRules inputRules = new InputRules();
         string? property;
         string? initial;
-        public event EventHandler<string?>? senderId;
+        public event EventHandler<string>? senderId;
+        public event EventHandler<bool>? senderBool;
 
         public Add_ItemProperty(int mode, bool inputMode)
         {
             InitializeComponent();
             DefaultSettings(mode);
+            dataGridView.ReadOnly = true;
             inputRules.Rule_Initial(textBox_Initial);
             button_Add.Click += (o, s) => Add_Property(mode, inputMode);
         }
@@ -36,27 +38,27 @@ namespace WHMS
                 {
                     dataGridView.DataSource = _context.Item_Objects.ToList();
                     dataGridView.Columns["_Object"].HeaderText = "使用目的";
-                    dataGridView.Columns["_ObjectCode"].HeaderText = "略字";
+                    dataGridView.Columns["_ObjectCode"].HeaderText = "コード";
                 }
             }
             else if (mode == 2)
             {
                 label_Property.Text = "種類";
-                if (_context.Item_Objects.Any() && _context.Item_Objects != null)
+                if (_context.Item_Types.Any() && _context.Item_Types != null)
                 {
-                    dataGridView.DataSource = _context.Item_Objects.ToList();
-                    dataGridView.Columns["_AssetType"].HeaderText = "種類";
-                    dataGridView.Columns["_AssetTypeCode"].HeaderText = "略字";
+                    dataGridView.DataSource = _context.Item_Types.ToList();
+                    dataGridView.Columns["_Type"].HeaderText = "種類";
+                    dataGridView.Columns["_TypeCode"].HeaderText = "コード";
                 }
             }
             else if (mode == 3)
             {
                 label_Property.Text = "資産管理";
-                if (_context.Item_Objects.Any() && _context.Item_Objects != null)
+                if (_context.Item_AssetTypes.Any() && _context.Item_AssetTypes != null)
                 {
-                    dataGridView.DataSource = _context.Item_Objects.ToList();
-                    dataGridView.Columns["_Type"].HeaderText = "使用目的";
-                    dataGridView.Columns["_TypeCode"].HeaderText = "略字";
+                    dataGridView.DataSource = _context.Item_AssetTypes.ToList();
+                    dataGridView.Columns["_AssetType"].HeaderText = "資産管理";
+                    dataGridView.Columns["_AssetTypeCode"].HeaderText = "コード";
                 }
             }
             else
@@ -64,7 +66,8 @@ namespace WHMS
                 MessageBox.Show("Mode Error!");
             }
         }
-        public void Add_Property(int mode, bool inputMode)
+
+        private void Add_Property(int mode, bool inputMode)
         {
             label_Property.ForeColor = Color.Black;
             label_Initial.ForeColor = Color.Black;
@@ -158,15 +161,16 @@ namespace WHMS
                 MessageBox.Show("登録完了");
                 if (inputMode)
                 {
-                    DialogResult result = MessageBox.Show("", "", MessageBoxButtons.YesNo);
+                    DialogResult result = MessageBox.Show("入力値を入力しますか？", "確認", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
-                        senderId?.Invoke(this, textBox_Property.Text);
-                        ParentForm =
+                        MessageBox.Show("ANSWER: YES!");
+                        senderId?.Invoke(this, property);
+                        senderBool?.Invoke(this, true);
                     }
                     else
                     {
-
+                        senderBool += (o, s) => s = false;
                     }
                 }
                 this.Close();
@@ -189,6 +193,5 @@ namespace WHMS
             }
 
         }
-        
     }
 }
