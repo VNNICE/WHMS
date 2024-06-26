@@ -34,7 +34,6 @@ namespace WHMS
                     .Include(x => x.Item_Object)
                     .Include(x => x.Item_Type)
                     .Include(x => x.Item_AssetType)
-                    .Include(x => x.WarehouseList_Shelf)
                     .Select(x => new
                     {
                         x._Id,
@@ -47,8 +46,7 @@ namespace WHMS
                         x._SerialNumber,
                         x._Price,
                         x._Quantity,
-                        x._Memo,
-                        WarehouseList_Shelf = x.WarehouseList_Shelf._Id
+                        x._Memo
                     }).ToList();
                 var viewLists =
 

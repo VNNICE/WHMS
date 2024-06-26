@@ -29,7 +29,7 @@ namespace WHMS
             comboBox_City.DropDownStyle = ComboBoxStyle.DropDownList;
             textBox_Add_Areas.KeyPress += KeyPressSettings;
             pictureViewer.SetADefaultDataPictureBox(this);
-            
+
         }
         private void KeyPressSettings(object? sender, KeyPressEventArgs e)
         {
@@ -105,7 +105,7 @@ namespace WHMS
         private void MapAreaSelection()
         {
             PictureViewer areaSelection = new PictureViewer();
-            
+
         }
 
         private void button_Cancel_Click(object sender, EventArgs e)
@@ -138,9 +138,7 @@ namespace WHMS
                 pictureViewer.Mode_LoadPicture(filePath);
             }
         }
-        /*
-         Functions
-         */
+        /*         Functions         */
         private void AreaMaker(string id, int count)
         {
             var warehouseAreas = new List<WarehouseList_Area>();
@@ -161,6 +159,11 @@ namespace WHMS
             {
                 return 1;
             }
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

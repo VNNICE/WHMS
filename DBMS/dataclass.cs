@@ -37,10 +37,9 @@ namespace DBMS
         public DateOnly? _PurchaseDate { get; set; }
         public int _Price { get; set; }
         public int _Quantity { get; set; }
-        
         public string? _Memo { get; set; }
-        public string? WarehouseShelf_Id { get; set; } public WarehouseList_Shelf? WarehouseList_Shelf { get; set; }
-        public ItemList(string _Id, string AdminList_Name_Id, string Item_Object_Code, string Item_Type_Code, string Item_AssetType_Code, int? AssetManagementList_Id, string _Name, string _Manufacturer, string _SerialNumber, DateOnly? _PurchaseDate, int _Price, int _Quantity, string? _Memo, string? WarehouseShelf_Id)
+        public ICollection<StockItemList> StockItemLists { get; } = new List<StockItemList>();
+        public ItemList(string _Id, string AdminList_Name_Id, string Item_Object_Code, string Item_Type_Code, string Item_AssetType_Code, int? AssetManagementList_Id, string _Name, string _Manufacturer, string _SerialNumber, DateOnly? _PurchaseDate, int _Price, int _Quantity, string? _Memo)
         {
             this._Id = _Id;
             this.AdminList_Name_Id = AdminList_Name_Id;
@@ -55,7 +54,6 @@ namespace DBMS
             this._Price = _Price;
             this._Quantity = _Quantity;
             this._Memo = _Memo;
-            this.WarehouseShelf_Id = WarehouseShelf_Id;
         }
     }
     public class Item_Object
@@ -92,7 +90,6 @@ namespace DBMS
         }
     }
 
-
     public class AssetManagementList
     {
         public int _Id { get; set; }
@@ -104,9 +101,7 @@ namespace DBMS
         }
     }
 
-    /*
-     Admin
-     */
+    /* Admin  */
     public class AdminList
     {
         public string _Id { get; set; }
@@ -138,9 +133,7 @@ namespace DBMS
         }
     }
 
-    /*
-     Warehouse Lists
-     */
+    /*     Warehouse Lists     */
     public class WarehouseList
     {
         public string _Id { get; set; }
@@ -186,9 +179,9 @@ namespace DBMS
         public int _Depth { get; set; }
 
         public int _Height { get; set; }
-        public int _Stock { get; set; }
-        public ICollection<ItemList> ItemLists { get; } = new List<ItemList>();
-        public WarehouseList_Shelf(string _Id, int _No, string WarehouseList_Area_Id, int _Width, int _Depth, int _Height, int _Stock) 
+        public int _IsStock { get; set; }
+        public ICollection<StockItemList> StockItemLists { get; } = new List<StockItemList>();
+        public WarehouseList_Shelf(string _Id, int _No, string WarehouseList_Area_Id, int _Width, int _Depth, int _Height, int _IsStock) 
         {
             this._Id = _Id;
             this._No = _No;
@@ -196,7 +189,7 @@ namespace DBMS
             this._Width = _Width;
             this._Depth = _Depth;
             this._Height = _Height;
-            this._Stock = _Stock;
+            this._IsStock = _IsStock;
         }
     }
     public class StockItemList
@@ -204,11 +197,14 @@ namespace DBMS
         public string _Id { get; set; }
         public string ItemList_Id { get; set; }  public ItemList ItemList { get; set; } = null!;
         public string WarehouseList_Shelf_Id { get; set; } public WarehouseList_Shelf WarehouseList_Shelf { get; set; } = null!;
+        public int _Quantity { get; set; }
         public DateOnly _ExpirationDate { get; set; }
         public DateOnly _CarryingInDate { get; set; }
         public DateOnly? _CarryingOutDate { get; set; }
         public DateOnly? _TakeOutDate { get; set; }
+        public int _TakeOutQuantity { get; set; }
         public DateOnly? _TakeInDate { get; set; }
+        public int _TakeInQuantity { get; set; }
         public StockItemList(string _Id, string ItemList_Id, string WarehouseList_Shelf_Id, DateOnly _ExpirationDate, DateOnly _CarryingInDate, DateOnly? _CarryingOutDate, DateOnly? _TakeOutDate, DateOnly? _TakeInDate)
         {
             this._Id = _Id;
@@ -222,19 +218,13 @@ namespace DBMS
         }
     }
 
-    /*
-     JoinTables
-     */
-
-
-
+    /*     JoinTables     */
     public class Join_AdminList 
     {
         public string _Id { get; set; }
         public string _Region { get; set; }
         public string _Group { get; set; }
         public string _Name { get; set; }
-
         public Join_AdminList(string _Id, string _Region, string _Group, string _Name)
         {
             this._Id = _Id;
@@ -246,36 +236,22 @@ namespace DBMS
 
     public class Join_Warehouse
     {
-        public string _City { get; set; }
         public string _Id { get; set; }
+        public string _City { get; set; }
         public string _Name { get; set; }
-        public string _AreaId { get; set; }
-        public int _Area { get; set; }
-        public string _ShelfId { get; set; }
+        public int _AreaNo { get; set; }
         public int _ShelfNo { get; set; }
-        public int _Stock { get; set; }
-        public Join_Warehouse(string _City, string _Id, string _Name, string _AreaId, int _Area, string _ShelfId, int _ShelfNo, int _Stock)
+        public int _IsStock { get; set; }
+        public string _AddedItem { get; set; }
+        public Join_Warehouse(string _Id, string _City, string _Name, int _AreaNo, int _ShelfNo, int _IsStock, string _AddedItem)
         {
-            this._City = _City;
             this._Id = _Id;
+            this._City = _City;
             this._Name = _Name;
-            this._AreaId = _AreaId;
-            this._Area = _Area;
-            this._ShelfId = _ShelfId;
+            this._AreaNo = _AreaNo;
             this._ShelfNo = _ShelfNo;
-            this._Stock = _Stock;
+            this._IsStock = _IsStock;
+            this._AddedItem = _AddedItem;
         }
-    }
-
-    /*
-     Functions
-     */
-    public class Functions_Stock
-    {
-        public required string _Id;
-        public required string _StockInfo;
-        public required int _Quantity;
-        public required DateTime _Date;
-        public required string _Memo;
     }
 }

@@ -140,7 +140,7 @@ namespace WHMS
             {
 
                 SerializeText();
-                ItemList itemList = new ItemList(id, selectedAdmin._Id, selectedObject._ObjectCode, selectedType._TypeCode, selectedAssetType._AssetTypeCode, null, name, manufacturer, serialNumber, DateOnly.FromDateTime(dateTimePicker.Value), price, quantity, memo, null);
+                ItemList itemList = new ItemList(id, selectedAdmin._Id, selectedObject._ObjectCode, selectedType._TypeCode, selectedAssetType._AssetTypeCode, null, name, manufacturer, serialNumber, DateOnly.FromDateTime(dateTimePicker.Value), price, quantity, memo);
                 _context.ItemLists.Add(itemList);
                 _context.SaveChanges();
                 MessageBox.Show("保存完了!! ID: "+ id);

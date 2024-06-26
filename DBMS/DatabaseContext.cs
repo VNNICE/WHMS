@@ -42,11 +42,12 @@ namespace DBMS
             {
                 i.HasKey(j => j._Id);
                 i.HasOne(j => j.AdminList_Name).WithMany(j => j.ItemLists).HasForeignKey(j => j.AdminList_Name_Id);
-                i.HasOne(j => j.WarehouseList_Shelf).WithMany(j => j.ItemLists).HasForeignKey(j=>j.WarehouseShelf_Id);
                 i.HasOne(j => j.Item_Object).WithMany(j => j.ItemLists).HasForeignKey(j => j.Item_Object_Code);
                 i.HasOne(j => j.Item_Type).WithMany(j => j.ItemLists).HasForeignKey(j => j.Item_Type_Code);
                 i.HasOne(j => j.Item_AssetType).WithMany(j => j.ItemLists).HasForeignKey(j => j.Item_AssetType_Code);
-                i.HasOne(j => j.AssetManagementList).WithOne(j => j.ItemList).HasForeignKey<AssetManagementList>(e => e.ItemList_Id);
+                i.HasOne(j => j.AssetManagementList).WithOne(j => j.ItemList).HasForeignKey<AssetManagementList>(e => e.ItemList_Id).IsRequired(false);
+                i.HasMany(j => j.StockItemLists).WithOne(j => j.ItemList).HasForeignKey(j => j.ItemList_Id).IsRequired(false);
+
             });
             modelBuilder.Entity<Item_Object> (i =>
             {
@@ -103,12 +104,12 @@ namespace DBMS
             {
                 i.HasKey(j => j._Id);
                 i.Property(j=>j._Id).ValueGeneratedNever();
+                i.HasMany(j => j.StockItemLists).WithOne(j => j.WarehouseList_Shelf).HasForeignKey(j => j.WarehouseList_Shelf_Id).IsRequired(false);
             });
 
             modelBuilder.Entity<StockItemList>(i =>
             {
                 i.HasKey(j => j._Id);
-                i.HasO
             });
         }
     }

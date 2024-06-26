@@ -42,23 +42,29 @@
             textBox_Width = new TextBox();
             textBox_Height = new TextBox();
             label_D = new Label();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // label1
             // 
             label1.BackColor = SystemColors.Menu;
-            label1.Location = new Point(3, 6);
+            label1.Dock = DockStyle.Fill;
+            label1.Location = new Point(3, 0);
             label1.Name = "label1";
-            label1.Size = new Size(85, 23);
+            label1.Size = new Size(110, 29);
             label1.TabIndex = 0;
             label1.Text = "倉庫名";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // button_Decide
             // 
-            button_Decide.Location = new Point(3, 180);
+            button_Decide.Dock = DockStyle.Fill;
+            button_Decide.Location = new Point(3, 3);
             button_Decide.Name = "button_Decide";
-            button_Decide.Size = new Size(96, 23);
+            button_Decide.Size = new Size(110, 27);
             button_Decide.TabIndex = 3;
             button_Decide.Text = "確定";
             button_Decide.UseVisualStyleBackColor = true;
@@ -66,9 +72,10 @@
             // 
             // button_Skip
             // 
-            button_Skip.Location = new Point(113, 180);
+            button_Skip.Dock = DockStyle.Fill;
+            button_Skip.Location = new Point(119, 3);
             button_Skip.Name = "button_Skip";
-            button_Skip.Size = new Size(101, 23);
+            button_Skip.Size = new Size(110, 27);
             button_Skip.TabIndex = 4;
             button_Skip.Text = "スキップ";
             button_Skip.UseVisualStyleBackColor = true;
@@ -76,28 +83,31 @@
             // 
             // textBox_Name
             // 
+            textBox_Name.Dock = DockStyle.Fill;
             textBox_Name.Enabled = false;
-            textBox_Name.Location = new Point(94, 6);
+            textBox_Name.Location = new Point(119, 3);
             textBox_Name.Name = "textBox_Name";
             textBox_Name.ReadOnly = true;
-            textBox_Name.Size = new Size(120, 23);
+            textBox_Name.Size = new Size(110, 23);
             textBox_Name.TabIndex = 0;
             // 
             // textBox_SelectedArea
             // 
+            textBox_SelectedArea.Dock = DockStyle.Fill;
             textBox_SelectedArea.Enabled = false;
-            textBox_SelectedArea.Location = new Point(94, 35);
+            textBox_SelectedArea.Location = new Point(119, 32);
             textBox_SelectedArea.Name = "textBox_SelectedArea";
             textBox_SelectedArea.ReadOnly = true;
-            textBox_SelectedArea.Size = new Size(120, 23);
+            textBox_SelectedArea.Size = new Size(110, 23);
             textBox_SelectedArea.TabIndex = 1;
             // 
             // label2
             // 
             label2.BackColor = SystemColors.Menu;
-            label2.Location = new Point(3, 35);
+            label2.Dock = DockStyle.Fill;
+            label2.Location = new Point(3, 29);
             label2.Name = "label2";
-            label2.Size = new Size(85, 23);
+            label2.Size = new Size(110, 29);
             label2.TabIndex = 7;
             label2.Text = "対象置場";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -105,28 +115,31 @@
             // label3
             // 
             label3.BackColor = SystemColors.Menu;
-            label3.Location = new Point(3, 64);
+            label3.Dock = DockStyle.Fill;
+            label3.Location = new Point(3, 58);
             label3.Name = "label3";
-            label3.Size = new Size(85, 23);
+            label3.Size = new Size(110, 29);
             label3.TabIndex = 10;
             label3.Text = "棚段";
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBox_Shelf
             // 
+            textBox_Shelf.Dock = DockStyle.Fill;
             textBox_Shelf.Enabled = false;
-            textBox_Shelf.Location = new Point(94, 64);
+            textBox_Shelf.Location = new Point(119, 61);
             textBox_Shelf.Name = "textBox_Shelf";
             textBox_Shelf.ReadOnly = true;
-            textBox_Shelf.Size = new Size(120, 23);
+            textBox_Shelf.Size = new Size(110, 23);
             textBox_Shelf.TabIndex = 2;
             // 
             // label_W
             // 
             label_W.BackColor = SystemColors.Menu;
-            label_W.Location = new Point(20, 95);
+            label_W.Dock = DockStyle.Fill;
+            label_W.Location = new Point(3, 87);
             label_W.Name = "label_W";
-            label_W.Size = new Size(54, 23);
+            label_W.Size = new Size(110, 29);
             label_W.TabIndex = 12;
             label_W.Text = "幅";
             label_W.TextAlign = ContentAlignment.MiddleCenter;
@@ -134,69 +147,110 @@
             // 
             // textBox_Depth
             // 
-            textBox_Depth.Location = new Point(99, 121);
+            textBox_Depth.Dock = DockStyle.Fill;
+            textBox_Depth.Location = new Point(119, 119);
             textBox_Depth.Name = "textBox_Depth";
-            textBox_Depth.Size = new Size(115, 23);
+            textBox_Depth.Size = new Size(110, 23);
             textBox_Depth.TabIndex = 1;
             // 
             // label_H
             // 
             label_H.BackColor = SystemColors.Menu;
-            label_H.Location = new Point(20, 151);
+            label_H.Dock = DockStyle.Fill;
+            label_H.Location = new Point(3, 145);
             label_H.Name = "label_H";
-            label_H.Size = new Size(40, 23);
+            label_H.Size = new Size(110, 29);
             label_H.TabIndex = 1;
             label_H.Text = "高さ";
             label_H.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // textBox_Width
             // 
-            textBox_Width.Location = new Point(94, 93);
+            textBox_Width.Dock = DockStyle.Fill;
+            textBox_Width.Location = new Point(119, 90);
             textBox_Width.Name = "textBox_Width";
-            textBox_Width.Size = new Size(120, 23);
+            textBox_Width.Size = new Size(110, 23);
             textBox_Width.TabIndex = 0;
             textBox_Width.TextChanged += textBox_Width_TextChanged;
             // 
             // textBox_Height
             // 
-            textBox_Height.Location = new Point(99, 150);
+            textBox_Height.Dock = DockStyle.Fill;
+            textBox_Height.Location = new Point(119, 148);
             textBox_Height.Name = "textBox_Height";
-            textBox_Height.Size = new Size(115, 23);
+            textBox_Height.Size = new Size(110, 23);
             textBox_Height.TabIndex = 2;
             // 
             // label_D
             // 
             label_D.BackColor = SystemColors.Menu;
-            label_D.Location = new Point(29, 121);
+            label_D.Dock = DockStyle.Fill;
+            label_D.Location = new Point(3, 116);
             label_D.Name = "label_D";
-            label_D.Size = new Size(40, 23);
+            label_D.Size = new Size(110, 29);
             label_D.TabIndex = 4;
             label_D.Text = "奥行";
             label_D.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Controls.Add(textBox_Name, 1, 0);
+            tableLayoutPanel1.Controls.Add(textBox_Height, 1, 5);
+            tableLayoutPanel1.Controls.Add(textBox_Depth, 1, 4);
+            tableLayoutPanel1.Controls.Add(label1, 0, 0);
+            tableLayoutPanel1.Controls.Add(textBox_Width, 1, 3);
+            tableLayoutPanel1.Controls.Add(label_H, 0, 5);
+            tableLayoutPanel1.Controls.Add(label_D, 0, 4);
+            tableLayoutPanel1.Controls.Add(label2, 0, 1);
+            tableLayoutPanel1.Controls.Add(textBox_SelectedArea, 1, 1);
+            tableLayoutPanel1.Controls.Add(label3, 0, 2);
+            tableLayoutPanel1.Controls.Add(label_W, 0, 3);
+            tableLayoutPanel1.Controls.Add(textBox_Shelf, 1, 2);
+            tableLayoutPanel1.Location = new Point(12, 12);
+            tableLayoutPanel1.Margin = new Padding(3, 3, 3, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 6;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 29F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 29F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 29F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 29F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 29F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 29F));
+            tableLayoutPanel1.Size = new Size(232, 174);
+            tableLayoutPanel1.TabIndex = 13;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Controls.Add(button_Decide, 0, 0);
+            tableLayoutPanel2.Controls.Add(button_Skip, 1, 0);
+            tableLayoutPanel2.Location = new Point(12, 186);
+            tableLayoutPanel2.Margin = new Padding(3, 0, 3, 3);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new Size(232, 33);
+            tableLayoutPanel2.TabIndex = 14;
             // 
             // Add_Warehouse_SecondInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(246, 219);
-            Controls.Add(textBox_Depth);
-            Controls.Add(textBox_Width);
-            Controls.Add(textBox_Height);
-            Controls.Add(label_D);
-            Controls.Add(label_W);
-            Controls.Add(label3);
-            Controls.Add(textBox_Shelf);
-            Controls.Add(label2);
-            Controls.Add(textBox_SelectedArea);
-            Controls.Add(textBox_Name);
-            Controls.Add(button_Skip);
-            Controls.Add(button_Decide);
-            Controls.Add(label1);
-            Controls.Add(label_H);
+            ClientSize = new Size(255, 228);
+            ControlBox = false;
+            Controls.Add(tableLayoutPanel2);
+            Controls.Add(tableLayoutPanel1);
             Name = "Add_Warehouse_SecondInfo";
             Text = "Add_WarehouseSecondInfo";
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -215,5 +269,7 @@
         private TextBox textBox_Width;
         private TextBox textBox_Height;
         private Label label_D;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel2;
     }
 }

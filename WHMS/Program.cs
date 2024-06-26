@@ -11,16 +11,19 @@ namespace WHMS
 {
     internal static class Program
     {
-
         [STAThread]
         public static void Main(string[] args)
         {
-            string msg = "";
-            DBManager.MakeDefaultData(out msg);
-            MessageBox.Show(msg);
-            DBManager.SetACityLists(out msg);
-            MessageBox.Show(msg);
-
+            var dbManager = new DBManager();
+            try
+            {
+                dbManager.MakeDefaultData();
+                dbManager.SetACityLists();
+            }
+            catch 
+            {
+                MessageBox.Show("ãNìÆÉGÉâÅ[");
+            }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ApplicationConfiguration.Initialize();
