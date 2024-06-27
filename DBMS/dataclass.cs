@@ -241,17 +241,51 @@ namespace DBMS
         public string _Name { get; set; }
         public int _AreaNo { get; set; }
         public int _ShelfNo { get; set; }
-        public int _IsStock { get; set; }
-        public string _AddedItem { get; set; }
-        public Join_Warehouse(string _Id, string _City, string _Name, int _AreaNo, int _ShelfNo, int _IsStock, string _AddedItem)
+        public string? _AddedItem { get; set; }
+        public Join_Warehouse(string _Id, string _City, string _Name, int _AreaNo, int _ShelfNo, string? _AddedItem)
         {
             this._Id = _Id;
             this._City = _City;
             this._Name = _Name;
             this._AreaNo = _AreaNo;
             this._ShelfNo = _ShelfNo;
-            this._IsStock = _IsStock;
             this._AddedItem = _AddedItem;
+        }
+    }
+
+    public class Join_ItemLists
+    {
+        public string _Id { get; set; }
+        public string AdminGroupAndName { get; set; }
+        public string Item_Object { get; set; }
+
+        public string Item_Type { get; set; }
+        public string Item_AssetType { get; set; }
+        public int? AssetManagementList_Id { get; set; }
+        public string _Name { get; set; }
+        public string _Manufacturer { get; set; }
+        public string _SerialNumber { get; set; }
+        public DateOnly? _PurchaseDate { get; set; }
+        public int _Price { get; set; }
+        public int _Quantity { get; set; }
+        public string? _Memo { get; set; }
+        public string? StockedItemList_Area { get; set; }
+        public Join_ItemLists(string _Id, string AdminGroupAndName, string Item_Object, string Item_Type, string Item_AssetType, int? AssetManagementList_Id, string _Name, string _Manufacturer, string _SerialNumber, DateOnly? _PurchaseDate, int _Price, int _Quantity, string? _Memo, string? StockedItemList_Area)
+        {
+            this._Id = _Id;
+            this.AdminGroupAndName = AdminGroupAndName;
+            this.Item_Object = Item_Object;
+            this.Item_Type = Item_Type;
+            this.Item_AssetType = Item_AssetType;
+            this.AssetManagementList_Id = AssetManagementList_Id;
+            this._Name = _Name;
+            this._Manufacturer = _Manufacturer;
+            this._SerialNumber = _SerialNumber;
+            this._PurchaseDate = _PurchaseDate;
+            this._Price = _Price;
+            this._Quantity = _Quantity;
+            this._Memo = _Memo;
+            this.StockedItemList_Area = StockedItemList_Area;
         }
     }
 }

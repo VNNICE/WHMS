@@ -88,7 +88,6 @@ namespace WHMS
             button_Add_Warehouse.TabIndex = 10;
             button_Add_Warehouse.Text = "倉庫登録へ";
             button_Add_Warehouse.UseVisualStyleBackColor = true;
-            button_Add_Warehouse.Click += button_Add_Warehouse_Click;
             // 
             // dataGridView_WarehouseLists
             // 

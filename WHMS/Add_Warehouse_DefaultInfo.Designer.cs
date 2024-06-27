@@ -42,10 +42,12 @@
             tableLayoutPanel2 = new TableLayoutPanel();
             tableLayoutPanel3 = new TableLayoutPanel();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            pictureBox1 = new PictureBox();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // textBox_Name
@@ -105,7 +107,6 @@
             button_Cancel.TabIndex = 5;
             button_Cancel.Text = "キャンセル";
             button_Cancel.UseVisualStyleBackColor = true;
-            button_Cancel.Click += button_Cancel_Click;
             // 
             // button_Add_Images
             // 
@@ -116,7 +117,6 @@
             button_Add_Images.TabIndex = 3;
             button_Add_Images.Text = "画像追加";
             button_Add_Images.UseVisualStyleBackColor = true;
-            button_Add_Images.Click += button_Add_Images_Click;
             // 
             // textBox_Show_ImagesPath
             // 
@@ -208,12 +208,22 @@
             flowLayoutPanel1.TabIndex = 14;
             flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(250, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(231, 178);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 15;
+            pictureBox1.TabStop = false;
+            // 
             // Add_Warehouse_DefaultInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(260, 202);
+            ClientSize = new Size(493, 202);
             ControlBox = false;
+            Controls.Add(pictureBox1);
             Controls.Add(flowLayoutPanel1);
             Name = "Add_Warehouse_DefaultInfo";
             Text = "倉庫登録";
@@ -223,6 +233,7 @@
             tableLayoutPanel2.PerformLayout();
             tableLayoutPanel3.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -241,5 +252,6 @@
         private TableLayoutPanel tableLayoutPanel2;
         private TableLayoutPanel tableLayoutPanel3;
         private FlowLayoutPanel flowLayoutPanel1;
+        private PictureBox pictureBox1;
     }
 }

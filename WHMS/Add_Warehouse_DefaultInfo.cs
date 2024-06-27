@@ -19,7 +19,6 @@ namespace WHMS
         public static string targetWarehouse { get; private set; } = "";
         private readonly DatabaseContext _context;
         private Functions fc = new Functions();
-        PictureViewer pictureViewer = new PictureViewer();
 
         public Add_Warehouse_DefaultInfo()
         {
@@ -28,7 +27,11 @@ namespace WHMS
             LoadComboBoxData();
             comboBox_City.DropDownStyle = ComboBoxStyle.DropDownList;
             textBox_Add_Areas.KeyPress += KeyPressSettings;
-            pictureViewer.SetADefaultDataPictureBox(this);
+
+            button_Add_Images.Click += (o, e) => ImageSelection();
+            button_Cancel.Click += (o, e) => this.Close();
+
+            this.Size = new Size(276, 241);
 
         }
         private void KeyPressSettings(object? sender, KeyPressEventArgs e)
@@ -50,8 +53,7 @@ namespace WHMS
             {
                 if (_context.CityLists != null)
                 {
-                    var cities = _context.CityLists.ToList();
-                    comboBox_City.DataSource = cities;
+                    comboBox_City.DataSource = _context.CityLists.ToList();
                     comboBox_City.DisplayMember = "_City";
                     comboBox_City.ValueMember = "_Code";
                 }
@@ -65,7 +67,7 @@ namespace WHMS
                 Add_Warehouse_SecondInfo secondInfoForm = new Add_Warehouse_SecondInfo();
                 secondInfoForm.Owner = this.Owner;
                 secondInfoForm.Load += (order, s) => this.Visible = false;
-                secondInfoForm.Closed += (order, s) => { secondInfoForm.Owner.Enabled = true; this.Close(); };
+                secondInfoForm.Closed += (order, s) => this.Close(); 
                 secondInfoForm.Show();
             }
             catch (ArgumentException ae)
@@ -102,20 +104,6 @@ namespace WHMS
             MessageBox.Show("登録成功");
             targetWarehouse = id;
         }
-        private void MapAreaSelection()
-        {
-            PictureViewer areaSelection = new PictureViewer();
-
-        }
-
-        private void button_Cancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void button_Add_Images_Click(object sender, EventArgs e)
-        {
-            ImageSelection();
-        }
         private void ImageSelection()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -133,9 +121,8 @@ namespace WHMS
                 File.Copy(selectedFilePath, filePath, true);
                 MakeUrl = filePath;
                 textBox_Show_ImagesPath.Text = MakeUrl;
-                pictureViewer.Show();
-                pictureViewer.SetADefaultDataPictureBox(this);
-                pictureViewer.Mode_LoadPicture(filePath);
+                pictureBox1.Image = Image.FromFile(filePath);
+                this.Size = new Size(509, 241);
             }
         }
         /*         Functions         */
