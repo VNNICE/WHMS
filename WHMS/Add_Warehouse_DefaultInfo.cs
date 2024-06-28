@@ -16,7 +16,9 @@ namespace WHMS
     public partial class Add_Warehouse_DefaultInfo : Form
     {
         private string? MakeUrl;
-        public static string targetWarehouse { get; private set; } = "";
+
+        //public static string targetWarehouse { get; private set; } = "";
+        string warehouseId;
         private readonly DatabaseContext _context;
         private Functions fc = new Functions();
 
@@ -66,8 +68,10 @@ namespace WHMS
                 Add_Database();
                 Add_Warehouse_SecondInfo secondInfoForm = new Add_Warehouse_SecondInfo();
                 secondInfoForm.Owner = this.Owner;
+                
                 secondInfoForm.Load += (order, s) => this.Visible = false;
                 secondInfoForm.Closed += (order, s) => this.Close(); 
+                
                 secondInfoForm.Show();
             }
             catch (ArgumentException ae)
@@ -102,7 +106,7 @@ namespace WHMS
             _context.SaveChanges();
             AreaMaker(id, areas);
             MessageBox.Show("登録成功");
-            targetWarehouse = id;
+            //targetWarehouse = id;
         }
         private void ImageSelection()
         {

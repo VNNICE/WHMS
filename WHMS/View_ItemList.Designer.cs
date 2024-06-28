@@ -36,10 +36,11 @@
             // 
             // dataGridView
             // 
+            dataGridView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView.Location = new Point(12, 142);
             dataGridView.Name = "dataGridView";
-            dataGridView.Size = new Size(776, 296);
+            dataGridView.Size = new Size(1216, 314);
             dataGridView.TabIndex = 0;
             // 
             // button_New
@@ -64,7 +65,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1240, 468);
             Controls.Add(button_Close);
             Controls.Add(button_New);
             Controls.Add(dataGridView);

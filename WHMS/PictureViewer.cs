@@ -45,8 +45,6 @@ namespace WHMS
 
         public void Mode_CreateArea(Form form, string path, ref int x, ref int y, ref int width, ref int height)
         {
-            
-
             this.pictureBoxMain.Image = Image.FromFile(path);
             this.pictureBoxMain.MouseDown += new MouseEventHandler(pictureBox_MouseDown);
             this.pictureBoxMain.MouseMove += new MouseEventHandler(pictureBox_MouseMove);
@@ -106,7 +104,6 @@ namespace WHMS
                 }
             }
         }
-        ////////////////////////////////////////
 
 
         private void ResetData()

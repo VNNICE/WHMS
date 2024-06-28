@@ -21,7 +21,7 @@ namespace WHMS
         PictureViewer pictureViewer = new PictureViewer();
 
         private WarehouseList targetWarehouse;
-        private string? targetWarehouseId = Add_Warehouse_DefaultInfo.targetWarehouse;
+        string? targetWarehouseId; //= Add_Warehouse_DefaultInfo.targetWarehouse;
 
         private List<WarehouseList_Area> targetAreaLists = new List<WarehouseList_Area>();
         private string? targetAreaId;
@@ -38,6 +38,8 @@ namespace WHMS
         public Add_Warehouse_SecondInfo()
         {
             InitializeComponent();
+            Add_Warehouse_DefaultInfo awd = this.Owner as Add_Warehouse_DefaultInfo;
+            targetWarehouseId = 
             targetWarehouse = _context.WarehouseLists.Include(x => x.WarehouseList_Areas).FirstOrDefault(x => x._Id == targetWarehouseId);
             targetAreaLists.AddRange(targetWarehouse.WarehouseList_Areas);
             string viewAreaLists = "";
