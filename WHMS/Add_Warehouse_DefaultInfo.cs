@@ -18,39 +18,45 @@ namespace WHMS
         private string? MakeUrl;
 
         //public static string targetWarehouse { get; private set; } = "";
-        string warehouseId;
-        private readonly DatabaseContext _context;
+        private string city;
+        private string warehouseName;
+        private string warehouseId;
+        private int areaCount;
+        private readonly DatabaseContext _context = new DatabaseContext();
         private Functions fc = new Functions();
+        private InputRules inputRules = new InputRules();
 
         public Add_Warehouse_DefaultInfo()
         {
             InitializeComponent();
-            _context = new DatabaseContext();
-            LoadComboBoxData();
-            comboBox_City.DropDownStyle = ComboBoxStyle.DropDownList;
-            textBox_Add_Areas.KeyPress += KeyPressSettings;
-
+            DefaultSettings();
             button_Add_Images.Click += (o, e) => ImageSelection();
             button_Cancel.Click += (o, e) => this.Close();
 
             this.Size = new Size(276, 241);
 
-        }
-        private void KeyPressSettings(object? sender, KeyPressEventArgs e)
-        {
-            TextBox? tb = sender as TextBox;
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            
+
+            button1.Click += (o, e) => 
             {
-                e.Handled = true;
-            }
-            if (tb != null && tb.Text.Length >= 4 && e.KeyChar != '\b')
-            {
-                e.Handled = true;
-            }
+                string testcity = comboBox_City.SelectedValue.ToString(); ;
+                int test;
+                if (_context.WarehouseLists.Any(x => x.CityList_Code == testcity))
+                {
+                    test = _context.WarehouseLists.Where(x => x.CityList_Code == testcity).Count() + 1;
+                }
+                else
+                {
+                    test = 1;
+                }
+                MessageBox.Show(  test.ToString());
+            };
         }
 
-        private void LoadComboBoxData()
+        private void DefaultSettings()
         {
+            comboBox_City.DropDownStyle = ComboBoxStyle.DropDownList;
+            inputRules.Rule_OnlyInt(textBox_Add_Areas);
             if (_context != null)
             {
                 if (_context.CityLists != null)
@@ -66,9 +72,8 @@ namespace WHMS
             try
             {
                 Add_Database();
-                Add_Warehouse_SecondInfo secondInfoForm = new Add_Warehouse_SecondInfo();
+                Add_Warehouse_SecondInfo secondInfoForm = new Add_Warehouse_SecondInfo(_context.WarehouseLists.Find(warehouseId));
                 secondInfoForm.Owner = this.Owner;
-                
                 secondInfoForm.Load += (order, s) => this.Visible = false;
                 secondInfoForm.Closed += (order, s) => this.Close(); 
                 
@@ -82,31 +87,41 @@ namespace WHMS
 
         private void Add_Database()
         {
-            string city = comboBox_City.SelectedValue.ToString();
-            string name = textBox_Name.Text.ToString();
-            if (string.IsNullOrWhiteSpace(name))
+            int cityCount;
+            city = comboBox_City.SelectedValue.ToString();
+            areaCount = int.Parse(textBox_Add_Areas.Text);
+            warehouseName = textBox_Name.Text.ToString();
+            if (_context.WarehouseLists.Any(x => x.CityList_Code == city))
+            {
+                cityCount = _context.WarehouseLists.Where(x => x.CityList_Code == city).Count() + 1;
+            }
+            else
+            {
+                cityCount = 1;
+            }
+            warehouseId = city + (cityCount).ToString("D2");
+            int areas = int.Parse(textBox_Add_Areas.Text);
+
+            if (string.IsNullOrWhiteSpace(warehouseName))
             {
                 throw new ArgumentException("登録失敗、倉庫名が空欄です。");
             }
-            else if (_context.WarehouseLists.Any(n => n._Name == name))
+            else if (_context.WarehouseLists.Any(n => n._Name == warehouseName))
             {
-                throw new ArgumentException($"登録失敗、'{name}'はすでに登録されています。");
+                throw new ArgumentException($"登録失敗、'{warehouseName}'はすでに登録されています。");
             }
-            int count = Counter(city);
-            string id = city + (count).ToString("D2");
-            int areas = fc.Try_IntParse(label_Add_Areas, textBox_Add_Areas);
+
             if (string.IsNullOrWhiteSpace(textBox_Show_ImagesPath.Text) && string.IsNullOrEmpty(textBox_Show_ImagesPath.Text))
             {
                 MakeUrl = null;
                 MessageBox.Show("画像なしで登録します。");
             }
 
-            var warehouseList = new WarehouseList(id, count, city, name, MakeUrl);
+            var warehouseList = new WarehouseList(warehouseId, areaCount, city, warehouseName, MakeUrl);
             _context.WarehouseLists.Add(warehouseList);
             _context.SaveChanges();
-            AreaMaker(id, areas);
+            AreaMaker();
             MessageBox.Show("登録成功");
-            //targetWarehouse = id;
         }
         private void ImageSelection()
         {
@@ -130,26 +145,15 @@ namespace WHMS
             }
         }
         /*         Functions         */
-        private void AreaMaker(string id, int count)
+        private void AreaMaker()
         {
             var warehouseAreas = new List<WarehouseList_Area>();
-            for (int i = 0; i <= count; i++)
+            for (int i = 0; i <= areaCount; i++)
             {
-                warehouseAreas.Add(new WarehouseList_Area(id + "-" + i.ToString("D2"), id, i, null, null));
+                warehouseAreas.Add(new WarehouseList_Area(warehouseId + "-" + i.ToString("D2"), warehouseId, i, null, null));
             }
             _context.WarehouseList_Areas.AddRange(warehouseAreas);
             _context.SaveChanges();
-        }
-        private int Counter(string city)
-        {
-            if (_context.WarehouseLists.Any(x => x.CityList_Code == city))
-            {
-                return _context.WarehouseLists.Where(x => x.CityList_Code == city).Max(x => x._Count) + 1;
-            }
-            else
-            {
-                return 1;
-            }
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)

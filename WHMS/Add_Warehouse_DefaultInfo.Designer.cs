@@ -43,6 +43,7 @@
             tableLayoutPanel3 = new TableLayoutPanel();
             flowLayoutPanel1 = new FlowLayoutPanel();
             pictureBox1 = new PictureBox();
+            button1 = new Button();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
@@ -217,12 +218,22 @@
             pictureBox1.TabIndex = 15;
             pictureBox1.TabStop = false;
             // 
+            // button1
+            // 
+            button1.Location = new Point(94, 189);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 16;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // Add_Warehouse_DefaultInfo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(493, 202);
             ControlBox = false;
+            Controls.Add(button1);
             Controls.Add(pictureBox1);
             Controls.Add(flowLayoutPanel1);
             Name = "Add_Warehouse_DefaultInfo";
@@ -253,5 +264,6 @@
         private TableLayoutPanel tableLayoutPanel3;
         private FlowLayoutPanel flowLayoutPanel1;
         private PictureBox pictureBox1;
+        private Button button1;
     }
 }
